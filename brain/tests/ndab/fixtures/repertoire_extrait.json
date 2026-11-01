@@ -1,0 +1,191 @@
+{
+ "meta": {
+  "titre": "Extrait fictif du répertoire de terrain (données de test)",
+  "avertissement": "Noms inventés. Même structure que le répertoire de terrain NDAAP, dont les données ne sont pas diffusées.",
+  "nb_entrees": 5
+ },
+ "entrees": [
+  {
+   "id": "BGT_09",
+   "chefferie": "Badiangseu",
+   "site_origine_ndab": "Mingo Boto",
+   "donateur_paternel_ref": "Mbelu Tato",
+   "noms_associes_au_pere": [
+    "Tombe Nene",
+    "Doumbe Neto",
+    "Douto Boto",
+    "Tongo Zane",
+    "Luza Salu",
+    "Talu Mbeto",
+    "Pane Migui",
+    "Taza Dousa Doumbe",
+    "Pami Guiza Mbelu"
+   ],
+   "lignage_paternel_labels": [
+    "Sami Ngopa Neto",
+    "Mimi Tapa"
+   ],
+   "lignage_maternel_hypothese": "Guimbe Mbefe",
+   "liste_hypothese_ndab_ngon_la": [
+    "Mbeto Zagui Zabo",
+    "Kagui Tasa Lupa",
+    "Riza Ngodou",
+    "Bopa Mbesa Guibo",
+    "Ngone Fene Tabo",
+    "Ngombe Sango",
+    "Douka Pasa",
+    "Zaka Ngone Tami",
+    "Togui Bobo"
+   ],
+   "liste_hypothese_ndab_mekat": [
+    "Bolu Pabo Tori",
+    "Rigui Salu",
+    "Tolu Kango Luta",
+    "Mberi Bongo",
+    "Tata Palu Lupa",
+    "Papa Zambe Ngolu",
+    "Fepa Saka Rita",
+    "Kaza Mbefe"
+   ]
+  },
+  {
+   "id": "BGT_15",
+   "chefferie": "Bangangté",
+   "site_origine_ndab": "Tasa Tadou",
+   "donateur_paternel_ref": "Midou Ridou",
+   "noms_associes_au_pere": [
+    "Douri Pata Kaka",
+    "Pafe Rita Guita",
+    "Mbedou Ludou Pari",
+    "Ripa Kapa Tambe"
+   ],
+   "lignage_paternel_labels": [
+    "Kato Tchoouu",
+    "Mimbe Bogui Bombe"
+   ],
+   "lignage_maternel_hypothese": "Sasa Ngoka",
+   "liste_hypothese_ndab_ngon_la": [
+    "Guingo Pata",
+    "Ngoka Kalu",
+    "Neri Rika",
+    "Riza Doumi Fene",
+    "Tota Guine",
+    "Ngoka Guisa"
+   ],
+   "liste_hypothese_ndab_mekat": [
+    "Ngosa Ngopa",
+    "Tomi Palu",
+    "Douri Feto"
+   ]
+  },
+  {
+   "id": "BGT_16",
+   "chefferie": "Bangangté",
+   "site_origine_ndab": "Lugui Kambe",
+   "donateur_paternel_ref": "Guimi Rife",
+   "noms_associes_au_pere": [
+    "Padou Feri Guingo",
+    "Lubo Guimi Mbedou",
+    "Mberi Zalu Ngota",
+    "Fengo Guidou",
+    "Bopa Sadou",
+    "Nebo Mine",
+    "Tami Mbeta"
+   ],
+   "lignage_paternel_labels": [
+    "Migui Guika",
+    "Miza Mbelu Doulu"
+   ],
+   "lignage_maternel_hypothese": "Mbefe Feto",
+   "liste_hypothese_ndab_ngon_la": [
+    "Fengo Nefe",
+    "Ngopa Mimbe Feto",
+    "Nembe Feka",
+    "Fembe Doumbe",
+    "Lugui Kami Nefe",
+    "Todou Lusa",
+    "Tosa Riza Zari",
+    "Guisa Feta Kafe",
+    "Kaka Ripa",
+    "Guilu Nepa"
+   ],
+   "liste_hypothese_ndab_mekat": [
+    "Zari Doumi Ringo",
+    "Zaari Doumi Ringo",
+    "Sato Mbebo Zadou",
+    "Togui Sasa Fegui",
+    "Feta Mimi",
+    "Toza Rita",
+    "Kami Bombe"
+   ]
+  },
+  {
+   "id": "BGT_19",
+   "chefferie": "Bangangté",
+   "site_origine_ndab": "Pafe Ridou",
+   "donateur_paternel_ref": "Kambe Fembe",
+   "noms_associes_au_pere": [
+    "Boto Boka",
+    "Zadou Mbengo Bomi",
+    "Ngoza Ngoto Nengo",
+    "Doumbe Kato",
+    "Talu Bogui",
+    "Kadou Pafe",
+    "Guimbe Mbembe",
+    "Fembe Fedou Ridou"
+   ],
+   "lignage_paternel_labels": [
+    "Pabo Mbepa Zato"
+   ],
+   "lignage_maternel_hypothese": "Rimbe Ngomi",
+   "liste_hypothese_ndab_ngon_la": [
+    "Kato tchou",
+    "Luri Paza Zagui",
+    "Guilu Riza Mbepa",
+    "Zagui Mbegui",
+    "Bori Rimbe Mbengo",
+    "Tango Felu Tadou",
+    "Pabo Kasa Kapa",
+    "Boza Ngone Tabo",
+    "Lumi Kami Mibo"
+   ],
+   "liste_hypothese_ndab_mekat": [
+    "Rika Zafe",
+    "Mbebo Bombe Tane",
+    "Tofe Luto Zango",
+    "Fene Miri",
+    "Neka Bori Mbeto",
+    "Guingo Zapa Tongo"
+   ]
+  },
+  {
+   "id": "BGT_21",
+   "chefferie": "Bangangté",
+   "site_origine_ndab": "Sapa Nemi",
+   "donateur_paternel_ref": "Zaza Fefe",
+   "noms_associes_au_pere": [
+    "Douza Pabo Lusa",
+    "Mberi Padou",
+    "Migui Nengo Ridou",
+    "Sami Mbemi"
+   ],
+   "lignage_paternel_labels": [
+    "Tafe Rika"
+   ],
+   "lignage_maternel_hypothese": "Nebo Neri",
+   "liste_hypothese_ndab_ngon_la": [
+    "Femi Topa Feta",
+    "Rimbe Fedou",
+    "Bogui Neza Kango",
+    "Nepa Paka"
+   ],
+   "liste_hypothese_ndab_mekat": [
+    "Bogui Guidou",
+    "Doungo Ngolu",
+    "Mbeto Kango Douto",
+    "Ngofe Nelu Lumbe",
+    "Ribo Fedou Kaka"
+   ]
+  }
+ ]
+}

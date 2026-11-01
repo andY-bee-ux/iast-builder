@@ -1,0 +1,160 @@
+{
+  "id": "toponymie",
+  "nom": "Toponymie coutumière (instance de référence, données fictives)",
+  "version": "0.1",
+  "description": "Noms coutumiers des lieux d'un territoire : quartiers, collines, cours d'eau, marchés et lieux sacrés, avec leur signification rapportée.",
+  "agent": {
+    "nom": "Toponyme",
+    "identite": "Tu es Toponyme, un agent conversationnel qui présente les noms coutumiers des lieux d'un territoire, leur signification rapportée et les chefferies dont ils relèvent.",
+    "domaine": "la toponymie coutumière (noms de lieux, significations, chefferies)",
+    "exemple_signal": "[SIGNAL:nouveaute|Le quartier X porte-t-il aussi le nom Y ?|Le quartier X porte aussi le nom Y.]",
+    "consignes": [
+      "Lorsqu'un nom désigne plusieurs lieux, nomme-les simplement en précisant leur type.",
+      "Ne donne aucune information sur un lieu à diffusion restreinte."
+    ]
+  },
+  "ontologie": {
+    "fichier": "ontologie_initiale.json",
+    "espace_de_noms": "http://iast.uqam.ca/toponymie#",
+    "origine": "documentaire",
+    "corpus": [
+      "Corpus toponymique illustratif (données fictives) préparé pour l'étude d'instanciation d'IAST-Builder."
+    ]
+  },
+  "autorite": "Conseil des notables de chaque chefferie, avec les chercheurs du projet",
+  "portee": [
+    {
+      "cle": "chefferie",
+      "libelle": "chefferie"
+    },
+    {
+      "cle": "type_de_lieu",
+      "libelle": "type de lieu"
+    },
+    {
+      "cle": "informateur",
+      "libelle": "informateur"
+    },
+    {
+      "cle": "acces",
+      "libelle": "accès"
+    }
+  ],
+  "regles": [
+    {
+      "id": "TP1",
+      "description": "Toute connaissance sur un bois sacré fait l'objet d'un examen renforcé.",
+      "si": {
+        "portee": {
+          "type_de_lieu": [
+            "bois sacré"
+          ]
+        }
+      }
+    }
+  ],
+  "acces": {
+    "niveaux": [
+      {
+        "id": "public",
+        "rang": 0,
+        "libelle": "public"
+      },
+      {
+        "id": "restreint",
+        "rang": 1,
+        "libelle": "diffusion restreinte"
+      }
+    ],
+    "niveau_par_defaut": "public",
+    "niveau_diffusion_agent": "public",
+    "regles": [
+      {
+        "id": "TP2",
+        "description": "Lieu sacré : diffusion restreinte.",
+        "si": {
+          "portee": {
+            "acces": [
+              "restreint"
+            ]
+          }
+        },
+        "niveau": "restreint"
+      }
+    ]
+  },
+  "surete": {
+    "risque": "faible",
+    "contraintes": []
+  },
+  "variantes": {
+    "classe": "NomDeLieu",
+    "predicat": "estVarianteDe",
+    "designation": "designe"
+  },
+  "glossaire": {},
+  "restitution": {
+    "exemples": [
+      "« le quartier près de la rivière » plutôt que « lieu de type quartier relevant de la chefferie A »"
+    ],
+    "incertitude": "ce point reste à confirmer auprès des notables"
+  },
+  "contributions": {
+    "types": [
+      {
+        "id": "nom_de_lieu",
+        "libelle": "Nom de lieu"
+      },
+      {
+        "id": "signification",
+        "libelle": "Signification d'un nom"
+      },
+      {
+        "id": "autre",
+        "libelle": "Autre"
+      }
+    ]
+  },
+  "interface": {
+    "outils": [],
+    "langues": [
+      {
+        "code": "fr",
+        "libelle": "Français"
+      }
+    ],
+    "fr": {
+      "titre": "Toponyme",
+      "eyebrow": "Toponyme · toponymie coutumière · instance de référence d'IAST-Builder (données fictives)",
+      "sousTitre": "Noms coutumiers des lieux, leur signification rapportée et leurs chefferies.",
+      "placeholder": "Posez une question sur un lieu…",
+      "accueil": "Bienvenue. Je présente les noms coutumiers des lieux, leur signification et les chefferies dont ils relèvent.",
+      "suggestions": [
+        "Que désigne le nom « Nkoum Fé » ?",
+        "Quels marchés connais-tu ?"
+      ]
+    }
+  },
+  "collecte": {
+    "temoignages": true,
+    "formulaire": true,
+    "lacunes": true
+  },
+  "personnalites": {
+    "guide": {
+      "label": "Guide",
+      "tone_fr": "Adopte le ton d'un guide qui fait découvrir un territoire : phrases courtes, vocabulaire simple, précision sur chaque nom.",
+      "label_en": "Guide"
+    }
+  },
+  "personnalite_par_defaut": "guide",
+  "inventaire": [
+    {
+      "classe": "Lieu",
+      "libelle": "Lieux documentés",
+      "attribut": "signification",
+      "max": 60,
+      "libelle_attribut": "Significations rapportées"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "name": "yobakoko-gateway",
+  "version": "2.0.0",
+  "description": "Gateway Node/TypeScript de YobaKoko — auth admin, routage, et relai vers le service brain Python.",
+  "main": "dist/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "ts-node src/server.ts"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "multer": "^2.0.0",
+    "dotenv": "^16.4.5",
+    "form-data": "^4.0.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "ts-node": "^10.9.2",
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.10.2",
+    "@types/multer": "^1.4.12"
+  }
+}

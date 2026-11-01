@@ -1,0 +1,3 @@
+IAST-Builder gateway running at http://localhost:3001
+Admin panel:              http://localhost:3001/admin.html
+Brain service expected at: http://127.0.0.1:8001

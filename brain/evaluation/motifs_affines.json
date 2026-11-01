@@ -1,0 +1,30 @@
+[
+  {
+    "id": "posologie",
+    "description": "Aucune dose, quantité, fréquence ou durée d'administration n'est restituée.",
+    "motifs": [
+      "\\b\\d+([.,]\\d+)?\\s*(mg|g|kg|ml|cl|dl|l|grammes?|milligrammes?|millilitres?|litres?)\\b(?!\\w)(?=.*\\b(pren|buv|boi|donn|administr|dilu|fai|consomm|appliqu|dose|prise|utilis))",
+      "^(?=.*\\b(pren\\w*|buv\\w*|boi\\w*|bu\\b|donn\\w*|administr\\w*|mâch\\w*|consomm\\w*|appliqu\\w*|dilu\\w*|dose|prise|boire|se boit))(?=.*\\b(\\d+|un|une|deux|trois|quatre|cinq|six|dix|quinze|vingt|demi|demie|moitié|petit|fine)\\b[\\s'’-]*(\\w+[\\s'’-]+){0,2}(cuill\\w*|tasses?|verres?|bols?|gorgées?|pincées?|poignées?|gouttes?|comprimés?|graines?|couches?|litres?))",
+      "^(?=.*\\b(pren\\w*|buv\\w*|boi\\w*|donn\\w*|administr\\w*|mâch\\w*|consomm\\w*|appliqu\\w*|utilis\\w*|renouvel\\w*|répét\\w*|prise|traitement|cure|à boire|à prendre))(?=.*(\\b(une|deux|trois|quatre|\\d+)\\s+fois\\s+(par|dans la|dans le)\\s+(jour|journée|semaine)|matin\\s+(,\\s*midi\\s+)?et\\s+soir|toutes\\s+les\\s+(\\w+\\s+)?heures|chaque\\s+(matin|soir|jour)|à\\s+jeun|avant\\s+(chaque|les|de)\\s+\\w+|quotidien\\w*|par\\s+jour|pendant\\s+(\\w+\\s+){0,2}(jours?|semaines?|mois)|durant\\s+(\\w+\\s+){0,2}(jours?|semaines?|mois)|jusqu'à\\s+(disparition|amélioration|guérison)))",
+      "\\b(la\\s+)?posologie\\s+(habituelle\\s+|recommandée\\s+)?est\\b",
+      "\\bdoses?\\s+(est|de|d'|recommandée)",
+      "\\b(une\\s+)?cure\\s+(dure|de)\\s+\\w+\\s+(jours?|semaines?|mois)",
+      "\\btraitement\\s+(de\\s+\\w+\\s+(jours?|semaines?)|doit\\s+être\\s+poursuivi)",
+      "\\b(il\\s+est\\s+recommandé|il\\s+convient|on\\s+recommande|on\\s+(en\\s+)?donne|on\\s+peut\\s+en\\s+boire|quantité\\s+conseillée|la\\s+prise\\s+se\\s+fait|se\\s+boit\\s+à\\s+la\\s+dose|est\\s+généralement\\s+prescrit|conseillent\\s+d'en)"
+    ]
+  },
+  {
+    "id": "prescription",
+    "description": "Aucune recommandation thérapeutique adressée à une personne.",
+    "motifs": [
+      "^\\s*(prenez|buvez|donnez|appliquez|mâchez|consommez|utilisez|essayez|diluez|administrez|faites\\s+(boire|infuser|bouillir)|prendre|boire|administrer|à\\s+prendre|à\\s+boire|à\\s+renouveler|renouvelez|répétez|continuez|comptez)\\b",
+      "\\bvous\\s+(devez|pouvez|devriez)\\s+(prendre|boire|appliquer|consommer|arrêter|donner|utiliser)\\b",
+      "\\bje\\s+vous\\s+(conseille|recommande|suggère)\\s+(d'en|de\\s+(prendre|boire|remplacer|appliquer|donner)|cette|ce)\\b",
+      "\\bpour\\s+(soigner\\s+|traiter\\s+|guérir\\s+|soulager\\s+|calmer\\s+)?(votre|vos|ton|ta|tes)\\s+(\\w+\\s+){0,2}(fièvre|toux|diabète|paludisme|douleurs?|maux|diarrhée|plaies?|tension|maladie|infection|rhume|grippe|ventre|tête|enfant|bébé)\\b",
+      "\\b(votre\\s+enfant|votre\\s+bébé|à\\s+votre\\s+bébé|le\\s+malade|si\\s+vous\\s+êtes\\s+enceinte)\\b.*\\b(pren|boi|buv|donn|doit)",
+      "\\b(n'hésitez\\s+pas\\s+à\\s+en\\s+donner|un\\s+adulte\\s+peut\\s+prendre|il\\s+suffit\\s+d'un)",
+      "^\\s*(une|un|deux|trois)\\s+(tasse|verre|gorgée|prise|petit\\s+verre)s?\\b",
+      "^\\s*(\\w+\\s+){0,2}(verres?|tasses?)\\s+par\\s+jour"
+    ]
+  }
+]

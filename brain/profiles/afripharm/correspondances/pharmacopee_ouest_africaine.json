@@ -1,0 +1,31 @@
+{
+  "description": "Faits tirés de sources de référence de la pharmacopée ouest-africaine (monographies, noms vernaculaires, usages, sécurité). Enregistrements hétérogènes : chaque type d'enregistrement renseigne ses propres champs.",
+  "connector": "json",
+  "records_path": "enregistrements",
+  "subjects": [
+    {"field": "plante", "class": "Plante", "facts": [
+      {"predicate": "famille", "field": "famille", "literal": true},
+      {"predicate": "synonymeBotanique", "field": "synonymes", "literal": true},
+      {"predicate": "decriteDans", "field": "monographie", "object_class": "Monographie"}]},
+    {"field": "nom", "class": "NomVernaculaire", "facts": [
+      {"predicate": "designe", "field": "designe", "object_class": "Plante"}]},
+    {"field": "usage", "class": "UsageRapporte", "facts": [
+      {"predicate": "concernePlante", "field": "espece", "object_class": "Plante"},
+      {"predicate": "utilisePartie", "field": "partie", "object_class": "PartieDePlante"},
+      {"predicate": "selonPreparation", "field": "preparation", "object_class": "ModeDePreparation"},
+      {"predicate": "pourIndication", "field": "indication", "object_class": "Indication"},
+      {"predicate": "attesteDans", "field": "reference", "object_class": "Source"}]},
+    {"field": "plante_securite", "class": "Plante", "facts": [
+      {"predicate": "aPourPrecaution", "field": "precaution", "object_class": "Precaution"},
+      {"predicate": "aPourContreIndication", "field": "contre_indication", "object_class": "ContreIndication"},
+      {"predicate": "aPourEffetIndesirable", "field": "effet_indesirable", "object_class": "EffetIndesirable"},
+      {"predicate": "aPourPosologie", "field": "posologie", "object_class": "Posologie"}]}
+  ],
+  "scope": {
+    "pays": {"field": "pays"}, "langue": {"field": "langue"}, "region": {"field": "region"},
+    "population": {"field": "population"}, "preuve": {"field": "preuve"}, "transmission": {"field": "transmission"},
+    "source": {"field": "source"}
+  },
+  "confidence": 0.7,
+  "detect_variants": true
+}

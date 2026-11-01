@@ -1,0 +1,341 @@
+{
+  "id": "ndab",
+  "nom": "Ndab du Ndé",
+  "version": "1.0",
+  "description": "Noms d'éloges des chefferies bamiléké du département du Ndé (Cameroun) : types, règles d'attribution, lignages, formes.",
+  "agent": {
+    "nom": "YobaKoko",
+    "identite": "Tu es YobaKoko, un agent conversationnel expert du savoir traditionnel des Ndab (noms d'éloges du sud-est bamiléké, département du Ndé, Cameroun), incarné en sage-robot vêtu des couleurs traditionnelles du Ndé, dont le tissu ndop.",
+    "domaine": "les Ndab (noms d'éloges bamiléké du département du Ndé, Cameroun)",
+    "exemple_signal": "[SIGNAL:contradiction|Dans la chefferie X, quel Ndab reçoit une fille dans telle configuration de lignages ?|Dans la chefferie X, le Ndab N2 est attribué aux filles dans cette configuration.]",
+    "consignes": []
+  },
+  "ontologie": {
+    "fichier": "ontologie_initiale.json",
+    "espace_de_noms": "http://iast.uqam.ca/ndab#",
+    "origine": "terrain",
+    "corpus": [
+      "Collectes par entretiens auprès des détenteurs du savoir, protocole CIEREH 2026-8058 (UQAM).",
+      "Répertoire de terrain de la chefferie supérieure de Bangangté (janvier 2026, 24 blocs, 343 noms)."
+    ]
+  },
+  "autorite": "Experts de la communauté et partenaires du projet IAST (CEPOM, CODEBA)",
+  "portee": [
+    {
+      "cle": "chefferie",
+      "libelle": "chefferie"
+    },
+    {
+      "cle": "lignage",
+      "libelle": "lignage"
+    },
+    {
+      "cle": "lignage_paternel",
+      "libelle": "lignage paternel"
+    },
+    {
+      "cle": "lignage_maternel",
+      "libelle": "lignage maternel"
+    },
+    {
+      "cle": "site",
+      "libelle": "site d'origine"
+    },
+    {
+      "cle": "bloc",
+      "libelle": "bloc du répertoire"
+    },
+    {
+      "cle": "sexe",
+      "libelle": "sexe"
+    },
+    {
+      "cle": "ligne",
+      "libelle": "ligne de filiation"
+    },
+    {
+      "cle": "periode",
+      "libelle": "période"
+    },
+    {
+      "cle": "diaspora",
+      "libelle": "communauté de la diaspora"
+    },
+    {
+      "cle": "informateur",
+      "libelle": "informateur"
+    },
+    {
+      "cle": "statut",
+      "libelle": "statut"
+    }
+  ],
+  "regles": [
+    {
+      "id": "R2",
+      "description": "Un garçon ne reçoit pas de Ndab ngon là'.",
+      "si": {
+        "predicat": [
+          "estDeType",
+          "estUn"
+        ],
+        "objet": [
+          "NdabNgonLa"
+        ],
+        "portee": {
+          "sexe": [
+            "masculin",
+            "garçon",
+            "homme",
+            "m"
+          ]
+        }
+      }
+    },
+    {
+      "id": "R3",
+      "description": "Le Ndab ngon là' vient de la ligne paternelle.",
+      "si": {
+        "predicat": [
+          "estDeType",
+          "estUn"
+        ],
+        "objet": [
+          "NdabNgonLa"
+        ],
+        "portee": {
+          "ligne": [
+            "maternelle",
+            "maternel",
+            "mère"
+          ]
+        }
+      }
+    },
+    {
+      "id": "R3",
+      "description": "Le Ndab de Mekat vient de la ligne maternelle.",
+      "si": {
+        "predicat": [
+          "estDeType",
+          "estUn"
+        ],
+        "objet": [
+          "NdabDeMekat"
+        ],
+        "portee": {
+          "ligne": [
+            "paternelle",
+            "paternel",
+            "père"
+          ]
+        }
+      }
+    }
+  ],
+  "acces": {
+    "niveaux": [
+      {
+        "id": "public",
+        "rang": 0,
+        "libelle": "public"
+      },
+      {
+        "id": "restreint",
+        "rang": 2,
+        "libelle": "diffusion restreinte"
+      }
+    ],
+    "niveau_par_defaut": "public",
+    "niveau_diffusion_agent": "public",
+    "regles": []
+  },
+  "surete": {
+    "risque": "faible",
+    "contraintes": [],
+    "consigne": ""
+  },
+  "variantes": {
+    "classe": "Ndab",
+    "predicat": "estSynonymeDe",
+    "designation": null
+  },
+  "glossaire": {
+    "langue": "medumba",
+    "code": "byv",
+    "cle": "glossaire_medumba_atteste"
+  },
+  "restitution": {
+    "exemples": [
+      "« la famille du père » plutôt que « patrilignage paternel »",
+      "« le nom qu'une fille reçoit de la famille de son père » plutôt qu'un nom de catégorie"
+    ],
+    "incertitude": "les anciens et les chercheurs du projet sont encore en train de le vérifier"
+  },
+  "contributions": {
+    "types": [
+      {
+        "id": "nouveau_ndab",
+        "libelle": "Nouveau Ndab"
+      },
+      {
+        "id": "correction",
+        "libelle": "Correction"
+      },
+      {
+        "id": "precision_lignage",
+        "libelle": "Précision de lignage"
+      },
+      {
+        "id": "autre",
+        "libelle": "Autre"
+      }
+    ]
+  },
+  "interface": {
+    "outils": [
+      {
+        "id": "determination_ndab",
+        "titre": {
+          "fr": "Déterminer le Ndab d'un enfant à partir des parents",
+          "en": "Determine a child's Ndab from the parents",
+          "mb": "Déterminer le Ndab d'un enfant à partir des parents"
+        },
+        "bouton": {
+          "fr": "Demander l'inférence à {agent}",
+          "en": "Ask {agent} to infer",
+          "mb": "Demander l'inférence à {agent}"
+        },
+        "champs": [
+          {
+            "id": "sexe",
+            "type": "choix",
+            "libelle": {
+              "fr": "Sexe de l'enfant",
+              "en": "Child's sex",
+              "mb": "Sexe de l'enfant"
+            },
+            "options": [
+              {
+                "valeur": "féminin",
+                "libelle": {
+                  "fr": "Féminin",
+                  "en": "Female",
+                  "mb": "Féminin"
+                }
+              },
+              {
+                "valeur": "masculin",
+                "libelle": {
+                  "fr": "Masculin",
+                  "en": "Male",
+                  "mb": "Masculin"
+                }
+              }
+            ]
+          },
+          {
+            "id": "chefferie",
+            "type": "texte",
+            "libelle": {
+              "fr": "Chefferie",
+              "en": "Chiefdom",
+              "mb": "Chefferie"
+            },
+            "exemple": "ex. Bangangté"
+          },
+          {
+            "id": "lignage_paternel",
+            "type": "texte",
+            "libelle": {
+              "fr": "Lignage / Ndap du père",
+              "en": "Father's lineage / Ndap",
+              "mb": "Lignage / Ndap du père"
+            },
+            "exemple": "ex. Swoodjoouh"
+          },
+          {
+            "id": "lignage_maternel",
+            "type": "texte",
+            "libelle": {
+              "fr": "Lignage / Ndap de la mère",
+              "en": "Mother's lineage / Ndap",
+              "mb": "Lignage / Ndap de la mère"
+            },
+            "exemple": "ex. Tchaakoouh"
+          }
+        ],
+        "vide": "non précisé",
+        "consigne": "Détermine le(s) type(s) de Ndab applicables pour un enfant de sexe {sexe}, né dans la chefferie de {chefferie}, dont le lignage paternel / Ndap du père est « {lignage_paternel} » et le lignage maternel / Ndap de la mère est « {lignage_maternel} ». Applique les règles pas à pas et cite-les. Si le répertoire contient des noms attestés, propose-les avec leur statut d'hypothèse."
+      }
+    ],
+    "langues": [
+      {
+        "code": "fr",
+        "libelle": "Français"
+      },
+      {
+        "code": "en",
+        "libelle": "English"
+      },
+      {
+        "code": "mb",
+        "libelle": "Medumba (glossaire limité)"
+      }
+    ],
+    "fr": {
+      "titre": "YobaKoko",
+      "eyebrow": "UQAM · CRIA · Projet Ndab (Ndé, Cameroun)",
+      "sousTitre": "Agent du savoir traditionnel des Ndab, fondé sur l'ontologie formelle du projet. YobaKoko peut expliquer un Ndap en profondeur, inférer le type de Ndab d'un enfant, et apprendre de nouvelles sources une fois validées par un administrateur.",
+      "placeholder": "Posez une question sur les Ndab…",
+      "suggestions": [
+        "Qu'est-ce qu'un Ndab ?",
+        "Quelle est la différence entre Ndab de Mekat et Ndab ngon là' ?",
+        "Qui a le droit de donner un Ndab ?",
+        "Pourquoi une fille reçoit-elle deux Ndab ?"
+      ],
+      "accueil": "Bienvenue, je suis YobaKoko. Je peux répondre à vos questions sur le savoir traditionnel des Ndab, expliquer un Ndap en profondeur, inférer le type de Ndab d'un enfant, et apprendre de nouvelles sources une fois validées par un administrateur. Cette base de connaissances évolue : pour toute question sensible, consultez les experts du terrain (CEPOM, CODEBA, Dr Lendja Ngnemzue)."
+    },
+    "en": {
+      "titre": "YobaKoko",
+      "eyebrow": "UQAM · CRIA · Ndab project (Ndé, Cameroon)",
+      "sousTitre": "Agent for the Ndab traditional knowledge, grounded in the project's formal ontology. YobaKoko can explain a Ndap in depth, infer a child's Ndab type, and learn from new sources once approved by an administrator.",
+      "placeholder": "Ask a question about the Ndab…",
+      "suggestions": [
+        "What is a Ndab?",
+        "What's the difference between Ndab de Mekat and Ndab ngon là'?",
+        "Who is allowed to give a Ndab?",
+        "Why does a girl receive two Ndab?"
+      ],
+      "accueil": "Welcome, I am YobaKoko. I can answer your questions on the traditional knowledge of the Ndab, explain a Ndap in depth, infer the type of Ndab for a child, and learn from new sources once an administrator has approved them."
+    },
+    "mb": {
+      "titre": "YobaKoko",
+      "eyebrow": "UQAM · CRIA · Projet Ndab (Ndé, Cameroun)",
+      "sousTitre": "Ntoo' — glossaire Medumba limité aux termes attestés dans les documents sources. YobaKoko traduit seulement ces termes ; le reste reste en français, par honnêteté envers la langue.",
+      "placeholder": "Ntoo' (question en français ou avec les mots Medumba connus)…",
+      "suggestions": [
+        "Que veut dire 'Ndab Mekat' ?",
+        "Que veut dire 'tà' et 'mà' ?",
+        "Le glossaire couvre-t-il toute la langue Medumba ?"
+      ]
+    }
+  },
+  "collecte": {
+    "temoignages": true,
+    "formulaire": true,
+    "lacunes": true
+  },
+  "inventaire": [
+    {
+      "classe": "GroupeLignager",
+      "libelle": "Lignages documentés",
+      "max": 40
+    },
+    {
+      "classe": "Ndab",
+      "libelle": "Ndab attestés",
+      "max": 0
+    }
+  ]
+}

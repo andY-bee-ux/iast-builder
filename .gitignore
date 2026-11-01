@@ -1,0 +1,19 @@
+# Secrets
+.env
+*.env
+!*.env.example
+# Instance data (knowledge bases, logs, uploads, vector stores)
+brain/data*/
+brain/uploads*/
+brain/**/*.sqlite*
+brain/**/*.db
+brain/evaluation/etude/donnees/*.jsonl
+# Environments and builds
+venv/
+.venv/
+node_modules/
+gateway/dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+.DS_Store

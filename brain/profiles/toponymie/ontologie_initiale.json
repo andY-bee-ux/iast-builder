@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "titre": "Ontologie initiale de l'instance de toponymie coutumière",
+    "origine": "Construite à partir du corpus toponymique illustratif (données fictives) préparé pour l'étude d'instanciation.",
+    "version": "1.0"
+  },
+  "classes": [
+    {
+      "id": "Lieu",
+      "label": "Lieu",
+      "parent": null,
+      "def_fr": "Lieu nommé d'un territoire coutumier : quartier, colline, cours d'eau, marché, bois sacré."
+    },
+    {
+      "id": "NomDeLieu",
+      "label": "Nom de lieu",
+      "parent": null,
+      "def_fr": "Nom d'usage d'un lieu ; un même nom peut désigner plusieurs lieux."
+    },
+    {
+      "id": "TypeDeLieu",
+      "label": "Type de lieu",
+      "parent": null,
+      "def_fr": "Nature du lieu."
+    },
+    {
+      "id": "Chefferie",
+      "label": "Chefferie",
+      "parent": null,
+      "def_fr": "Chefferie dont relève le lieu."
+    },
+    {
+      "id": "Informateur",
+      "label": "Informateur",
+      "parent": null,
+      "def_fr": "Personne qui a rapporté le nom ou sa signification, désignée par un code."
+    }
+  ],
+  "proprietes_objet": [
+    {
+      "id": "designe",
+      "domaine": "NomDeLieu",
+      "portee": "Lieu",
+      "def_fr": "Lieu que désigne un nom."
+    },
+    {
+      "id": "estVarianteDe",
+      "domaine": "NomDeLieu",
+      "portee": "NomDeLieu",
+      "def_fr": "Deux graphies d'un même nom de lieu."
+    },
+    {
+      "id": "estDeType",
+      "domaine": "Lieu",
+      "portee": "TypeDeLieu",
+      "def_fr": "Nature du lieu."
+    },
+    {
+      "id": "releveDe",
+      "domaine": "Lieu",
+      "portee": "Chefferie",
+      "def_fr": "Chefferie dont relève le lieu."
+    },
+    {
+      "id": "rapportePar",
+      "domaine": "Lieu",
+      "portee": "Informateur",
+      "def_fr": "Informateur qui a rapporté le lieu."
+    }
+  ],
+  "proprietes_donnees": [
+    {
+      "id": "signification",
+      "domaine": "Lieu",
+      "type": "string",
+      "def_fr": "Signification rapportée du nom du lieu."
+    }
+  ],
+  "regles_attribution": [
+    {
+      "id": "TP1_lieu_sacre",
+      "enonce_fr": "Toute connaissance sur un bois sacré fait l'objet d'un examen renforcé et reste à diffusion restreinte.",
+      "commentaire": "lieu sacré"
+    }
+  ],
+  "disjointures": [
+    [
+      "Lieu",
+      "NomDeLieu"
+    ]
+  ],
+  "individus_seed": [
+    {
+      "id": "Quartier",
+      "classe": "TypeDeLieu",
+      "label": "quartier"
+    },
+    {
+      "id": "Colline",
+      "classe": "TypeDeLieu",
+      "label": "colline"
+    },
+    {
+      "id": "CoursDEau",
+      "classe": "TypeDeLieu",
+      "label": "cours d'eau"
+    },
+    {
+      "id": "Source",
+      "classe": "TypeDeLieu",
+      "label": "source"
+    },
+    {
+      "id": "Marche",
+      "classe": "TypeDeLieu",
+      "label": "marché"
+    },
+    {
+      "id": "Chemin",
+      "classe": "TypeDeLieu",
+      "label": "chemin"
+    },
+    {
+      "id": "LieuDit",
+      "classe": "TypeDeLieu",
+      "label": "lieu-dit"
+    },
+    {
+      "id": "BoisSacre",
+      "classe": "TypeDeLieu",
+      "label": "bois sacré"
+    }
+  ]
+}

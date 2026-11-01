@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Administration</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="admin">
+
+<div id="loginView" class="admin-login">
+  <h1>Administration</h1>
+  <p style="color:var(--bone-dim); font-size:14px; margin-top:8px;">Connectez-vous pour examiner les questions des usagers, les connaissances proposées et l'ontologie.</p>
+  <input type="password" id="loginPassword" placeholder="Mot de passe administrateur">
+  <div class="err" id="loginError"></div>
+  <button onclick="doLogin()">Se connecter</button>
+</div>
+
+<div id="dashboardView" style="display:none;">
+  <div class="admin-header">
+    <h1>Administration</h1>
+    <div class="expert-box">
+      <label for="expertName">Vous êtes</label>
+      <input type="text" id="expertName" placeholder="Nom de l'expert (inscrit au journal)">
+      <button class="btn-admin ghost" onclick="doLogout()">Se déconnecter</button>
+    </div>
+  </div>
+  <div class="stats-bar" id="statsBar"></div>
+
+  <div class="admin-tabs">
+    <button class="admin-tab active" data-tab="questions">Questions des usagers</button>
+    <button class="admin-tab" data-tab="assertions">Connaissances proposées</button>
+    <button class="admin-tab" data-tab="ontology">Ontologie</button>
+    <button class="admin-tab" data-tab="connectors">Connecteurs</button>
+    <button class="admin-tab" data-tab="contributions">Contributions</button>
+    <button class="admin-tab" data-tab="documents">Documents</button>
+    <button class="admin-tab" data-tab="journal">Journal</button>
+  </div>
+
+  <!-- Phase 1 : questions d'investigation -->
+  <div class="admin-panel active" id="panel-questions">
+    <p class="panel-intro">Questions soulevées par les échanges avec les usagers : lacunes, contradictions, faits nouveaux,
+      ambiguïtés. Les questions proches sont regroupées ; la priorité tient compte du nombre d'usagers concernés.</p>
+    <div class="filter-row">
+      <select id="qStatus" onchange="loadQuestions()">
+        <option value="open">À traiter</option><option value="validated">Validées</option>
+        <option value="rejected">Rejetées</option><option value="all">Toutes</option>
+      </select>
+    </div>
+    <div id="questionsList"></div>
+  </div>
+
+  <!-- Phases 2 et 3 : assertions candidates -->
+  <div class="admin-panel" id="panel-assertions">
+    <p class="panel-intro">Connaissances extraites des documents, importées par les connecteurs ou issues des réponses des experts.
+      Chacune porte un verdict formel : conforme, en tension (contredit une règle ou une connaissance validée) ou hors ontologie.</p>
+    <div class="filter-row">
+      <select id="aStatus" onchange="loadAssertions()">
+        <option value="pending">En attente</option><option value="deliberation">En délibération</option>
+        <option value="validated">Validées</option><option value="rejected">Rejetées</option>
+        <option value="retired">Retirées</option><option value="all">Toutes</option>
+      </select>
+      <select id="aVerdict" onchange="loadAssertions()">
+        <option value="">Tous verdicts</option><option value="conforme">Conformes</option>
+        <option value="en_tension">En tension</option><option value="hors_ontologie">Hors ontologie</option>
+      </select>
+      <select id="aSource" onchange="loadAssertions()">
+        <option value="">Toutes sources</option><option value="document">Documents</option>
+        <option value="connecteur">Connecteurs</option><option value="question">Questions</option><option value="expert">Experts</option>
+      </select>
+    </div>
+    <div id="assertionsList"></div>
+  </div>
+
+  <!-- Ontologie : format, import, évolutions, versions -->
+  <div class="admin-panel" id="panel-ontology">
+    <div class="ontology-meta-row">
+      <span class="status-pill" id="ontologyFormatPill">…</span>
+      <span class="status-pill" id="ontologyVersionPill">…</span>
+      <label class="btn-admin ghost" style="cursor:pointer;">
+        Importer l'ontologie initiale (.json, .owl, .rdf, .ttl, .n3)
+        <input type="file" id="ontologyUploadInput" accept=".json,.owl,.rdf,.ttl,.n3,.xml" style="display:none;">
+      </label>
+      <a class="btn-admin ghost" href="#" onclick="downloadEnrichments(); return false;">Graphe des enrichissements (Turtle)</a>
+      <span class="ontology-status" id="ontologyUploadStatus"></span>
+    </div>
+
+    <h2 class="section-title">Proposer une évolution</h2>
+    <p class="panel-intro">Décrivez l'évolution en français. Le système la traduit en opérations formelles et vous présente
+      ce qui sera appliqué ; rien n'est modifié avant votre validation.</p>
+    <textarea id="changeProposal" class="wide-text" placeholder="Ex. : Ajouter une catégorie, avec sa définition et sa place dans l\'ontologie."></textarea>
+    <div class="actions"><button class="btn-admin" onclick="formalizeChange()">Traduire la proposition</button>
+      <span class="ontology-status" id="changeStatus"></span></div>
+    <div id="changePreview"></div>
+
+    <h2 class="section-title">Évolutions</h2>
+    <div id="changesList"></div>
+
+    <h2 class="section-title">Versions</h2>
+    <div id="versionsList"></div>
+
+    <details class="raw-editor">
+      <summary>Éditeur du fichier d'ontologie (usage technique)</summary>
+      <div class="ontology-editor"><textarea id="ontologyText" spellcheck="false"></textarea></div>
+      <div class="ontology-actions">
+        <button class="btn-admin" onclick="saveOntology()">Enregistrer</button>
+        <button class="btn-admin ghost" onclick="loadOntology()">Recharger</button>
+        <span class="ontology-status" id="ontologyStatus"></span>
+      </div>
+    </details>
+  </div>
+
+  <!-- Phase 3 : connecteurs -->
+  <div class="admin-panel" id="panel-connectors">
+    <p class="panel-intro">Import de données structurées (CSV, JSON) par correspondance déclarative. Les assertions produites
+      restent en attente jusqu'à leur validation ; les variantes graphiques et les homonymies sont signalées.</p>
+    <div class="connector-form">
+      <label>Fichier <input type="file" id="connectorFile" accept=".json,.csv"></label>
+      <label>Correspondance
+        <select id="connectorPreset" onchange="showPreset()"></select></label>
+      <textarea id="connectorMapping" class="wide-text mono" placeholder="Correspondance personnalisée (JSON), utilisée si aucune correspondance prédéfinie n'est choisie"></textarea>
+      <div class="actions"><button class="btn-admin" onclick="importConnector()">Importer</button>
+        <span class="ontology-status" id="connectorStatus"></span></div>
+    </div>
+    <h2 class="section-title">Lots importés</h2>
+    <div id="batchesList"></div>
+  </div>
+
+  <div class="admin-panel" id="panel-contributions"></div>
+  <div class="admin-panel" id="panel-documents"></div>
+
+  <div class="admin-panel" id="panel-journal">
+    <p class="panel-intro">Journal épistémique en ajout seul : chaque proposition, verdict, avis, décision et version de
+      l'ontologie y est inscrit et ne peut être ni modifié ni supprimé.</p>
+    <div class="filter-row">
+      <select id="jSubject" onchange="loadJournal()">
+        <option value="">Tous sujets</option><option value="question">Questions</option><option value="assertion">Assertions</option>
+        <option value="evolution">Évolutions</option><option value="ontologie">Ontologie</option><option value="document">Documents</option>
+        <option value="contribution">Contributions</option><option value="collecte">Collecte</option><option value="lot">Lots d'import</option><option value="conversation">Conversations</option>
+      </select>
+      <a class="btn-admin ghost" href="#" onclick="downloadJournal(); return false;">Exporter (JSONL)</a>
+    </div>
+    <div id="journalList"></div>
+  </div>
+</div>
+
+<script src="js/admin.js"></script>
+</body>
+</html>

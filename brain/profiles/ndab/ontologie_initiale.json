@@ -1,0 +1,1188 @@
+{
+  "meta": {
+    "titre": "Ontologie formelle du savoir traditionnel des Ndab",
+    "domaine": "Culture immatérielle bamiléké (Ndé, Cameroun) - système d'attribution de noms d'éloges",
+    "sources": [
+      "Nkambou, R. — Description de projet (NKARO9901), UQAM",
+      "Lendja Ngnemzue, A.B. — Guide d'entretien de l'enquête de terrain (CIEREH 2026-8058)",
+      "Méthodologie du volet anthropologique (AIST)",
+      "Voorhoeve (1964); Barbier (1986); Julien & Rosselin (2005)",
+      "NDAAP-Chefferie supérieure Bangangté, janvier 2026 (répertoire de terrain brut, 24 entrées, 343 noms attestés)"
+    ],
+    "avertissement": "Ontologie de première version, construite à partir des seuls documents fournis. Elle doit être validée et enrichie avec les experts CEPOM/CODEBA et l'ethnographe (Dr Lendja Ngnemzue) avant tout usage de production, en particulier pour tout ce qui touche la géographie exhaustive des chefferies et la casuistique des donateurs. Depuis l'ajout du répertoire de terrain de Bangangté (janvier 2026), l'ontologie contient également des données réelles brutes (voir clé repertoire_bangangte) dont la classification par type de Ndab reste une hypothèse à valider — voir repertoire_bangangte.meta.avertissement_critique.",
+    "expressivite_cible": "Ontologie légère (lightweight), proche d'un profil OWL 2 EL : hiérarchie de classes, propriétés d'objet/de données, axiomes de disjonction et de cardinalité, complétée par des règles de type SWRL pour rendre l'attribution décidable."
+  },
+  "classes": [
+    {
+      "id": "SavoirTraditionnel",
+      "parent": null,
+      "def_fr": "Connaissance, pratique ou expression reconnue par une communauté comme faisant partie de son patrimoine culturel immatériel (déf. UNESCO 2003, art. 2)."
+    },
+    {
+      "id": "Ndab",
+      "parent": "SavoirTraditionnel",
+      "def_fr": "Nom d'éloge / nom de remerciement attribué à la naissance, combinant parenté et topologie ; unité centrale du domaine. Synonyme rencontré dans les sources : Ndap."
+    },
+    {
+      "id": "TypeDeNdab",
+      "parent": null,
+      "def_fr": "Catégorie formelle de Ndab, définie par la ligne de filiation d'où il provient et par le sexe du récipiendaire."
+    },
+    {
+      "id": "NdabDeMekat",
+      "parent": "TypeDeNdab",
+      "def_fr": "Ndab « de petit-fils/petite-fille », issu du patrilignage MATERNEL. Attribué à tous les nouveau-nés, garçons et filles."
+    },
+    {
+      "id": "NdabNgonLa",
+      "parent": "TypeDeNdab",
+      "def_fr": "Ndab « de fille de concession » (Ndab ngon là'), issu du patrilignage PATERNEL. Attribué exclusivement aux filles."
+    },
+    {
+      "id": "Personne",
+      "parent": null,
+      "def_fr": "Individu impliqué dans le domaine, comme porteur, donateur, expert ou chercheur."
+    },
+    {
+      "id": "PorteurDeNdab",
+      "parent": "Personne",
+      "def_fr": "Toute personne native d'une chefferie du Ndé (ou apparentée) à qui un ou plusieurs Ndab ont été attribués à la naissance."
+    },
+    {
+      "id": "DonateurDeNdab",
+      "parent": "Personne",
+      "def_fr": "Chef de lignage (paternel ou maternel) habilité à transmettre / choisir le Ndab d'un nouveau-né de son lignage."
+    },
+    {
+      "id": "ExpertNdab",
+      "parent": "Personne",
+      "def_fr": "Personne-ressource reconnue (par son lignage, par la recherche antérieure, ou par la réputation populaire) comme détentrice du répertoire et de l'histoire des Ndab. Population cible du guide d'entretien."
+    },
+    {
+      "id": "Ethnographe",
+      "parent": "Personne",
+      "def_fr": "Chercheur chargé de la collecte de terrain (entretiens semi-directifs, archives)."
+    },
+    {
+      "id": "GroupeSocial",
+      "parent": null,
+      "def_fr": "Regroupement social porteur ou gestionnaire du savoir traditionnel."
+    },
+    {
+      "id": "GroupeLignager",
+      "parent": "GroupeSocial",
+      "def_fr": "Lignage (descent group) ; unité de filiation, paternelle ou maternelle, à laquelle un Ndab est rattaché."
+    },
+    {
+      "id": "Chefferie",
+      "parent": "GroupeSocial",
+      "def_fr": "Chefferie traditionnelle bamiléké (ex. Bangangté, Bangoulap, Bakong, Bahouoc, Bahouoc-Mfen Ngava/Bali) placée sous l'autorité d'une Majesté."
+    },
+    {
+      "id": "AireCulturelle",
+      "parent": "GroupeSocial",
+      "def_fr": "Regroupement de chefferies partageant un trait culturel (usage des Ndab), medumbaphones ou non."
+    },
+    {
+      "id": "TermeDeParente",
+      "parent": null,
+      "def_fr": "Terme d'adresse de parenté simple, dont l'ambiguïté est précisément ce que le système des Ndab permet d'éviter."
+    },
+    {
+      "id": "Langue",
+      "parent": null,
+      "def_fr": "Langue locale du département du Ndé et de ses environs."
+    },
+    {
+      "id": "Lieu",
+      "parent": null,
+      "def_fr": "Localisation géographique (village, chefferie, département, région)."
+    },
+    {
+      "id": "Metier",
+      "parent": null,
+      "def_fr": "Métier traditionnel de la culture matérielle (forge, poterie, sculpture sur bois...) auquel certains Ndab peuvent être rattachés."
+    },
+    {
+      "id": "SourceDeConnaissance",
+      "parent": null,
+      "def_fr": "Provenance d'une donnée du répertoire : entretien semi-directif, archive, observation, contribution crowdsourcée."
+    },
+    {
+      "id": "EntreeRepertoire",
+      "parent": "SourceDeConnaissance",
+      "def_fr": "Bloc généalogique tel que collecté sur le terrain pour une chefferie donnée : un donateur paternel de référence, un site d'origine, et un ou deux lignages avec leurs listes de noms de Ndab associées. Unité d'ingestion du répertoire brut, en amont de toute classification par TypeDeNdab."
+    },
+    {
+      "id": "LignageAssocieHypothese",
+      "parent": "GroupeLignager",
+      "def_fr": "Lignage nommé dans une EntreeRepertoire, dont le rattachement à NdabDeMekat (ligne maternelle) ou NdabNgonLa (ligne paternelle) est une hypothèse structurelle non confirmée par l'ethnographe."
+    }
+  ],
+  "disjointures": [
+    [
+      "NdabDeMekat",
+      "NdabNgonLa"
+    ],
+    [
+      "PorteurDeNdab",
+      "DonateurDeNdab",
+      "Ethnographe"
+    ]
+  ],
+  "proprietes_objet": [
+    {
+      "id": "estAttribueA",
+      "domaine": "Ndab",
+      "portee": "PorteurDeNdab",
+      "def_fr": "Relie un Ndab au porteur auquel il a été attribué à la naissance."
+    },
+    {
+      "id": "estDeType",
+      "domaine": "Ndab",
+      "portee": "TypeDeNdab",
+      "def_fr": "Classe un Ndab donné dans NdabDeMekat ou NdabNgonLa."
+    },
+    {
+      "id": "provientDuLignage",
+      "domaine": "Ndab",
+      "portee": "GroupeLignager",
+      "def_fr": "Lignage d'origine du Ndab (paternel pour NdabNgonLa, maternel pour NdabDeMekat)."
+    },
+    {
+      "id": "estDonneParDonateur",
+      "domaine": "Ndab",
+      "portee": "DonateurDeNdab",
+      "def_fr": "Chef de lignage à l'origine de l'attribution."
+    },
+    {
+      "id": "appartientAChefferie",
+      "domaine": "GroupeLignager",
+      "portee": "Chefferie",
+      "def_fr": "Rattachement d'un lignage à une chefferie d'origine."
+    },
+    {
+      "id": "estSujetDe",
+      "domaine": "Personne",
+      "portee": "Chefferie",
+      "def_fr": "Rapport de sujétion d'une personne à la Majesté d'une chefferie (ex. Q16 du guide d'entretien : 'Votre père est le sujet de quelle Majesté ?')."
+    },
+    {
+      "id": "parleeDans",
+      "domaine": "Langue",
+      "portee": "Chefferie",
+      "def_fr": "Langue en usage dans une chefferie."
+    },
+    {
+      "id": "aPourPere",
+      "domaine": "Personne",
+      "portee": "Personne",
+      "def_fr": "Lien de filiation paternelle."
+    },
+    {
+      "id": "aPourMere",
+      "domaine": "Personne",
+      "portee": "Personne",
+      "def_fr": "Lien de filiation maternelle."
+    },
+    {
+      "id": "rattacheAMetier",
+      "domaine": "Ndab",
+      "portee": "Metier",
+      "def_fr": "Lien, parfois attesté, entre un Ndab et un métier traditionnel (ex. la forge)."
+    },
+    {
+      "id": "estSynonymeDe",
+      "domaine": "Ndab",
+      "portee": "Ndab",
+      "def_fr": "Relation symétrique entre variantes/synonymes d'un même Ndab, à catégoriser durant l'ethnographie."
+    },
+    {
+      "id": "aPourSource",
+      "domaine": "Ndab",
+      "portee": "SourceDeConnaissance",
+      "def_fr": "Traçabilité : origine de l'attestation d'un Ndab dans le répertoire (obligatoire pour la balise qualité 'fiabilité')."
+    },
+    {
+      "id": "aPourEntreeRepertoire",
+      "domaine": "Chefferie",
+      "portee": "EntreeRepertoire",
+      "def_fr": "Relie une chefferie à un bloc généalogique brut collecté sur le terrain (voir repertoire_bangangte)."
+    }
+  ],
+  "proprietes_donnees": [
+    {
+      "id": "nomNdab",
+      "domaine": "Ndab",
+      "type": "string"
+    },
+    {
+      "id": "sexeRecipiendaire",
+      "domaine": "PorteurDeNdab",
+      "type": "enum[masculin, feminin]"
+    },
+    {
+      "id": "nomChefferie",
+      "domaine": "Chefferie",
+      "type": "string"
+    },
+    {
+      "id": "estMedumbaphone",
+      "domaine": "Chefferie",
+      "type": "boolean"
+    },
+    {
+      "id": "ageExpert",
+      "domaine": "ExpertNdab",
+      "type": "integer",
+      "contrainte": ">= 50 (critère d'échantillonnage, sauf chercheurs publiants sur le sujet)"
+    },
+    {
+      "id": "dateCollecte",
+      "domaine": "SourceDeConnaissance",
+      "type": "date"
+    }
+  ],
+  "regles_attribution": [
+    {
+      "id": "R1_double_attribution_filles",
+      "enonce_fr": "SI Personne(p) ET sexeRecipiendaire(p, féminin) ALORS estAttribueA(NdabNgonLa_de_p, p) ET estAttribueA(NdabDeMekat_de_p, p).",
+      "commentaire": "Une fille reçoit deux Ndab à la naissance : un du patrilignage paternel (Ndab ngon là') et un du patrilignage maternel (Ndab de Mekat)."
+    },
+    {
+      "id": "R2_attribution_unique_garcons",
+      "enonce_fr": "SI Personne(p) ET sexeRecipiendaire(p, masculin) ALORS estAttribueA(NdabDeMekat_de_p, p) ET NON estAttribueA(NdabNgonLa, p).",
+      "commentaire": "Un garçon ne reçoit à la naissance que le Ndab de Mekat (issu du lignage maternel)."
+    },
+    {
+      "id": "R3_origine_lignagere",
+      "enonce_fr": "SI estDeType(n, NdabDeMekat) ALORS provientDuLignage(n, lignage_maternel) ; SI estDeType(n, NdabNgonLa) ALORS provientDuLignage(n, lignage_paternel).",
+      "commentaire": "Contrainte de cohérence entre type de Ndab et ligne de filiation ; sert de test de décidabilité (une attribution incohérente avec cette règle est rejetée)."
+    },
+    {
+      "id": "R4_habilitation_donateur",
+      "enonce_fr": "SI DonateurDeNdab(d) ET estChefDe(d, l) ET GroupeLignager(l) ET provientDuLignage(n, l) ALORS estDonneParDonateur(n, d).",
+      "commentaire": "Seul le chef du lignage concerné (paternel ou maternel selon le type de Ndab) est habilité à attribuer/choisir le Ndab."
+    },
+    {
+      "id": "R5_desambiguisation_parente",
+      "enonce_fr": "Les Ndab sont utilisés comme termes d'adresse en alternative aux 4 termes de parenté simple ambigus : tà (père), mà (mère), nfèt (frère/sœur), mèn (enfant).",
+      "commentaire": "Fonction sociale principale attestée par Voorhoeve (1964) ; utile pour désambiguïser des requêtes de l'agent conversationnel portant sur la parenté."
+    }
+  ],
+  "balises_qualite_donnees": [
+    {
+      "id": "contextualisation",
+      "def_fr": "Le Ndab collecté est-il suffisamment incorporé au contexte culturel et social des chefferies du sud-est bamiléké ?"
+    },
+    {
+      "id": "fiabilite",
+      "def_fr": "Les données recueillies sur un même segment de Ndab sont-elles cohérentes et reproductibles (cf. aPourSource) ?"
+    },
+    {
+      "id": "reflexivite",
+      "def_fr": "Les biais et l'influence du chercheur sur la collecte ont-ils été identifiés ?"
+    },
+    {
+      "id": "profondeur",
+      "def_fr": "La donnée offre-t-elle une compréhension riche et détaillée du Ndab concerné ?"
+    },
+    {
+      "id": "ethique",
+      "def_fr": "La donnée a-t-elle été recueillie de manière éthique et respectueuse (consentement, CIEREH) ?"
+    }
+  ],
+  "individus_seed": [
+    {
+      "id": "Chefferie_Bangangte",
+      "classe": "Chefferie",
+      "nomChefferie": "Bangangté",
+      "estMedumbaphone": true,
+      "donneesTerrainDisponibles": true,
+      "nbEntreesRepertoire": 24,
+      "nbNomsAttestes": 343,
+      "sourceRepertoire": "NDAAP-Chefferie_superieur_Bangangté-Janvier_2026.docx"
+    },
+    {
+      "id": "Chefferie_Bangoulap",
+      "classe": "Chefferie",
+      "nomChefferie": "Bangoulap",
+      "estMedumbaphone": true
+    },
+    {
+      "id": "Chefferie_Bakong",
+      "classe": "Chefferie",
+      "nomChefferie": "Bakong",
+      "estMedumbaphone": true
+    },
+    {
+      "id": "Chefferie_Bahouoc",
+      "classe": "Chefferie",
+      "nomChefferie": "Bahouoc",
+      "estMedumbaphone": true
+    },
+    {
+      "id": "Chefferie_Bahouoc_Mfen_Ngava_Bali",
+      "classe": "Chefferie",
+      "nomChefferie": "Bahouoc-Mfen Ngava (Bali, Nord-Ouest)",
+      "estMedumbaphone": true
+    },
+    {
+      "id": "Chefferie_Bazou",
+      "classe": "Chefferie",
+      "nomChefferie": "Bazou",
+      "estMedumbaphone": false
+    },
+    {
+      "id": "Chefferie_Balengou",
+      "classe": "Chefferie",
+      "nomChefferie": "Balengou",
+      "estMedumbaphone": false
+    },
+    {
+      "id": "Chefferie_Bamena",
+      "classe": "Chefferie",
+      "nomChefferie": "Bamena",
+      "estMedumbaphone": false
+    },
+    {
+      "id": "Chefferie_Bangoua",
+      "classe": "Chefferie",
+      "nomChefferie": "Bangoua",
+      "estMedumbaphone": false
+    },
+    {
+      "id": "Chefferie_Badoumga",
+      "classe": "Chefferie",
+      "nomChefferie": "Badoumga",
+      "estMedumbaphone": false
+    },
+    {
+      "id": "Chefferie_Batchingou",
+      "classe": "Chefferie",
+      "nomChefferie": "Batchingou",
+      "estMedumbaphone": false
+    },
+    {
+      "id": "Chefferie_Banganfokam",
+      "classe": "Chefferie",
+      "nomChefferie": "Banganfokam",
+      "estMedumbaphone": false
+    },
+    {
+      "id": "Chefferie_Baloua",
+      "classe": "Chefferie",
+      "nomChefferie": "Baloua",
+      "estMedumbaphone": false
+    },
+    {
+      "id": "Chefferie_Babitchoua",
+      "classe": "Chefferie",
+      "nomChefferie": "Babitchoua",
+      "estMedumbaphone": false
+    },
+    {
+      "id": "Langue_Medumba",
+      "classe": "Langue",
+      "nomLangue": "Medumba"
+    },
+    {
+      "id": "Type_NdabDeMekat",
+      "classe": "NdabDeMekat",
+      "nomNdab": "Ndab de Mekat",
+      "provientDuLignage": "lignage maternel",
+      "attribueA": "garçons et filles"
+    },
+    {
+      "id": "Type_NdabNgonLa",
+      "classe": "NdabNgonLa",
+      "nomNdab": "Ndab ngon là' (fille de concession)",
+      "provientDuLignage": "lignage paternel",
+      "attribueA": "filles uniquement"
+    }
+  ],
+  "glossaire_medumba_atteste": {
+    "avertissement": "Ce glossaire ne contient QUE les termes explicitement attestés dans les documents sources. Il n'a pas la prétention de couvrir la langue Medumba et doit être validé par un locuteur natif / l'ethnographe avant tout usage étendu.",
+    "termes": [
+      {
+        "medumba": "Ndab",
+        "fr": "nom d'éloge / nom de remerciement",
+        "variante": "Ndap"
+      },
+      {
+        "medumba": "tà",
+        "fr": "père (terme de parenté, génération précédant Ego)"
+      },
+      {
+        "medumba": "mà",
+        "fr": "mère (terme de parenté, génération précédant Ego)"
+      },
+      {
+        "medumba": "nfèt",
+        "fr": "frère / sœur (génération d'Ego)"
+      },
+      {
+        "medumba": "mèn",
+        "fr": "enfant (génération suivant Ego)"
+      },
+      {
+        "medumba": "mèn fi",
+        "fr": "enfant frais / nouveau-né"
+      },
+      {
+        "medumba": "Ndab Mekat",
+        "fr": "Ndab de petit-fils/petite-fille (lignage maternel)"
+      },
+      {
+        "medumba": "Ndab ngon là'",
+        "fr": "Ndab de fille de concession (lignage paternel)"
+      }
+    ]
+  },
+  "repertoire_bangangte": {
+    "meta": {
+      "titre": "Répertoire de terrain — Chefferie supérieure Bangangté",
+      "source_document": "NDAAP-Chefferie_superieur_Bangangté-Janvier_2026.docx",
+      "date_source": "janvier 2026",
+      "nb_entrees": 24,
+      "nb_noms_attestes": 343,
+      "avertissement_critique": "CECI EST UNE DONNEE DE TERRAIN BRUTE, PAS ENCORE VALIDEE. Chaque entrée correspond à un bloc généalogique tel qu'il apparaît dans le document source (24 tableaux). La correspondance entre les colonnes du document et les classes formelles de l'ontologie (NdabDeMekat / NdabNgonLa) est une HYPOTHESE STRUCTURELLE, pas un fait confirmé : 1) la liste sous 'donateur_paternel_ref' (colonne Père) n'a pas de classification confirmée ; 2) la liste préfixée 'Gooun...' est rattachée par hypothèse au type NdabNgonLa (le préfixe Gooun évoque phonétiquement 'ngon', fille) ; 3) la seconde liste (sous un second nom de lignage, préfixes Mii/Maa/Djaa mêlés) est rattachée par hypothèse au type NdabDeMekat (mixité de sexes attendue pour ce type). Ces trois hypothèses doivent être confirmées par l'ethnographe du projet (Dr Lendja Ngnemzue) et les experts CEPOM/CODEBA avant tout usage autre qu'exploratoire. Le document source lui-même contient des marqueurs d'incertitude (ex. '???' dans l'entrée BGT_03), signe qu'il s'agit d'un travail de terrain encore ouvert.",
+      "regle_agent": "L'agent peut citer ces noms tels quels comme données de terrain collectées, en rappelant systématiquement leur statut d'hypothèse non validée dès qu'on lui demande de les classer par type de Ndab."
+    },
+    "entrees": [
+      {
+        "id": "BGT_00",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun Ngaah",
+        "donateur_paternel_ref": "Taah Leeuhn Djaah",
+        "noms_associes_au_pere": [
+          "Menkah Tcheup NDaat zee",
+          "Ngnoouh Taat Ziip Breeu",
+          "Djaa NDaam Choou",
+          "Jeeuh Ndaah Taagaa Kam Bett Keeun"
+        ],
+        "lignage_paternel_labels": [
+          "Swoodjoouh",
+          "Veeun Ngaah"
+        ],
+        "lignage_maternel_hypothese": "Tchaakoouh",
+        "liste_hypothese_ndab_ngon_la": [
+          "Ndooh VoohNgnam",
+          "Gooun FaamBreeu",
+          "Gooun Beeu Ndongueun",
+          "Gooun Beeu Tee Tchaap",
+          "Gooun Zii Yapmi Kwiikeeun"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Maahtah Noouu",
+          "Yim Biaa Nzii",
+          "Djaa Mii Daam",
+          "Miignaa Tchookgnaa",
+          "Tooun Nkap Djoou …",
+          "Tchaa Chouaan",
+          "Menzwi Ke Ben Tsii"
+        ]
+      },
+      {
+        "id": "BGT_01",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Madjaa et Tchoukoup",
+        "donateur_paternel_ref": "Taaboouh Ndam",
+        "noms_associes_au_pere": [
+          "Djaa Waat Tchoouh",
+          "Tee Feeunkeeuh",
+          "Veeunleeuhn",
+          "Djaa Lang",
+          "Menkam Djaa Nzouaah Baeuh"
+        ],
+        "lignage_paternel_labels": [
+          "Swoodjoouh",
+          "Menkam DjaaZouaah/",
+          "Menkam Djaalang/",
+          "Veunleeun"
+        ],
+        "lignage_maternel_hypothese": "Kaafeeuuh",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun Laah",
+          "Gooun Ndjaa Ngniiaa Keeuh",
+          "Goon Taaveen Tchooh Boouhh",
+          "Goon Ngnaa Geeuuh",
+          "Gooun Tee Feeunkeeuh"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Mii Djoouu Bett",
+          "Maa Saa Taa",
+          "Mii ngaa Tcheuut"
+        ]
+      },
+      {
+        "id": "BGT_02",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Choou Djeeum",
+        "donateur_paternel_ref": "Taah Noouh Djaah",
+        "noms_associes_au_pere": [
+          "Zooup Yoougnia",
+          "Zee Fee Tchoouh",
+          "Lontaa Ngassaa",
+          "Tchaam Ngwa Loon Tsooh",
+          "Tee Daapbreeunn"
+        ],
+        "lignage_paternel_labels": [
+          "Swoodjoouh",
+          "Menkam Djaa Biaah"
+        ],
+        "lignage_maternel_hypothese": "Maah Yaan Nkeeuh",
+        "liste_hypothese_ndab_ngon_la": [
+          "GoounTaahn Jjooun",
+          "Gooun Zee Fee Tchooh",
+          "Gooun Tee Ngaa Noouh",
+          "Gooun Tee ndawn Breuun",
+          "Gooun Tee Daapbreeunn"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Maa breeu Zeeh Tchooh",
+          "Maa Yaap Kwikeeu",
+          "Zwui Weet Beeun Kee Zuu Tcheuh",
+          "Maa Breeuh Nessaaw Booun"
+        ]
+      },
+      {
+        "id": "BGT_03",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": null,
+        "donateur_paternel_ref": "Taah NKoouh Nkaam",
+        "noms_associes_au_pere": [
+          "Veeun Baah Ndaam",
+          "Zooup Noouh Djoouh",
+          "Tee Djooum Ngniii",
+          "Veeun Kwaa Kaam taahn",
+          "Tchaam Ngwa Loon Tsooh"
+        ],
+        "lignage_paternel_labels": [
+          "Swoodjoouh",
+          "???"
+        ],
+        "lignage_maternel_hypothese": "Magnii Tchaap",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun Maah Tiii",
+          "Gooun Zoouh Ndaah",
+          "Gooun Tee Ngaah Nkeeeu",
+          "Gooun Veeuhn Baah Ndaam"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Mi Choumngaah",
+          "Maah Nkiii Ndaah",
+          "Maa Beeh Haa Choou Djeum",
+          "Maah Nkiii Ndaah",
+          "Maa Breeuh Wouaak Ouuh"
+        ]
+      },
+      {
+        "id": "BGT_04",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun Tchaah",
+        "donateur_paternel_ref": "Taah Ngaa Feen",
+        "noms_associes_au_pere": [
+          "Ngaap Tchooun Ngaap Zaam",
+          "Tee Tchoouh Nkam",
+          "Policy ne Baah Breuuhn",
+          "Djoouh Faah Tsoong"
+        ],
+        "lignage_paternel_labels": [
+          "Goun Tchoou",
+          "Yaa loooh"
+        ],
+        "lignage_maternel_hypothese": "Mii Taah Kwii",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun Kreeeuh",
+          "Gooun Baah Breeun",
+          "Gooun Djaa Mii Tchaah",
+          "Gooun Djooh faah Tsoohn",
+          "Gooun Paka Djooukeeun",
+          "Gooun Menkam Djaa Waat breeun",
+          "Gooun Menkam Yomi"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Nooubaa Zaah Tchaa",
+          "Tchaap Taakeeu",
+          "Magny Menkoouh",
+          "Billoo Veeungaah",
+          "Toouh joouh Feeun Feeun",
+          "Balaguii Veeun Jeeuh"
+        ]
+      },
+      {
+        "id": "BGT_05",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun Ndiip Djeum",
+        "donateur_paternel_ref": "NDoon Tchoouuh",
+        "noms_associes_au_pere": [
+          "Tee Kaam Daawm Baah",
+          "Sii Kann boouu Yiit Kooh",
+          "Zooup Ndaa Tseeu",
+          "Memkam Greeun Breeuh"
+        ],
+        "lignage_paternel_labels": [
+          "Djeeuu Ngniig"
+        ],
+        "lignage_maternel_hypothese": "NGueeun Noouh",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun Siii Kaan",
+          "Gooun Ngaa Beenn",
+          "Gooun Yacoub Daa Jaah",
+          "Gooun Memkam Greeun Breeuh",
+          "Gooun Zooup Ndaa Tseeu"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Maa Saah Ngaa Ziih",
+          "Maa Veeun Me Noouh Keeuh",
+          "Maa Zouaa Tchaa",
+          "Goounii Woouh Diaang",
+          "Zooo Miii Tchaah"
+        ]
+      },
+      {
+        "id": "BGT_06",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun Beet",
+        "donateur_paternel_ref": "Taah NKoouh Taat",
+        "noms_associes_au_pere": [
+          "Tchaam Ngwa Loon Tsooh"
+        ],
+        "lignage_paternel_labels": [
+          "Toontaah"
+        ],
+        "lignage_maternel_hypothese": "Massaah Deeuh",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun Ndett",
+          "Gooun Maah Tiii",
+          "Gooun Tee Ngaah Nkeeeu",
+          "Gooun Veeuhn Baah Ndaam"
+        ],
+        "liste_hypothese_ndab_mekat": []
+      },
+      {
+        "id": "BGT_07",
+        "chefferie": "Badiangseu",
+        "site_origine_ndab": "Veeun Gueutt",
+        "donateur_paternel_ref": "Tacheeutt Kouh",
+        "noms_associes_au_pere": [],
+        "lignage_paternel_labels": [
+          "Gooun Tchouu",
+          "Yaa Looh"
+        ],
+        "lignage_maternel_hypothese": "Madjaa waa",
+        "liste_hypothese_ndab_ngon_la": [],
+        "liste_hypothese_ndab_mekat": []
+      },
+      {
+        "id": "BGT_08",
+        "chefferie": "Badiangseu",
+        "site_origine_ndab": "Tchaam Kack",
+        "donateur_paternel_ref": "Saah Tchoukeu",
+        "noms_associes_au_pere": [
+          "Tee Ngaah"
+        ],
+        "lignage_paternel_labels": [
+          "Gooun Tchouu",
+          "Yaa looh"
+        ],
+        "lignage_maternel_hypothese": "Mii Jeeukam",
+        "liste_hypothese_ndab_ngon_la": [],
+        "liste_hypothese_ndab_mekat": []
+      },
+      {
+        "id": "BGT_09",
+        "chefferie": "Badiangseu",
+        "site_origine_ndab": "Menkam Djeeu Yaa",
+        "donateur_paternel_ref": "Tassaah Djeum",
+        "noms_associes_au_pere": [
+          "Megny jeuloo",
+          "Tchouchou kee zui",
+          "Menkam Djiaa",
+          "Beuu Kamtchoua",
+          "Weetbaan Saahmen",
+          "Wetbaan DaamKaam",
+          "Choou tchuuen Ke Took Zoueeu",
+          "Doou Menzuii Kaadaah",
+          "Goouh Saah Tchoun Took"
+        ],
+        "lignage_paternel_labels": [
+          "Gooun Tchoouu",
+          "Yaa looh"
+        ],
+        "lignage_maternel_hypothese": "Maanou kaam",
+        "liste_hypothese_ndab_ngon_la": [
+          "Goountchou Kemii",
+          "Goun Baatii",
+          "Goun Toun Men nooum Koouh Gueefet",
+          "Gooun Tiitchaa Beunzuii",
+          "Gooun Veun Keezoou Kwaa baah",
+          "Gooun Beu Kamtchoua",
+          "Gooun Weetbaan Saahmen",
+          "Gooun Wetbaan Damkam",
+          "Gooun Tiii Ngassam Nya"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Kekii Boouhh menwouaah",
+          "Mattee veeun djeum",
+          "Zui veeun Nyakam",
+          "Maabreeu Gooup Veeun Gueett",
+          "Magnii Nzitchouaa",
+          "Maa Fouooh Ziin Koouh",
+          "Magni Zii gnaa",
+          "Magnii Zii Tchouaa"
+        ]
+      },
+      {
+        "id": "BGT_10",
+        "chefferie": "Badiangseu",
+        "site_origine_ndab": "Veeun Taat",
+        "donateur_paternel_ref": "Tikii Djaa",
+        "noms_associes_au_pere": [
+          "Taa eeug Sang",
+          "Taabiaayim",
+          "Taa Veuntat",
+          "Saah Laakougueeut",
+          "Yaakoub",
+          "Tee Gwaat Tchou",
+          "Veeutat Tchoun Laah",
+          "Djaa Zoup Tchouakeuu",
+          "Tiilooh Choumtat",
+          "Messikeuuh Noukeeuh",
+          "Zakalia Waazii",
+          "Tagny Breeut Tcheaup"
+        ],
+        "lignage_paternel_labels": [
+          "Gountchoou",
+          "Yaa looh"
+        ],
+        "lignage_maternel_hypothese": "Massaah deeu",
+        "liste_hypothese_ndab_ngon_la": [
+          "Goon Teekii djaa",
+          "Gooun Zooup Bia Daah",
+          "Goun Baatii",
+          "Goon Veeutat Tchoun Laah",
+          "Gooun deeu kebee Men",
+          "Goun Moussi Ngassam",
+          "Goun Taa Kee Kweut Gnyaah"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Zui saa tchoukeu",
+          "Kezuaah Menzuii",
+          "Zui tee tchougyaa",
+          "Zuii Ngya Taakeuu",
+          "Keet Zouaa Menzuii",
+          "Maassah Tchoukeeu",
+          "Zui Zoup Djabooum",
+          "Zui Tee Tchou djaah Yaah Gouum",
+          "Tchaami Betkeuu"
+        ]
+      },
+      {
+        "id": "BGT_11",
+        "chefferie": "Badiangseu",
+        "site_origine_ndab": "Paab Deeuh",
+        "donateur_paternel_ref": "Saaah LeunKam",
+        "noms_associes_au_pere": [
+          "Tee Nyadjou"
+        ],
+        "lignage_paternel_labels": [
+          "Goun Tchoou",
+          "Yaa looh"
+        ],
+        "lignage_maternel_hypothese": "Maatee Tchaap",
+        "liste_hypothese_ndab_ngon_la": [],
+        "liste_hypothese_ndab_mekat": []
+      },
+      {
+        "id": "BGT_12",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun  Vaah",
+        "donateur_paternel_ref": "Taabaah Kii",
+        "noms_associes_au_pere": [
+          "Chouaa Toounn Nkam",
+          "Mii Baa Tchoouh Keeuh",
+          "Saah Ngassaam",
+          "Djaa Choou Chouaa"
+        ],
+        "lignage_paternel_labels": [
+          "Djoon Baap"
+        ],
+        "lignage_maternel_hypothese": "Maa kooh Kwa",
+        "liste_hypothese_ndab_ngon_la": [
+          "Keeun Taah Boouh",
+          "Ngnaa Woullii",
+          "Ke nooh noum Tchaah",
+          "Gooun Bele",
+          "Gooun Cheeu Ngna Gooup",
+          "Goun Taa Ziibaah",
+          "Gooun Taaveun Youkwi"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Maa Kweeu Laah Nkeeut",
+          "Maa Tchoong Meen Choou Tcheeu",
+          "Maa Yook Beeh Ziiin Tchoouh Daah Djoouhh",
+          "Maa Baakett Choouh Tcheuun",
+          "Naa Mii Vooh"
+        ]
+      },
+      {
+        "id": "BGT_13",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun  Tchoou",
+        "donateur_paternel_ref": "Taabaah Kii",
+        "noms_associes_au_pere": [
+          "Chouaa Toounn Nkam",
+          "Mii Baa Tchoouh Keeuh",
+          "Saah Ngassaam",
+          "Djaa Choou Chouaa"
+        ],
+        "lignage_paternel_labels": [
+          "Djoon Baap"
+        ],
+        "lignage_maternel_hypothese": "Maa kooh Kwa",
+        "liste_hypothese_ndab_ngon_la": [
+          "Keeun Taah Boouh",
+          "Ngnaa Woullii",
+          "Ke nooh noum Tchaah",
+          "Gooun Bele",
+          "Gooun Cheeu Ngna Gooup",
+          "Goun Taa Ziibaah",
+          "Gooun Taaveun Youkwi"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Maa Kweeu Laah Nkeeut",
+          "Maa Tchoong Meen Choou Tcheeu",
+          "Maa Yook Beeh Ziiin Tchoouh Daah Djoouhh",
+          "Maa Baakett Choouh Tcheuun",
+          "Naa Mii Vooh"
+        ]
+      },
+      {
+        "id": "BGT_14",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun  Ngneeuh",
+        "donateur_paternel_ref": "Taa Kiii Ngniaa",
+        "noms_associes_au_pere": [
+          "Kwaa Choou Zouuah",
+          "Djaa Mouni",
+          "Ngaak Djabaeuh",
+          "Tee Zii kaeumm TSii",
+          "Tee Waat Ngueeup",
+          "Beeu Taa Djouun"
+        ],
+        "lignage_paternel_labels": [
+          "Tchoouh Leeuh"
+        ],
+        "lignage_maternel_hypothese": "Maa Cheeu Choou",
+        "liste_hypothese_ndab_ngon_la": [
+          "Bouoo Cha Baa Ngneum",
+          "Gooun Taa Kiii Ngniaa",
+          "Gooun Kaam Ziin Kwaan",
+          "Gooun Djaaa Mouni",
+          "Gooun Beeuu Kwii DjeeummVaa",
+          "Gooun Baah Kweett Kaap Diang"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Kiii Djaa Zii Beet",
+          "Maaveun Booum Meen",
+          "Zwii Zooup Baa keeuh",
+          "Maa Veun Leewaat",
+          "Maagnii Zii Laahm",
+          "Magni Voohgaah"
+        ]
+      },
+      {
+        "id": "BGT_15",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun Cheeuh",
+        "donateur_paternel_ref": "Taa Choouu Baah",
+        "noms_associes_au_pere": [
+          "Taa Dawm Ngaa",
+          "Kwii Boou Zikii",
+          "Taaveun Noukeeuh",
+          "Megny Choumtat"
+        ],
+        "lignage_paternel_labels": [
+          "Goountchou",
+          "Yaa looh  Greeuh"
+        ],
+        "lignage_maternel_hypothese": "Maa Vaah",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun keebaah Tchuett",
+          "Gooun Bee Kwwii Boou Ziki",
+          "Gooun TaaVeun Noukeuuh",
+          "Gooun Taa Tchoouu Baah",
+          "Goun Tee ChoumTaat",
+          "Gooun Megny Choumtat"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Maaveun Baah Gouuhn",
+          "Daap Tchaa",
+          "Maa Megni Choumkeeuh"
+        ]
+      },
+      {
+        "id": "BGT_16",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun Greun Tooun",
+        "donateur_paternel_ref": "Taawaa  Taah",
+        "noms_associes_au_pere": [
+          "Kooh Tchoua",
+          "Djaa Tcheeu Nzuii",
+          "Veeun Ndooh Nkaa",
+          "Zooup Chooutah",
+          "Veeun Taa Maadjoo",
+          "Veeun Tanng Baah",
+          "Taaleeum Baatchoou"
+        ],
+        "lignage_paternel_labels": [
+          "Gooun Tchou",
+          "Yaa looh"
+        ],
+        "lignage_maternel_hypothese": "Waah kam",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun Taa Ndoo Kaa",
+          "Gooun Djaa Tcheeu Nzuii",
+          "Gooun Keet Chee Feeuu Mii",
+          "Gooun Taaleeum Baatchoou",
+          "Gooun Taang Djaa Zooh",
+          "Gooun Tee Whaatat",
+          "Gooun Noubaah Kee Yaapp Nwuiin",
+          "Gooun Nkwwi Taah Tchakounteu",
+          "Gooun Veeun Taa Maadjoo",
+          "Gooun Beeuh Goouhou"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "MaaDjeeu Ngaa",
+          "Maa Veeun Djaaboom",
+          "Mii Toungaa",
+          "Nzwii Ziii Kiitchaa",
+          "Nzuii Djaa Taat",
+          "Maa Beeu Djaa Waah",
+          "Maa Taaleeum Baatchoou"
+        ]
+      },
+      {
+        "id": "BGT_17",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun Zuii Keeuh",
+        "donateur_paternel_ref": "Taa Biaah Taan",
+        "noms_associes_au_pere": [
+          "Veeun Zuii Keeeuh",
+          "Djaa Nooun Maa Kouan",
+          "Tchouu Beet",
+          "Kaam Kuii Biaah",
+          "Weetbaan Biip Bacck",
+          "Weetbaan Baa Gueeu Kee Bouooh"
+        ],
+        "lignage_paternel_labels": [
+          "Baah Zaaah"
+        ],
+        "lignage_maternel_hypothese": "Maa Waah Taat",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun Tchoouh Ngooh",
+          "Gooun Djaa Laa Ziih",
+          "Gouon Djaa Noou Maa Kouan",
+          "Gooun Weetbaan Biip Bacck",
+          "Gooun Weetbaan Baa Gueeu Kee Bouooh",
+          "Gooun Weetbaan Baat Tchaah",
+          "Goun Menkaam Kuii Biaah"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Waat Tchaa Nooumgaa",
+          "Maa Breeu Kii Booun",
+          "Maa Boouudee Keghaam"
+        ]
+      },
+      {
+        "id": "BGT_18",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun",
+        "donateur_paternel_ref": "Taatchaah Tchooun",
+        "noms_associes_au_pere": [
+          "Vetutoun Kooh",
+          "Beu tooun Tcheup",
+          "Dja Nkui Tchoua Nga",
+          "Baah Veeu sii tcheei fii benzuii",
+          "Zii Boouh Kam",
+          "Wetbat dejudji",
+          "Zoup noou Kemen",
+          "Tee Nga Biakoup",
+          "Taa Boukaa Kemadjou"
+        ],
+        "lignage_paternel_labels": [
+          "Goounkwaa Tchoum"
+        ],
+        "lignage_maternel_hypothese": "Maaboouh Kam",
+        "liste_hypothese_ndab_ngon_la": [],
+        "liste_hypothese_ndab_mekat": [
+          "Maa guelii djaa",
+          "Zuii Baahfoon",
+          "Maaven Batkam",
+          "Maa Kabidaam",
+          "Magni Yogouaah",
+          "Maa Dja Zoup Ngahane"
+        ]
+      },
+      {
+        "id": "BGT_19",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun haak",
+        "donateur_paternel_ref": "Taa Doou haak",
+        "noms_associes_au_pere": [
+          "Dja waa",
+          "Kooum Kekia",
+          "Taven Waazii",
+          "Taaven Yoodjeuuh",
+          "Baah Laak Koo Gueenn",
+          "Djaa Kuii Yaacmii",
+          "Breeuu Tchoouu Kam",
+          "Men Maaven Taakeeu"
+        ],
+        "lignage_paternel_labels": [
+          "Yaalooo Greeuuh"
+        ],
+        "lignage_maternel_hypothese": "Kii gaa Kam",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun tchou",
+          "Gooun Djaa heep Tcheup",
+          "Goun noubahh ke yap wiin",
+          "Goun Men maveeun Takeu",
+          "Gooun Taaveun Yoodjeuuh",
+          "Gooun Breeu Goouuhh",
+          "Gooun Kooum Kekia",
+          "Gooun Kee Tchoou Tseeuu",
+          "Gooun Taveeun Waazii"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Maa NaanKouan",
+          "Maa Fiih Goo",
+          "Mekat Noubaah Keyap wiin",
+          "Maa Feeu Veun Kemadjou",
+          "Maa Tchou Kam",
+          "Maa Tiii Kkeeu Zii Waah"
+        ]
+      },
+      {
+        "id": "BGT_20",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun Cheeum Tchoouh",
+        "donateur_paternel_ref": "Taa Gueeun Bet",
+        "noms_associes_au_pere": [
+          "Djaa Greeun Teeunn",
+          "Taa Djaa Tat",
+          "Toouh Zoo Breeun",
+          "Megnii Djeeuu Djiii"
+        ],
+        "lignage_paternel_labels": [
+          "Gooun Tchoouh"
+        ],
+        "lignage_maternel_hypothese": "Mii Teeu Nyaa",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun Breeuh Goouhou",
+          "Gooun Naah guee Koouh Naah yon Taat",
+          "Gooun MaaKaam",
+          "Gooun Ke Tchouu Tseeeu"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Maaveeun Baah Fouon",
+          "Mii Djeeu",
+          "Djeeu ToounZii",
+          "Maveeun Me Djou Sii",
+          "TaatZii"
+        ]
+      },
+      {
+        "id": "BGT_21",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun GueeTooun",
+        "donateur_paternel_ref": "Taa Wouaah Taa",
+        "noms_associes_au_pere": [
+          "Taa Doo Kaah",
+          "Djaa Tchee Zuii",
+          "Taaa leeum Batchou",
+          "Beu Tchoua Biaah"
+        ],
+        "lignage_paternel_labels": [
+          "GoounTchoouh"
+        ],
+        "lignage_maternel_hypothese": "Waah Kam",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun Breeuh Goouhou",
+          "Gooun Naah guee Koouh Naah yoon Taat",
+          "Gooun MaaKaam",
+          "Gooun Ke Tchouu Tseeeu"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Maa Beu Djaa",
+          "Teeuh Djeeuh",
+          "Maa Beuu Djaadjaeuh",
+          "Maa Taaa Maadjoo Zoup Fiaah Djeeuh",
+          "Maveeun Kuii Taah"
+        ]
+      },
+      {
+        "id": "BGT_22",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Veeun Djaaeuh Foueut",
+        "donateur_paternel_ref": "Djaa Koouh Bet",
+        "noms_associes_au_pere": [
+          "Djaa Tat Djeeum",
+          "Nkeeup Tcheeup Soukaki",
+          "Gaa Kaa Ke zee Tseeu",
+          "Veeun Kii Tii",
+          "Veeun Djaa Fouet"
+        ],
+        "lignage_paternel_labels": [
+          "Gooun Tchoouh",
+          "Yaa looh"
+        ],
+        "lignage_maternel_hypothese": "Mii Choouu Djouh",
+        "liste_hypothese_ndab_ngon_la": [
+          "Gooun Breeuh Goouhou",
+          "Gooun Naah guee Koouh Naah yoon Taat",
+          "Gooun MaaKaam",
+          "Gooun Ke Tchouu Tseeeu"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Mii nyaah Beeu Yeeunn",
+          "Magnii Yookouan",
+          "Chooukeeu Batkaam",
+          "Maveun Gaa Teeukaam"
+        ]
+      },
+      {
+        "id": "BGT_23",
+        "chefferie": "Bangangté",
+        "site_origine_ndab": "Vooh Saah Noum Ziin",
+        "donateur_paternel_ref": "Taa Cheeuun",
+        "noms_associes_au_pere": [
+          "Djaa Saah Kii",
+          "Megnii Taa Daam Wouaah",
+          "Saah Mii Watat",
+          "Men Maveun Nyadjou",
+          "Djaa Zoup Tee Faam",
+          "Veeun Zii Choou (qui était è Choo Djiim)",
+          "Taa Boouhbaah"
+        ],
+        "lignage_paternel_labels": [
+          "Kwaa Neeuun"
+        ],
+        "lignage_maternel_hypothese": "Ke beeu Baah",
+        "liste_hypothese_ndab_ngon_la": [
+          "Nyaat Nyaaeum",
+          "Gooun Baat Teeun"
+        ],
+        "liste_hypothese_ndab_mekat": [
+          "Djaah NJeeuh",
+          "Maa Naah Teeu Chouaah",
+          "Maveun Noumen",
+          "Maa Zoup Ke Beeu Ndet",
+          "Maa Tee Daamkoou"
+        ]
+      }
+    ]
+  }
+}

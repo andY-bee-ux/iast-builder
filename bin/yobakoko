@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# bin/yobakoko — YobaKoko (profil ndab) sur http://localhost:3000
+exec "$(dirname "$(readlink -f "${BASH_SOURCE[0]}" 2>/dev/null || python3 -c 'import os,sys;print(os.path.realpath(sys.argv[1]))' "${BASH_SOURCE[0]}")")/iast-lancer" ndab 3000

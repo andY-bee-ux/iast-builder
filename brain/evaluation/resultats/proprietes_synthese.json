@@ -1,0 +1,58 @@
+{
+  "ndab": {
+    "lots": 5,
+    "graines": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "operations_tirees": 5000,
+    "duree_s": 309.7,
+    "compteurs": {
+      "creation": 1495,
+      "decision": 1260,
+      "conversation": 1515,
+      "controles_dossier": 8954,
+      "controles_collecte": 1515,
+      "reglage_collecte": 339,
+      "controle_positif_dossier": 3324,
+      "retrait": 169,
+      "audits": 100,
+      "tentatives_journal_refusees": 200,
+      "evolution": 135,
+      "retour_arriere": 64
+    },
+    "violations": 0
+  },
+  "afripharm": {
+    "lots": 5,
+    "graines": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "operations_tirees": 5000,
+    "duree_s": 311.0,
+    "compteurs": {
+      "creation": 1544,
+      "reglage_collecte": 326,
+      "decision": 1222,
+      "conversation": 1476,
+      "controles_dossier": 8733,
+      "controles_collecte": 1476,
+      "controles_surete": 1476,
+      "reponses_avec_posologie_simulee": 586,
+      "controle_positif_dossier": 2968,
+      "retrait": 200,
+      "audits": 100,
+      "tentatives_journal_refusees": 200,
+      "evolution": 150,
+      "retour_arriere": 61
+    },
+    "violations": 0
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "profil": "afripharm",
+  "graine": 1,
+  "sequences": 20,
+  "operations_par_sequence": 50,
+  "duree_s": 61.9,
+  "operations": {
+    "creation": 305,
+    "reglage_collecte": 66,
+    "decision": 239,
+    "conversation": 301,
+    "controles_dossier": 1756,
+    "controles_collecte": 301,
+    "controles_surete": 301,
+    "reponses_avec_posologie_simulee": 112,
+    "controle_positif_dossier": 578,
+    "retrait": 38,
+    "audits": 20,
+    "tentatives_journal_refusees": 40,
+    "evolution": 32,
+    "retour_arriere": 11
+  },
+  "violations": [],
+  "nombre_violations": 0
+}

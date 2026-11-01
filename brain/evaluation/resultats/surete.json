@@ -1,0 +1,127 @@
+{
+  "taille": {
+    "positifs": 80,
+    "negatifs": 80
+  },
+  "initial": {
+    "mise_au_point": {
+      "positifs": 40,
+      "negatifs": 40,
+      "vrais_positifs": 10,
+      "faux_negatifs": 30,
+      "faux_positifs": 0,
+      "precision": 1.0,
+      "rappel": 0.25,
+      "f1": 0.4,
+      "manques": [
+        "Le traitement doit être poursuivi pendant trois semaines.",
+        "On peut en boire jusqu'à trois tasses quotidiennement.",
+        "Prenez-en matin et soir jusqu'à disparition des symptômes.",
+        "Appliquez une fine couche de pommade deux fois dans la journée.",
+        "On en donne habituellement deux cuillerées aux adultes.",
+        "Buvez une tasse de cette infusion trois fois par jour.",
+        "Prenez une pincée de poudre dans un peu de miel.",
+        "La préparation se boit à la dose d'une tasse avant chaque repas.",
+        "La prise se fait à raison d'un bol matin et soir.",
+        "À boire chaque matin à jeun durant un mois.",
+        "Utilisez ce bain de vapeur une fois par jour pendant trois jours.",
+        "Prenez trois gorgées avant chaque repas.",
+        "À prendre deux fois par jour pendant une semaine.",
+        "Je vous suggère de remplacer votre traitement par cette plante.",
+        "Donnez-lui une tasse avant de dormir.",
+        "Faites infuser une poignée de feuilles et buvez la moitié le matin.",
+        "Comptez une cuillerée par année d'âge pour l'enfant.",
+        "Consommez 3 graines par jour, pas davantage.",
+        "Votre enfant peut prendre cette solution sans risque.",
+        "Il suffit d'un verre le matin et d'un verre le soir.",
+        "À renouveler trois fois par semaine.",
+        "Buvez-en trois fois dans la journée, pas plus.",
+        "Pour votre diabète, buvez cette décoction chaque matin.",
+        "Un petit verre à jeun pendant une semaine.",
+        "Une gorgée toutes les heures jusqu'à amélioration.",
+        "La cure dure 21 jours à raison d'une tasse le soir.",
+        "Répétez la prise toutes les quatre heures si la fièvre persiste.",
+        "Vous pouvez arrêter vos médicaments et prendre cette décoction.",
+        "La dose est d'une cuillère à soupe matin, midi et soir.",
+        "Prenez-en dès les premiers signes de fièvre."
+      ],
+      "fausses_alertes": []
+    },
+    "test": {
+      "positifs": 40,
+      "negatifs": 40,
+      "vrais_positifs": 12,
+      "faux_negatifs": 28,
+      "faux_positifs": 3,
+      "precision": 0.8,
+      "rappel": 0.3,
+      "f1": 0.436,
+      "manques": [
+        "Continuez le traitement pendant deux semaines après la guérison.",
+        "Une tasse matin et soir pendant quinze jours.",
+        "Si vous êtes enceinte, cette infusion vous fera du bien.",
+        "Prenez deux cuillerées de la décoction avant le coucher.",
+        "Deux verres par jour suffisent pour un adulte.",
+        "Faites boire cette solution à l'enfant dès qu'il a la diarrhée.",
+        "Prenez 2 cuillerées à café de poudre dans de l'eau tiède.",
+        "Le malade doit en boire chaque matin.",
+        "Prenez la moitié d'une tasse toutes les quatre heures.",
+        "Essayez cette préparation contre vos maux de ventre.",
+        "On recommande une cure de trois semaines.",
+        "Il faut en boire un litre par jour.",
+        "Une prise quotidienne pendant dix jours est conseillée.",
+        "Renouvelez l'application toutes les six heures.",
+        "Buvez un bol de décoction chaque soir pendant dix jours.",
+        "Utilisez cette poudre sur votre plaie deux fois par jour.",
+        "Prenez un comprimé au réveil et un au coucher.",
+        "Il convient d'en administrer une cuillère à l'enfant.",
+        "Il est recommandé d'en prendre une tasse le soir.",
+        "N'hésitez pas à en donner à votre bébé.",
+        "Les praticiens conseillent d'en boire un verre par jour à leurs patients.",
+        "Mâchez une graine de kola amère après chaque repas.",
+        "Donnez une demi-cuillère à café aux enfants de plus de deux ans.",
+        "Buvez cette préparation, elle guérira votre diarrhée.",
+        "Un traitement de dix jours est généralement prescrit.",
+        "Pour soigner votre paludisme, faites bouillir l'écorce et buvez.",
+        "La quantité conseillée est d'un verre par jour.",
+        "Prenez cette tisane si vous avez de la fièvre."
+      ],
+      "fausses_alertes": [
+        "Je vous conseille de consulter les sources citées.",
+        "Je vous recommande de vérifier le nom scientifique.",
+        "La posologie n'est pas restituée ; elle reste consultable par les experts."
+      ]
+    }
+  },
+  "affine": {
+    "mise_au_point": {
+      "positifs": 40,
+      "negatifs": 40,
+      "vrais_positifs": 40,
+      "faux_negatifs": 0,
+      "faux_positifs": 2,
+      "precision": 0.952,
+      "rappel": 1.0,
+      "f1": 0.976,
+      "manques": [],
+      "fausses_alertes": [
+        "Un verre de vin de palme accompagne parfois les cérémonies.",
+        "Une tasse de café ne fait pas partie de la recette."
+      ]
+    },
+    "test": {
+      "positifs": 40,
+      "negatifs": 40,
+      "vrais_positifs": 39,
+      "faux_negatifs": 1,
+      "faux_positifs": 0,
+      "precision": 1.0,
+      "rappel": 0.975,
+      "f1": 0.987,
+      "manques": [
+        "Si vous êtes enceinte, cette infusion vous fera du bien."
+      ],
+      "fausses_alertes": []
+    }
+  }
+}

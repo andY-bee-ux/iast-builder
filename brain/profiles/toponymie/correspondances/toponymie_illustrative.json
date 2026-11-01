@@ -1,0 +1,22 @@
+{
+  "description": "Corpus toponymique illustratif : un enregistrement par lieu, avec son nom, ses variantes graphiques, son type, sa chefferie, sa signification et l'informateur.",
+  "connector": "json",
+  "records_path": "lieux",
+  "subjects": [
+    {"template": "{lieu} ({type})", "class": "Lieu", "facts": [
+      {"predicate": "estDeType", "field": "type", "object_class": "TypeDeLieu"},
+      {"predicate": "releveDe", "field": "chefferie", "object_class": "Chefferie"},
+      {"predicate": "rapportePar", "field": "informateur", "object_class": "Informateur"},
+      {"predicate": "signification", "field": "signification", "literal": true}]},
+    {"field": "lieu", "class": "NomDeLieu", "facts": [
+      {"predicate": "designe", "template": "{lieu} ({type})", "object_class": "Lieu"}]},
+    {"from_list": "variantes", "class": "NomDeLieu", "facts": [
+      {"predicate": "designe", "template": "{lieu} ({type})", "object_class": "Lieu"}]}
+  ],
+  "scope": {
+    "chefferie": {"field": "chefferie"}, "type_de_lieu": {"field": "type"}, "informateur": {"field": "informateur"},
+    "acces": {"field": "acces"}
+  },
+  "confidence": 0.7,
+  "detect_variants": true
+}

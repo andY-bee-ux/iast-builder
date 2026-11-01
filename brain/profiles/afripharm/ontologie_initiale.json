@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "titre": "Ontologie initiale d'AfriPharm",
+    "origine": "Structure dérivée du canevas des monographies de la Pharmacopée des plantes médicinales de l'Afrique de l'Ouest (OOAS, 2013) : nom botanique, famille, synonymes, noms communs et vernaculaires par pays et par langue, parties utilisées, utilisations ethnomédicales, activités biologiques, données cliniques, données de sécurité, précautions, effets indésirables, contre-indications, dosage et forme galénique.",
+    "version": "1.0"
+  },
+  "classes": [
+    {"id": "Plante", "label": "Plante", "parent": null, "def_fr": "Espèce végétale, désignée par son nom botanique."},
+    {"id": "NomVernaculaire", "label": "Nom vernaculaire", "parent": null, "def_fr": "Nom d'usage d'une plante dans une langue et un pays ; un même nom peut désigner plusieurs espèces."},
+    {"id": "PartieDePlante", "label": "Partie de plante", "parent": null, "def_fr": "Organe ou produit employé : feuille, écorce, racine, fruit, pulpe, graine, gomme, bulbe."},
+    {"id": "ModeDePreparation", "label": "Mode de préparation", "parent": null, "def_fr": "Forme de préparation : décoction, infusion, macération, poudre, solution, onguent, cataplasme."},
+    {"id": "Indication", "label": "Indication", "parent": null, "def_fr": "Trouble ou besoin pour lequel un usage est rapporté ou une indication thérapeutique retenue."},
+    {"id": "UsageRapporte", "label": "Usage rapporté", "parent": null, "def_fr": "Usage d'une plante reliant une partie, un mode de préparation et une indication, tel qu'une source le rapporte."},
+    {"id": "Precaution", "label": "Précaution d'emploi", "parent": null, "def_fr": "Précaution d'emploi mentionnée par une source de référence."},
+    {"id": "ContreIndication", "label": "Contre-indication", "parent": null, "def_fr": "Situation dans laquelle l'emploi de la plante est déconseillé."},
+    {"id": "EffetIndesirable", "label": "Effet indésirable", "parent": null, "def_fr": "Effet indésirable rapporté ou suspecté."},
+    {"id": "Posologie", "label": "Posologie", "parent": null, "def_fr": "Dose, fréquence ou forme d'administration ; conservée pour les spécialistes, jamais restituée par l'agent."},
+    {"id": "Source", "label": "Source", "parent": null, "def_fr": "Origine d'une information."},
+    {"id": "Monographie", "label": "Monographie", "parent": "Source", "def_fr": "Monographie d'une pharmacopée de référence."},
+    {"id": "PublicationEthnobotanique", "label": "Publication ethnobotanique", "parent": "Source", "def_fr": "Enquête ethnobotanique publiée."},
+    {"id": "EtudePharmacologique", "label": "Étude pharmacologique", "parent": "Source", "def_fr": "Étude expérimentale in vitro ou in vivo."},
+    {"id": "EtudeClinique", "label": "Étude clinique", "parent": "Source", "def_fr": "Étude conduite chez l'être humain."},
+    {"id": "Temoignage", "label": "Témoignage", "parent": "Source", "def_fr": "Information recueillie auprès d'un praticien ou d'un usager."}
+  ],
+  "proprietes_objet": [
+    {"id": "designe", "domaine": "NomVernaculaire", "portee": "Plante", "def_fr": "Plante que désigne un nom vernaculaire, dans une langue et un pays donnés."},
+    {"id": "estVarianteDe", "domaine": "NomVernaculaire", "portee": "NomVernaculaire", "def_fr": "Deux graphies d'un même nom vernaculaire."},
+    {"id": "decriteDans", "domaine": "Plante", "portee": "Monographie", "def_fr": "Monographie de référence qui décrit la plante."},
+    {"id": "concernePlante", "domaine": "UsageRapporte", "portee": "Plante", "def_fr": "Plante employée dans l'usage."},
+    {"id": "utilisePartie", "domaine": "UsageRapporte", "portee": "PartieDePlante", "def_fr": "Partie employée."},
+    {"id": "selonPreparation", "domaine": "UsageRapporte", "portee": "ModeDePreparation", "def_fr": "Mode de préparation."},
+    {"id": "pourIndication", "domaine": "UsageRapporte", "portee": "Indication", "def_fr": "Indication de l'usage."},
+    {"id": "attesteDans", "domaine": "UsageRapporte", "portee": "Source", "def_fr": "Source qui atteste l'usage."},
+    {"id": "aPourPrecaution", "domaine": "Plante", "portee": "Precaution", "def_fr": "Précaution d'emploi."},
+    {"id": "aPourContreIndication", "domaine": "Plante", "portee": "ContreIndication", "def_fr": "Contre-indication."},
+    {"id": "aPourEffetIndesirable", "domaine": "Plante", "portee": "EffetIndesirable", "def_fr": "Effet indésirable."},
+    {"id": "aPourPosologie", "domaine": "Plante", "portee": "Posologie", "def_fr": "Posologie documentée par une source de référence."}
+  ],
+  "proprietes_donnees": [
+    {"id": "famille", "domaine": "Plante", "type": "string", "def_fr": "Famille botanique."},
+    {"id": "synonymeBotanique", "domaine": "Plante", "type": "string", "def_fr": "Synonyme du nom botanique."},
+    {"id": "nomScientifique", "domaine": "Plante", "type": "string", "def_fr": "Nom botanique binominal."}
+  ],
+  "regles_attribution": [
+    {"id": "PH1_population_vulnerable", "enonce_fr": "Un usage chez l'enfant, le nourrisson ou la femme enceinte fait l'objet d'un examen renforcé, quel que soit le niveau de preuve.", "commentaire": "population vulnérable"},
+    {"id": "PH2_posologie", "enonce_fr": "Aucune posologie n'est restituée par l'agent ; elle reste consultable par les experts.", "commentaire": "posologie"},
+    {"id": "PH3_espece_protegee", "enonce_fr": "Les usages portant sur une espèce protégée ou sur une préparation relevant du secret d'une lignée sont à diffusion restreinte.", "commentaire": "diffusion restreinte"}
+  ],
+  "disjointures": [["Plante", "NomVernaculaire"], ["Precaution", "ContreIndication"]],
+  "individus_seed": [
+    {"id": "Feuille", "classe": "PartieDePlante", "label": "feuille"},
+    {"id": "Ecorce", "classe": "PartieDePlante", "label": "écorce"},
+    {"id": "Racine", "classe": "PartieDePlante", "label": "racine"},
+    {"id": "Fruit", "classe": "PartieDePlante", "label": "fruit"},
+    {"id": "PulpeDuFruit", "classe": "PartieDePlante", "label": "pulpe du fruit"},
+    {"id": "Graine", "classe": "PartieDePlante", "label": "graine"},
+    {"id": "Gomme", "classe": "PartieDePlante", "label": "gomme"},
+    {"id": "Bulbe", "classe": "PartieDePlante", "label": "bulbe"},
+    {"id": "PlanteEntiere", "classe": "PartieDePlante", "label": "plante entière"},
+    {"id": "Decoction", "classe": "ModeDePreparation", "label": "décoction"},
+    {"id": "Infusion", "classe": "ModeDePreparation", "label": "infusion"},
+    {"id": "Maceration", "classe": "ModeDePreparation", "label": "macération"},
+    {"id": "Poudre", "classe": "ModeDePreparation", "label": "poudre"},
+    {"id": "Solution", "classe": "ModeDePreparation", "label": "solution buvable"},
+    {"id": "Onguent", "classe": "ModeDePreparation", "label": "onguent"},
+    {"id": "Cataplasme", "classe": "ModeDePreparation", "label": "cataplasme"},
+    {"id": "Recette", "classe": "ModeDePreparation", "label": "recette traditionnelle composée"}
+  ]
+}

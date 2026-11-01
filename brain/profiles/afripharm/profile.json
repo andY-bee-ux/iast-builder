@@ -1,0 +1,274 @@
+{
+  "id": "afripharm",
+  "nom": "AfriPharm, pharmacopée africaine (instance de démonstration)",
+  "version": "0.1",
+  "description": "Usages rapportés des plantes médicinales d'Afrique de l'Ouest, noms vernaculaires, données de sécurité et sources, à l'intention des spécialistes et des praticiens.",
+  "agent": {
+    "nom": "AfriPharm",
+    "identite": "Tu es AfriPharm, un agent conversationnel destiné aux spécialistes et aux praticiens de la pharmacopée africaine. Tu documentes les usages traditionnels rapportés des plantes, leurs noms vernaculaires et leurs sources ; tu n'es pas un outil de prescription.",
+    "domaine": "la pharmacopée africaine (usages traditionnels rapportés des plantes médicinales)",
+    "exemple_signal": "[SIGNAL:nouveaute|Dans la région X, la feuille de Vernonia amygdalina est-elle employée en décoction contre les troubles digestifs ?|Dans la région X, une décoction de feuilles de Vernonia amygdalina est employée contre les troubles digestifs.]",
+    "consignes": [
+      "Distingue toujours le niveau de preuve d'une information : usage rapporté, activité démontrée en laboratoire, résultat d'une étude clinique.",
+      "Lorsqu'un nom vernaculaire désigne plusieurs espèces, nomme-les simplement ; inutile d'en tirer une mise en garde à chaque réponse.",
+      "Mentionne les précautions d'emploi et les contre-indications connues chaque fois que tu évoques un usage."
+    ]
+  },
+  "ontologie": {
+    "fichier": "ontologie_initiale.json",
+    "espace_de_noms": "http://iast.uqam.ca/afripharm#",
+    "origine": "documentaire",
+    "corpus": [
+      "OOAS (2013). Pharmacopée des plantes médicinales de l'Afrique de l'Ouest, vol. 1 : 55 monographies.",
+      "OOAS (2020). Pharmacopée de l'Afrique de l'Ouest, vol. 2 : 30 monographies.",
+      "Eklu-Natey, R. et Balet, A. (2012). Pharmacopée africaine : dictionnaire et monographies multilingues (Afrique de l'Ouest).",
+      "Recueil des résumés des JSDC-5, programme thématique Pharmacopée et médecine traditionnelle africaines."
+    ]
+  },
+  "autorite": "Comité d'experts associant pharmacognostes, pharmacologues, ethnobotanistes et tradipraticiens reconnus, sur le modèle du comité de la Pharmacopée de l'Afrique de l'Ouest",
+  "portee": [
+    {
+      "cle": "pays",
+      "libelle": "pays"
+    },
+    {
+      "cle": "langue",
+      "libelle": "langue"
+    },
+    {
+      "cle": "region",
+      "libelle": "région"
+    },
+    {
+      "cle": "tradition",
+      "libelle": "tradition thérapeutique"
+    },
+    {
+      "cle": "praticien",
+      "libelle": "praticien"
+    },
+    {
+      "cle": "population",
+      "libelle": "population"
+    },
+    {
+      "cle": "preuve",
+      "libelle": "niveau de preuve"
+    },
+    {
+      "cle": "transmission",
+      "libelle": "mode de transmission"
+    },
+    {
+      "cle": "source",
+      "libelle": "source"
+    }
+  ],
+  "regles": [
+    {
+      "id": "PH1",
+      "description": "Un usage rapporté chez l'enfant, le nourrisson ou la femme enceinte fait l'objet d'un examen renforcé.",
+      "si": {
+        "classe_sujet": [
+          "UsageRapporte"
+        ],
+        "portee": {
+          "population": [
+            "enfant",
+            "nourrisson",
+            "femme enceinte",
+            "grossesse"
+          ]
+        }
+      }
+    }
+  ],
+  "acces": {
+    "niveaux": [
+      {
+        "id": "public",
+        "rang": 0,
+        "libelle": "public"
+      },
+      {
+        "id": "specialiste",
+        "rang": 1,
+        "libelle": "spécialistes et praticiens"
+      },
+      {
+        "id": "restreint",
+        "rang": 2,
+        "libelle": "diffusion restreinte"
+      }
+    ],
+    "niveau_par_defaut": "specialiste",
+    "niveau_diffusion_agent": "specialiste",
+    "regles": [
+      {
+        "id": "PH2",
+        "description": "Posologie : conservée pour les experts, jamais restituée par l'agent.",
+        "si": {
+          "predicat": [
+            "aPourPosologie"
+          ]
+        },
+        "niveau": "restreint"
+      },
+      {
+        "id": "PH3a",
+        "description": "Espèce protégée : diffusion restreinte.",
+        "si": {
+          "sujet": [
+            "Prunus africana"
+          ]
+        },
+        "niveau": "restreint"
+      },
+      {
+        "id": "PH3b",
+        "description": "Préparation relevant du secret d'une lignée : diffusion restreinte.",
+        "si": {
+          "portee": {
+            "transmission": [
+              "secret de lignée",
+              "secret"
+            ]
+          }
+        },
+        "niveau": "restreint"
+      }
+    ]
+  },
+  "surete": {
+    "risque": "eleve",
+    "consigne": "Ne donne jamais de posologie, de dose, de fréquence ni de durée de traitement, et ne formule aucune recommandation thérapeutique adressée à une personne.",
+    "message": "Ces informations décrivent des usages traditionnels rapportés ; elles ne comprennent ni dose ni recommandation de traitement. Pour soigner une personne, adressez-vous à un professionnel de santé ou à un praticien reconnu.",
+    "contraintes": [
+      {
+        "id": "posologie",
+        "description": "Aucune dose, quantité, fréquence ou durée d'administration n'est restituée.",
+        "motifs": [
+          "\\b\\d+([.,]\\d+)?\\s*(mg|g|kg|ml|cl|dl|l|grammes?|milligrammes?|millilitres?|litres?)\\b(?!\\w)(?=.*\\b(pren|buv|boi|donn|administr|dilu|fai|consomm|appliqu|dose|prise|utilis))",
+          "^(?=.*\\b(pren\\w*|buv\\w*|boi\\w*|bu\\b|donn\\w*|administr\\w*|mâch\\w*|consomm\\w*|appliqu\\w*|dilu\\w*|dose|prise|boire|se boit))(?=.*\\b(\\d+|un|une|deux|trois|quatre|cinq|six|dix|quinze|vingt|demi|demie|moitié|petit|fine)\\b[\\s'’-]*(\\w+[\\s'’-]+){0,2}(cuill\\w*|tasses?|verres?|bols?|gorgées?|pincées?|poignées?|gouttes?|comprimés?|graines?|couches?|litres?))",
+          "^(?=.*\\b(pren\\w*|buv\\w*|boi\\w*|donn\\w*|administr\\w*|mâch\\w*|consomm\\w*|appliqu\\w*|utilis\\w*|renouvel\\w*|répét\\w*|prise|traitement|cure|à boire|à prendre))(?=.*(\\b(une|deux|trois|quatre|\\d+)\\s+fois\\s+(par|dans la|dans le)\\s+(jour|journée|semaine)|matin\\s+(,\\s*midi\\s+)?et\\s+soir|toutes\\s+les\\s+(\\w+\\s+)?heures|chaque\\s+(matin|soir|jour)|à\\s+jeun|avant\\s+(chaque|les|de)\\s+\\w+|quotidien\\w*|par\\s+jour|pendant\\s+(\\w+\\s+){0,2}(jours?|semaines?|mois)|durant\\s+(\\w+\\s+){0,2}(jours?|semaines?|mois)|jusqu'à\\s+(disparition|amélioration|guérison)))",
+          "\\b(la\\s+)?posologie\\s+(habituelle\\s+|recommandée\\s+)?est\\b",
+          "\\bdoses?\\s+(est|de|d'|recommandée)",
+          "\\b(une\\s+)?cure\\s+(dure|de)\\s+\\w+\\s+(jours?|semaines?|mois)",
+          "\\btraitement\\s+(de\\s+\\w+\\s+(jours?|semaines?)|doit\\s+être\\s+poursuivi)",
+          "\\b(il\\s+est\\s+recommandé|il\\s+convient|on\\s+recommande|on\\s+(en\\s+)?donne|on\\s+peut\\s+en\\s+boire|quantité\\s+conseillée|la\\s+prise\\s+se\\s+fait|se\\s+boit\\s+à\\s+la\\s+dose|est\\s+généralement\\s+prescrit|conseillent\\s+d'en)"
+        ]
+      },
+      {
+        "id": "prescription",
+        "description": "Aucune recommandation thérapeutique adressée à une personne.",
+        "motifs": [
+          "^\\s*(prenez|buvez|donnez|appliquez|mâchez|consommez|utilisez|essayez|diluez|administrez|faites\\s+(boire|infuser|bouillir)|prendre|boire|administrer|à\\s+prendre|à\\s+boire|à\\s+renouveler|renouvelez|répétez|continuez|comptez)\\b",
+          "\\bvous\\s+(devez|pouvez|devriez)\\s+(prendre|boire|appliquer|consommer|arrêter|donner|utiliser)\\b",
+          "\\bje\\s+vous\\s+(conseille|recommande|suggère)\\s+(d'en|de\\s+(prendre|boire|remplacer|appliquer|donner)|cette|ce)\\b",
+          "\\bpour\\s+(soigner\\s+|traiter\\s+|guérir\\s+|soulager\\s+|calmer\\s+)?(votre|vos|ton|ta|tes)\\s+(\\w+\\s+){0,2}(fièvre|toux|diabète|paludisme|douleurs?|maux|diarrhée|plaies?|tension|maladie|infection|rhume|grippe|ventre|tête|enfant|bébé)\\b",
+          "\\b(votre\\s+enfant|votre\\s+bébé|à\\s+votre\\s+bébé|le\\s+malade|si\\s+vous\\s+êtes\\s+enceinte)\\b.*\\b(pren|boi|buv|donn|doit)",
+          "\\b(n'hésitez\\s+pas\\s+à\\s+en\\s+donner|un\\s+adulte\\s+peut\\s+prendre|il\\s+suffit\\s+d'un)",
+          "^\\s*(une|un|deux|trois)\\s+(tasse|verre|gorgée|prise|petit\\s+verre)s?\\b",
+          "^\\s*(\\w+\\s+){0,2}(verres?|tasses?)\\s+par\\s+jour"
+        ]
+      }
+    ]
+  },
+  "variantes": {
+    "classe": "NomVernaculaire",
+    "predicat": "estVarianteDe",
+    "designation": "designe"
+  },
+  "glossaire": {},
+  "restitution": {
+    "exemples": [
+      "« une préparation obtenue en faisant bouillir les feuilles » plutôt que « décoction foliaire »",
+      "« ce que rapportent des praticiens de telle région » plutôt que « usage ethnobotanique attesté »"
+    ],
+    "incertitude": "ce point n'a pas encore été validé par les experts du projet"
+  },
+  "contributions": {
+    "types": [
+      {
+        "id": "usage_rapporte",
+        "libelle": "Usage rapporté"
+      },
+      {
+        "id": "nom_vernaculaire",
+        "libelle": "Nom vernaculaire"
+      },
+      {
+        "id": "correction",
+        "libelle": "Correction"
+      },
+      {
+        "id": "autre",
+        "libelle": "Autre"
+      }
+    ]
+  },
+  "interface": {
+    "outils": [],
+    "langues": [
+      {
+        "code": "fr",
+        "libelle": "Français"
+      },
+      {
+        "code": "en",
+        "libelle": "English"
+      }
+    ],
+    "fr": {
+      "titre": "AfriPharm",
+      "eyebrow": "AfriPharm · pharmacopée africaine · instance de démonstration d'IAST-Builder",
+      "sousTitre": "Agent documentaire destiné aux spécialistes et aux praticiens : usages traditionnels rapportés, noms vernaculaires et sources. Ne fournit ni dose ni recommandation de traitement.",
+      "placeholder": "Posez une question sur une plante ou un usage…",
+      "accueil": "Bienvenue. Je documente les usages traditionnels rapportés des plantes médicinales, leurs noms vernaculaires et leurs sources. Je ne donne ni dose ni conseil de traitement.",
+      "suggestions": [
+        "Quelles espèces désigne le nom « doundaké » ?",
+        "Quels usages du baobab sont rapportés, et avec quel niveau de preuve ?",
+        "Quelles précautions sont signalées pour Ageratum conyzoides ?"
+      ]
+    },
+    "en": {
+      "titre": "AfriPharm",
+      "eyebrow": "AfriPharm · African pharmacopoeia · IAST-Builder demonstration instance",
+      "sousTitre": "Documentary agent for specialists and practitioners: reported traditional uses, vernacular names and sources. Gives no dosage or treatment advice.",
+      "placeholder": "Ask about a plant or a use…",
+      "accueil": "Welcome. I document the reported traditional uses of medicinal plants, their vernacular names and their sources. I give no dosage or treatment advice.",
+      "suggestions": [
+        "Which species are called 'African quinine'?",
+        "Which uses are reported for Vernonia amygdalina?"
+      ]
+    }
+  },
+  "collecte": {
+    "temoignages": false,
+    "formulaire": false,
+    "lacunes": true
+  },
+  "collecte_motif": "Le recueil de savoirs thérapeutiques auprès du public relève du consentement préalable en connaissance de cause (Protocole de Nagoya) ; il n'est activé qu'une fois ce cadre établi.",
+  "personnalites": {
+    "chercheur": {
+      "label": "Spécialiste",
+      "tone_fr": "Adopte le ton d'un spécialiste qui s'adresse à des pairs (pharmacognostes, ethnobotanistes, praticiens) : précis, sobre, structuré, en distinguant toujours le niveau de preuve de chaque information.",
+      "label_en": "Specialist"
+    },
+    "guide": {
+      "label": "Guide",
+      "tone_fr": "Adopte le ton d'un documentaliste accueillant : phrases courtes, vocabulaire simple, sans jamais simplifier au point de déformer un usage ou une précaution.",
+      "label_en": "Guide"
+    }
+  },
+  "personnalite_par_defaut": "chercheur",
+  "inventaire": [
+    {
+      "classe": "Plante",
+      "libelle": "Plantes documentées",
+      "attribut": "famille",
+      "max": 80,
+      "libelle_attribut": "Familles représentées"
+    }
+  ]
+}

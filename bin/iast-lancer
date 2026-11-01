@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# bin/iast-lancer <profil> <port> — lance une instance d'IAST-Builder sur des ports qui lui sont propres
+# (conversation sur <port>, service interne sur <port> + 5000), depuis n'importe quel dossier.
+# Le dossier d'IAST-Builder est déduit de l'emplacement de ce script, même via un lien symbolique.
+PROFIL="${1:?Usage : iast-lancer <profil> <port>}"; PORT="${2:-3000}"; BRAIN_PORT=$((PORT + 5000))
+SOURCE="${BASH_SOURCE[0]}"
+while [ -L "$SOURCE" ]; do
+  DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"; SOURCE="$(readlink "$SOURCE")"
+  [[ "$SOURCE" != /* ]] && SOURCE="$DIR/$SOURCE"
+done
+IAST_HOME="$(cd -P "$(dirname "$SOURCE")/.." && pwd)"
+cd "$IAST_HOME" || exit 1
+echo "Dossier : $IAST_HOME"
+
+# Libère les ports de cette instance si une ancienne instance y est restée.
+for p in "$PORT" "$BRAIN_PORT"; do
+  pids=$(lsof -ti tcp:"$p" -sTCP:LISTEN 2>/dev/null)
+  if [ -n "$pids" ]; then
+    echo "Arrêt de l'ancienne instance sur le port $p"
+    kill $pids 2>/dev/null; sleep 1; kill -9 $pids 2>/dev/null
+  fi
+done
+
+# Ouvre le navigateur dès que l'instance du bon profil répond (macOS : open ; Linux : xdg-open).
+OPENER=$(command -v open || command -v xdg-open || true)
+if [ -n "$OPENER" ]; then
+  ( for _ in $(seq 1 90); do
+      if curl -s "http://localhost:$PORT/api/profile" | grep -q "\"id\":\"$PROFIL\""; then
+        "$OPENER" "http://localhost:$PORT/" >/dev/null 2>&1; break
+      fi
+      sleep 1
+    done ) &
+fi
+
+exec ./start.sh "$PROFIL" --port "$PORT"

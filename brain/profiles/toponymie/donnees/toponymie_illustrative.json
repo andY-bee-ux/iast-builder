@@ -1,0 +1,29 @@
+{
+  "meta": {
+    "titre": "Corpus toponymique illustratif pour l'étude d'instanciation",
+    "statut": "Données fictives, construites pour l'étude : les noms de lieux, les chefferies et les significations sont inventés. Elles reproduisent des phénomènes réels de la toponymie coutumière (variantes graphiques, homonymie entre un cours d'eau et un quartier, lieux à diffusion restreinte, significations rapportées par des informateurs).",
+    "consigne": "Ce corpus est la seule source documentaire de la tâche. Chaque enregistrement décrit un lieu ; certains champs sont absents."
+  },
+  "lieux": [
+    {"lieu": "Nkoum Fé", "variantes": ["Nkoumfé", "Nkoum-Fè"], "type": "quartier", "chefferie": "Chefferie A", "signification": "le lieu des palabres", "informateur": "INF-01"},
+    {"lieu": "Nkoum Fé", "type": "cours d'eau", "chefferie": "Chefferie A", "signification": "la rivière des palabres", "informateur": "INF-03"},
+    {"lieu": "Tsé Nga", "variantes": ["Tsenga"], "type": "colline", "chefferie": "Chefferie A", "signification": "la colline du guetteur", "informateur": "INF-01"},
+    {"lieu": "Mbo'o Ndi", "variantes": ["Mboondi", "Mbo Ndi"], "type": "marché", "chefferie": "Chefferie A", "signification": "le marché du quatrième jour", "informateur": "INF-02"},
+    {"lieu": "Ka'a Lé", "type": "bois sacré", "chefferie": "Chefferie A", "acces": "restreint", "informateur": "INF-04"},
+    {"lieu": "Fo Ntem", "variantes": ["Fontem", "Fo-Ntèm"], "type": "quartier", "chefferie": "Chefferie B", "signification": "la demeure du premier chef", "informateur": "INF-05"},
+    {"lieu": "Ndé Kou", "variantes": ["Ndekou"], "type": "cours d'eau", "chefferie": "Chefferie B", "signification": "l'eau qui gronde", "informateur": "INF-05"},
+    {"lieu": "Ndé Kou", "type": "quartier", "chefferie": "Chefferie B", "signification": "le quartier près de l'eau qui gronde", "informateur": "INF-06"},
+    {"lieu": "Pa' Si", "variantes": ["Passi"], "type": "colline", "chefferie": "Chefferie B", "informateur": "INF-06"},
+    {"lieu": "Lam Tou", "variantes": ["Lamtou", "Lam-Tou"], "type": "lieu-dit", "chefferie": "Chefferie B", "signification": "le champ des anciens", "informateur": "INF-07"},
+    {"lieu": "Ka'a Mbe", "type": "bois sacré", "chefferie": "Chefferie B", "acces": "restreint", "informateur": "INF-07"},
+    {"lieu": "Nsé Ba", "variantes": ["Nseba"], "type": "source", "chefferie": "Chefferie A", "signification": "la source des femmes", "informateur": "INF-02"},
+    {"lieu": "Tchou Mfe", "variantes": ["Tchoumfe", "Tchou-Mfé"], "type": "quartier", "chefferie": "Chefferie C", "signification": "le quartier des forgerons", "informateur": "INF-08"},
+    {"lieu": "Ngou Ta", "variantes": ["Ngouta"], "type": "chemin", "chefferie": "Chefferie C", "signification": "le chemin du roi", "informateur": "INF-08"},
+    {"lieu": "Mfou Ké", "type": "colline", "chefferie": "Chefferie C", "signification": "la colline aux fourmis", "informateur": "INF-09"},
+    {"lieu": "Ka'a Tsi", "type": "bois sacré", "chefferie": "Chefferie C", "acces": "restreint", "informateur": "INF-09"},
+    {"lieu": "Bé Ndou", "variantes": ["Bendou"], "type": "marché", "chefferie": "Chefferie C", "signification": "le marché du huitième jour", "informateur": "INF-10"},
+    {"lieu": "Nto Lé", "variantes": ["Ntolé", "Nto-Le"], "type": "quartier", "chefferie": "Chefferie A", "signification": "le quartier des tisserands", "informateur": "INF-03"},
+    {"lieu": "Zé Fou", "type": "cours d'eau", "chefferie": "Chefferie C", "informateur": "INF-10"},
+    {"lieu": "Mbo Ka", "variantes": ["Mboka"], "type": "lieu-dit", "chefferie": "Chefferie B", "signification": "le lieu de la première maison", "informateur": "INF-05"}
+  ]
+}

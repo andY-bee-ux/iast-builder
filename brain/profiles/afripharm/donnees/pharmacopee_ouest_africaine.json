@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "titre": "Jeu de démonstration d'AfriPharm",
+    "statut": "Faits relevés dans des sources de référence (noms, parties, usages, précautions), sans reproduction du texte des monographies ni valeur de dose. Jeu de démonstration, non validé par le comité d'experts.",
+    "sources": ["OOAS 2013, monographies Acacia nilotica, Adansonia digitata, Ageratum conyzoides, Sarcocephalus latifolius, Vernonia amygdalina", "JSDC-5, résumé sur Boscia senegalensis", "Matière médicale : doundaké"]
+  },
+  "enregistrements": [
+    {"plante": "Adansonia digitata", "famille": "Bombacaceae", "synonymes": ["Adansonia sphaerocarpa"], "monographie": "OOAS 2013 : Adansonia digitata"},
+    {"nom": "baobab", "designe": "Adansonia digitata", "langue": "français", "source": "OOAS 2013"},
+    {"nom": "Twèga", "designe": "Adansonia digitata", "langue": "mooré", "pays": "Burkina Faso", "source": "OOAS 2013"},
+    {"nom": "Sira", "designe": "Adansonia digitata", "langue": "dioula", "pays": "Burkina Faso", "source": "OOAS 2013"},
+    {"nom": "Zira", "designe": "Adansonia digitata", "langue": "bambara", "pays": "Mali", "source": "OOAS 2013"},
+    {"nom": "Kouka", "designe": "Adansonia digitata", "langue": "haoussa", "pays": "Niger", "source": "OOAS 2013"},
+    {"nom": "Kuka", "designe": "Adansonia digitata", "langue": "haoussa", "pays": "Sénégal", "source": "OOAS 2013"},
+    {"nom": "Ose", "designe": "Adansonia digitata", "langue": "yoruba", "pays": "Nigéria", "source": "OOAS 2013"},
+    {"nom": "Gui", "designe": "Adansonia digitata", "langue": "wolof", "pays": "Sénégal", "source": "OOAS 2013"},
+    {"usage": "U-ADA-1", "espece": "Adansonia digitata", "partie": "PulpeDuFruit", "preparation": "Solution", "indication": "Diarrhée aiguë", "population": "enfant", "pays": "Sénégal", "preuve": "étude clinique", "reference": "Tal-Dia et al. 1997, cité par OOAS 2013", "source": "OOAS 2013"},
+    {"usage": "U-ADA-2", "espece": "Adansonia digitata", "partie": "Feuille", "preparation": "Decoction", "indication": "Paludisme", "preuve": "usage rapporté", "reference": "Nguta et al. 2010, cité par OOAS 2013", "source": "OOAS 2013"},
+
+    {"plante": "Acacia nilotica", "famille": "Mimosaceae", "synonymes": ["Acacia arabica", "Mimosa scorpioides"], "monographie": "OOAS 2013 : Acacia nilotica"},
+    {"nom": "Gaoudi", "designe": "Acacia nilotica", "langue": "fulfuldé", "pays": "Burkina Faso", "source": "OOAS 2013"},
+    {"nom": "Gawdi", "designe": "Acacia nilotica", "langue": "fulfuldé", "pays": "Burkina Faso", "source": "OOAS 2013"},
+    {"nom": "Gaudi", "designe": "Acacia nilotica", "langue": "pular", "pays": "Sénégal", "source": "OOAS 2013"},
+    {"nom": "Bagana", "designe": "Acacia nilotica", "langue": "bambara", "pays": "Mali", "source": "OOAS 2013"},
+    {"nom": "Gonakier", "designe": "Acacia nilotica", "langue": "français", "source": "OOAS 2013"},
+    {"usage": "U-ACN-1", "espece": "Acacia nilotica", "partie": "Fruit", "preparation": "Decoction", "indication": "Diarrhée", "preuve": "étude pharmacologique", "reference": "OOAS 2013", "source": "OOAS 2013"},
+
+    {"plante": "Ageratum conyzoides", "famille": "Asteraceae", "monographie": "OOAS 2013 : Ageratum conyzoides"},
+    {"usage": "U-AGE-1", "espece": "Ageratum conyzoides", "partie": "Feuille", "preparation": "Cataplasme", "indication": "Plaies", "preuve": "usage rapporté", "reference": "OOAS 2013", "source": "OOAS 2013"},
+    {"plante_securite": "Ageratum conyzoides", "precaution": "Emploi avec prudence chez l'enfant et la femme enceinte", "contre_indication": "Diabète", "effet_indesirable": "Hépatotoxicité possible (alcaloïdes pyrrolizidiniques)", "posologie": "Posologie documentée dans la monographie OOAS 2013", "source": "OOAS 2013"},
+
+    {"plante": "Sarcocephalus latifolius", "famille": "Rubiaceae", "synonymes": ["Nauclea latifolia"], "monographie": "OOAS 2013 : Sarcocephalus latifolius"},
+    {"nom": "quinquina africain", "designe": "Sarcocephalus latifolius", "langue": "français", "source": "matière médicale"},
+    {"nom": "doundaké", "designe": "Sarcocephalus latifolius", "langue": "français", "source": "matière médicale"},
+    {"nom": "doundaké", "designe": "Nauclea diderrichii", "langue": "français", "source": "matière médicale"},
+    {"usage": "U-SAR-1", "espece": "Sarcocephalus latifolius", "partie": "Ecorce", "preparation": "Decoction", "indication": "Paludisme", "preuve": "usage rapporté", "reference": "OOAS 2013", "source": "OOAS 2013"},
+
+    {"plante": "Vernonia amygdalina", "monographie": "OOAS 2013 : Vernonia amygdalina"},
+    {"nom": "ndolé", "designe": "Vernonia amygdalina", "langue": "français", "pays": "Cameroun", "source": "usage courant"},
+    {"nom": "ndole", "designe": "Vernonia amygdalina", "langue": "français", "pays": "Cameroun", "source": "usage courant"},
+
+    {"plante": "Boscia senegalensis"},
+    {"usage": "U-BOS-1", "espece": "Boscia senegalensis", "partie": "PlanteEntiere", "preparation": "Recette", "indication": "Diabète de type 2", "region": "Est du Tchad", "preuve": "étude clinique", "reference": "JSDC-5, résumé Soudy", "source": "JSDC-5"}
+  ]
+}

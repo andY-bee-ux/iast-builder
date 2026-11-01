@@ -1,0 +1,243 @@
+{
+  "total": 134,
+  "par_famille": {
+    "V": {
+      "mutants": 2,
+      "detectes": 0
+    },
+    "S": {
+      "mutants": 120,
+      "detectes": 120
+    },
+    "P": {
+      "mutants": 12,
+      "detectes": 0
+    }
+  },
+  "par_operateur": [
+    {
+      "famille": "P",
+      "operateur": "defaut_abaisse",
+      "invariant": "aucun",
+      "total": 2,
+      "detectes": 0
+    },
+    {
+      "famille": "P",
+      "operateur": "motif_de_surete_inoperant",
+      "invariant": "aucun",
+      "total": 2,
+      "detectes": 0
+    },
+    {
+      "famille": "P",
+      "operateur": "regle_objet_permute",
+      "invariant": "aucun",
+      "total": 3,
+      "detectes": 0
+    },
+    {
+      "famille": "P",
+      "operateur": "regle_valeur_mal_orthographiee",
+      "invariant": "aucun",
+      "total": 4,
+      "detectes": 0
+    },
+    {
+      "famille": "P",
+      "operateur": "regles_acces_supprimees",
+      "invariant": "aucun",
+      "total": 1,
+      "detectes": 0
+    },
+    {
+      "famille": "S",
+      "operateur": "autorite_absente",
+      "invariant": "IP2",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "collecte_non_declaree",
+      "invariant": "IP8",
+      "total": 6,
+      "detectes": 6
+    },
+    {
+      "famille": "S",
+      "operateur": "contrainte_sans_description",
+      "invariant": "IP6",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "contrainte_sans_motif",
+      "invariant": "IP6",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "corpus_absent",
+      "invariant": "IP1",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "correspondance_classe_inconnue",
+      "invariant": "coherence",
+      "total": 19,
+      "detectes": 19
+    },
+    {
+      "famille": "S",
+      "operateur": "correspondance_dimension_non_declaree",
+      "invariant": "coherence",
+      "total": 12,
+      "detectes": 12
+    },
+    {
+      "famille": "S",
+      "operateur": "correspondance_predicat_inconnu",
+      "invariant": "coherence",
+      "total": 21,
+      "detectes": 21
+    },
+    {
+      "famille": "S",
+      "operateur": "correspondance_sujet_inconnu",
+      "invariant": "coherence",
+      "total": 8,
+      "detectes": 8
+    },
+    {
+      "famille": "S",
+      "operateur": "defaut_non_declare",
+      "invariant": "coherence",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "diffusion_non_declaree",
+      "invariant": "IP4",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "fichier_ontologie_absent",
+      "invariant": "coherence",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "niveaux_absents",
+      "invariant": "IP4",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "origine_invalide",
+      "invariant": "IP1",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "portee_vide",
+      "invariant": "IP3",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "regle_acces_niveau_inconnu",
+      "invariant": "coherence",
+      "total": 3,
+      "detectes": 3
+    },
+    {
+      "famille": "S",
+      "operateur": "regle_acces_sans_description",
+      "invariant": "IP6",
+      "total": 3,
+      "detectes": 3
+    },
+    {
+      "famille": "S",
+      "operateur": "regle_classe_inconnue",
+      "invariant": "coherence",
+      "total": 4,
+      "detectes": 4
+    },
+    {
+      "famille": "S",
+      "operateur": "regle_dimension_non_declaree",
+      "invariant": "coherence",
+      "total": 4,
+      "detectes": 4
+    },
+    {
+      "famille": "S",
+      "operateur": "regle_predicat_inconnu",
+      "invariant": "coherence",
+      "total": 4,
+      "detectes": 4
+    },
+    {
+      "famille": "S",
+      "operateur": "regle_sans_description",
+      "invariant": "IP6",
+      "total": 4,
+      "detectes": 4
+    },
+    {
+      "famille": "S",
+      "operateur": "regle_sans_identifiant",
+      "invariant": "IP6",
+      "total": 4,
+      "detectes": 4
+    },
+    {
+      "famille": "S",
+      "operateur": "risque_eleve_sans_contrainte",
+      "invariant": "IP5",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "risque_eleve_un_seul_niveau",
+      "invariant": "IP5",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "variante_classe_inconnue",
+      "invariant": "coherence",
+      "total": 2,
+      "detectes": 2
+    },
+    {
+      "famille": "S",
+      "operateur": "variante_relation_inconnue",
+      "invariant": "coherence",
+      "total": 2,
+      "detectes": 2
+    }
+  ],
+  "non_detectes_S": [],
+  "S_bonne_raison": 120,
+  "S_mauvaise_raison": [],
+  "operateurs_distincts": {
+    "S": 26,
+    "P": 5
+  }
+}

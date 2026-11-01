@@ -1,0 +1,7 @@
+# Contrainte de données propre au domaine : le nom scientifique d'une plante suit la forme binominale.
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix ph:  <http://iast.uqam.ca/afripharm#> .
+ph:NomScientifiqueBinominal a sh:NodeShape ;
+    sh:targetSubjectsOf ph:nomScientifique ;
+    sh:property [ sh:path ph:nomScientifique ; sh:pattern "^[A-Z][a-z]+ [a-z-]+$" ;
+        sh:message "Le nom scientifique doit suivre la forme binominale (Genre espèce)."@fr ] .

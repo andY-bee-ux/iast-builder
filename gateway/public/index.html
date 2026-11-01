@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>IAST-Builder</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <p class="eyebrow"></p>
+  <div style="display:flex; align-items:center; gap:14px;">
+    <span id="headerAvatar" style="width:44px; height:44px; flex:none; border-radius:50%; overflow:hidden;"></span>
+    <h1></h1>
+  </div>
+  <p class="subtitle" id="subtitleText"></p>
+  <div class="controls">
+    <span id="langButtons"></span>
+    <div class="persona-row">
+      <label id="personaLabel">Personnalité</label>
+      <select id="personaSelect"></select>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div id="chat"></div>
+  <div class="typing" id="typing" style="display:none;"></div>
+
+  <div id="toolsContainer"></div>
+  <div class="contrib-panel" id="contribPanel">
+    <button type="button" class="contrib-toggle" id="contribToggle">
+      <span id="contribToggleLabel"></span>
+      <span class="chev">▾</span>
+    </button>
+    <div class="contrib-body" id="contribBody" style="display:none;">
+      <div class="contrib-tabs">
+        <button type="button" class="contrib-tab active" data-target="text" id="contribTextTabBtn"></button>
+        <button type="button" class="contrib-tab" data-target="doc" id="contribDocTabBtn"></button>
+      </div>
+
+      <div id="contribTextPane">
+        <label class="contrib-field">
+          <span id="contribTextLabel"></span>
+          <textarea id="contribContent" placeholder=""></textarea>
+        </label>
+        <label class="contrib-field">
+          <span id="contribTypeLabelText">Type</span>
+          <select id="contribType"></select>
+        </label>
+        <label class="contrib-field">
+          <span id="contribNameLabel1"></span>
+          <input type="text" id="contribName1" placeholder="Optionnel">
+        </label>
+        <button type="button" class="contrib-submit" id="contribSubmitBtn"></button>
+        <div class="contrib-status" id="contribTextStatus"></div>
+      </div>
+
+      <div id="contribDocPane" style="display:none;">
+        <label class="contrib-field">
+          <span id="contribDocFileLabel"></span>
+          <input type="file" id="contribFile" accept=".txt,.md,.csv,.json,.docx,.pdf,.rtf">
+        </label>
+        <label class="contrib-field">
+          <span id="contribDocNoteLabel"></span>
+          <input type="text" id="contribDocNote" placeholder="Optionnel">
+        </label>
+        <label class="contrib-field">
+          <span id="contribNameLabel2"></span>
+          <input type="text" id="contribName2" placeholder="Optionnel">
+        </label>
+        <button type="button" class="contrib-submit" id="contribDocSubmitBtn"></button>
+        <div class="contrib-status" id="contribDocStatus"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="suggestions" id="suggestions"></div>
+  <form id="form">
+    <textarea id="input" placeholder=""></textarea>
+    <button class="send" id="sendBtn" type="submit">Envoyer</button>
+  </form>
+</main>
+
+<div class="zigzag"></div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

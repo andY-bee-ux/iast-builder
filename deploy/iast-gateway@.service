@@ -1,0 +1,18 @@
+# Service gateway d'une instance IAST-Builder. %i = identifiant du profil.
+[Unit]
+Description=IAST-Builder, gateway (profil %i)
+After=network.target iast-brain@%i.service
+Requires=iast-brain@%i.service
+
+[Service]
+Type=simple
+User=iast
+WorkingDirectory=/opt/iast-builder/gateway
+EnvironmentFile=/etc/iast-builder/%i.env
+Environment=BRAIN_URL=http://127.0.0.1:${BRAIN_PORT}
+ExecStart=/usr/bin/node dist/server.js
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

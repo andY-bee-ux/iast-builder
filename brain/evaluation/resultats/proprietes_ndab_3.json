@@ -1,0 +1,23 @@
+{
+  "profil": "ndab",
+  "graine": 3,
+  "sequences": 20,
+  "operations_par_sequence": 50,
+  "duree_s": 64.0,
+  "operations": {
+    "creation": 305,
+    "conversation": 307,
+    "controles_dossier": 1809,
+    "controles_collecte": 307,
+    "decision": 244,
+    "reglage_collecte": 62,
+    "controle_positif_dossier": 731,
+    "retrait": 37,
+    "evolution": 31,
+    "audits": 20,
+    "tentatives_journal_refusees": 40,
+    "retour_arriere": 13
+  },
+  "violations": [],
+  "nombre_violations": 0
+}

@@ -1,0 +1,108 @@
+# Invariants du métamodèle IAST-Builder, exprimés en SHACL.
+#
+# Les invariants se répartissent en deux familles :
+#   - IP : invariants de profil, vérifiés avant le chargement d'un profil de domaine ;
+#   - IE : invariants d'exécution, vérifiés par un audit de l'état du système exporté en RDF.
+# Deux invariants d'exécution sont garantis par construction et vérifiés par les tests,
+# non par SHACL, car ils portent sur des comportements et non sur des données :
+#   IE-C1 aucune assertion non validée n'entre dans le dossier de réponse de l'agent ;
+#   IE-C2 aucun événement du journal ne peut être modifié ni supprimé ;
+#   IE-C3 aucun réglage de la collecte ne modifie le circuit de validation, et tout changement
+#         de réglage est inscrit au journal avec son auteur ;
+#   IE-C4 un répertoire de données ne sert qu'un seul profil de domaine ;
+#   IE-C5 un même fichier n'est importé qu'une fois avec une même correspondance, et l'annulation
+#         d'un lot ne laisse aucune de ses connaissances active, sans rien effacer du journal.
+
+@prefix iab: <http://iast.uqam.ca/iast-builder#> .
+@prefix sh:  <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# IP1. Un profil utilise exactement une ontologie, qui déclare l'origine et les sources de son corpus de référence.
+iab:IP1 a sh:NodeShape ; sh:targetClass iab:ProfilDeDomaine ;
+    sh:property [ sh:path iab:utiliseOntologie ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "IP1 : un profil utilise exactement une ontologie de domaine."@fr ] .
+iab:IP1b a sh:NodeShape ; sh:targetClass iab:OntologieDeDomaine ;
+    sh:property [ sh:path iab:origine ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:in ( iab:origineTerrain iab:origineDocumentaire iab:origineMixte ) ;
+        sh:message "IP1 : l'ontologie de domaine déclare l'origine de son corpus (terrain, documentaire ou mixte)."@fr ] ;
+    sh:property [ sh:path iab:corpusDeReference ; sh:minCount 1 ;
+        sh:message "IP1 : l'ontologie de domaine cite au moins une source de son corpus de référence."@fr ] .
+
+# IP2. Un profil relève d'une autorité de validation, et d'une seule.
+iab:IP2 a sh:NodeShape ; sh:targetClass iab:ProfilDeDomaine ;
+    sh:property [ sh:path iab:sousAutorite ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "IP2 : un profil désigne une autorité de validation."@fr ] .
+
+# IP3. Un profil déclare au moins une dimension de portée.
+iab:IP3 a sh:NodeShape ; sh:targetClass iab:ProfilDeDomaine ;
+    sh:property [ sh:path iab:declareDimension ; sh:minCount 1 ;
+        sh:message "IP3 : un profil déclare au moins une dimension de portée."@fr ] .
+
+# IP4. Un profil déclare au moins un niveau d'accès, et le niveau de diffusion de l'agent en fait partie.
+iab:IP4 a sh:NodeShape ; sh:targetClass iab:ProfilDeDomaine ;
+    sh:property [ sh:path iab:declareNiveau ; sh:minCount 1 ;
+        sh:message "IP4 : un profil déclare au moins un niveau d'accès."@fr ] ;
+    sh:property [ sh:path iab:niveauDiffusionAgent ; sh:minCount 1 ; sh:maxCount 1 ;
+        sh:message "IP4 : un profil fixe le niveau de diffusion de l'agent."@fr ] ;
+    sh:sparql [ sh:message "IP4 : le niveau de diffusion de l'agent doit être l'un des niveaux déclarés."@fr ;
+        sh:select """PREFIX iab: <http://iast.uqam.ca/iast-builder#>
+            SELECT $this WHERE { $this iab:niveauDiffusionAgent ?n . FILTER NOT EXISTS { $this iab:declareNiveau ?n } }""" ] .
+
+# IP5. Un profil à risque élevé déclare au moins une contrainte de sûreté et au moins deux niveaux d'accès.
+iab:IP5 a sh:NodeShape ; sh:targetClass iab:ProfilDeDomaine ;
+    sh:sparql [ sh:message "IP5 : un profil à risque élevé déclare au moins une contrainte de sûreté."@fr ;
+        sh:select """PREFIX iab: <http://iast.uqam.ca/iast-builder#>
+            SELECT $this WHERE { $this iab:niveauDeRisque iab:risqueEleve . FILTER NOT EXISTS { $this iab:declareContrainte ?c } }""" ] ;
+    sh:sparql [ sh:message "IP5 : un profil à risque élevé déclare au moins deux niveaux d'accès."@fr ;
+        sh:select """PREFIX iab: <http://iast.uqam.ca/iast-builder#>
+            SELECT $this WHERE { $this iab:niveauDeRisque iab:risqueEleve .
+                { SELECT $this (COUNT(?n) AS ?k) WHERE { $this iab:declareNiveau ?n } GROUP BY $this } FILTER (?k < 2) }""" ] .
+
+# IP6. Toute règle contrôlée et toute contrainte de sûreté est identifiée et décrite.
+iab:IP6 a sh:NodeShape ; sh:targetClass iab:RegleControlee, iab:ContrainteDeSurete, iab:RegleDAcces ;
+    sh:property [ sh:path iab:identifiant ; sh:minCount 1 ; sh:message "IP6 : identifiant manquant."@fr ] ;
+    sh:property [ sh:path iab:description ; sh:minCount 1 ; sh:message "IP6 : description manquante."@fr ] .
+iab:IP6b a sh:NodeShape ; sh:targetClass iab:ContrainteDeSurete ;
+    sh:property [ sh:path iab:motif ; sh:minCount 1 ;
+        sh:message "IP6 : une contrainte de sûreté est vérifiable, elle porte au moins un motif."@fr ] .
+
+# IP7. Tout composant neuronal est sans état.
+iab:IP7 a sh:NodeShape ; sh:targetClass iab:ComposantNeuronal ;
+    sh:property [ sh:path iab:sansEtat ; sh:hasValue true ;
+        sh:message "IP7 : un composant neuronal n'est jamais ré-entraîné par ce qu'il traite."@fr ] .
+
+# IE1. Toute assertion validée procède d'une décision prise par un expert.
+iab:IE1 a sh:NodeShape ; sh:targetClass iab:AssertionCandidate ;
+    sh:sparql [ sh:message "IE1 : une assertion validée doit procéder d'une décision experte."@fr ;
+        sh:select """PREFIX iab: <http://iast.uqam.ca/iast-builder#>
+            SELECT $this WHERE { $this iab:aPourStatut iab:validee .
+                FILTER NOT EXISTS { $this iab:valideePar ?d . ?d iab:decidePar ?e } }""" ] .
+
+# IE2. Toute assertion porte sa provenance, son verdict et son niveau d'accès.
+iab:IE2 a sh:NodeShape ; sh:targetClass iab:AssertionCandidate ;
+    sh:property [ sh:path iab:reference ; sh:minCount 1 ; sh:message "IE2 : provenance manquante."@fr ] ;
+    sh:property [ sh:path iab:aPourVerdict ; sh:minCount 1 ; sh:message "IE2 : verdict manquant."@fr ] ;
+    sh:property [ sh:path iab:aPourNiveauDAcces ; sh:minCount 1 ; sh:message "IE2 : niveau d'accès manquant."@fr ] .
+
+# IE3. Toute version d'ontologie a un numéro et un motif ; toute version autre que la première désigne sa précédente.
+iab:IE3 a sh:NodeShape ; sh:targetClass iab:VersionDOntologie ;
+    sh:property [ sh:path iab:numero ; sh:minCount 1 ; sh:datatype xsd:integer ; sh:message "IE3 : numéro de version manquant."@fr ] ;
+    sh:property [ sh:path iab:motifDeVersion ; sh:minCount 1 ; sh:message "IE3 : motif de version manquant."@fr ] ;
+    sh:sparql [ sh:message "IE3 : une version ultérieure désigne sa version précédente."@fr ;
+        sh:select """PREFIX iab: <http://iast.uqam.ca/iast-builder#>
+            SELECT $this WHERE { $this iab:numero ?n . FILTER (?n > 1) FILTER NOT EXISTS { $this iab:versionPrecedente ?p } }""" ] .
+
+# IE4. Tout événement du journal nomme son acteur et la version de l'ontologie en vigueur.
+iab:IE4 a sh:NodeShape ; sh:targetClass iab:EvenementDeJournal ;
+    sh:property [ sh:path iab:acteur ; sh:minCount 1 ; sh:message "IE4 : acteur manquant."@fr ] ;
+    sh:property [ sh:path iab:typeDEvenement ; sh:minCount 1 ; sh:message "IE4 : type d'événement manquant."@fr ] ;
+    sh:property [ sh:path iab:sousVersion ; sh:minCount 1 ; sh:message "IE4 : version d'ontologie manquante."@fr ] .
+
+# IP8. Un profil déclare, pour chacun des trois modes de collecte communautaire, s'il est actif par défaut.
+iab:IP8 a sh:NodeShape ; sh:targetClass iab:ProfilDeDomaine ;
+    sh:property [ sh:path iab:recueilTemoignagesParDefaut ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ;
+        sh:message "IP8 : le profil déclare si le recueil des témoignages est actif par défaut."@fr ] ;
+    sh:property [ sh:path iab:formulaireParDefaut ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ;
+        sh:message "IP8 : le profil déclare si le formulaire de contribution est ouvert par défaut."@fr ] ;
+    sh:property [ sh:path iab:signalementLacunesParDefaut ; sh:minCount 1 ; sh:maxCount 1 ; sh:datatype xsd:boolean ;
+        sh:message "IP8 : le profil déclare si le signalement des lacunes est actif par défaut."@fr ] .

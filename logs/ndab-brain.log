@@ -1,0 +1,7 @@
+INFO:     Started server process [83249]
+INFO:     Waiting for application startup.
+2026-11-01 10:01:29,846 INFO yobakoko : Profil de domaine actif : ndab (Ndab du Ndé)
+INFO:     Application startup complete.
+ERROR:    [Errno 48] error while attempting to bind on address ('127.0.0.1', 8000): address already in use
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.

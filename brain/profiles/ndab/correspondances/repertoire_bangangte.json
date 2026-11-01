@@ -1,0 +1,38 @@
+{
+  "description": "Répertoire de terrain NDAAP (format JSON du projet, clé « entrees ») : types de Ndab, lignages et bloc d'origine, en hypothèse à valider.",
+  "connector": "json",
+  "records_path": "entrees",
+  "subjects": [
+    {
+      "from_list": "liste_hypothese_ndab_ngon_la",
+      "class": "Ndab",
+      "facts": [
+        {"predicate": "estDeType", "value": "NdabNgonLa", "object_class": "TypeDeNdab"},
+        {"predicate": "provientDuLignage", "field": "lignage_paternel_labels", "object_class": "GroupeLignager"},
+        {"predicate": "aPourSource", "field": "id", "object_class": "EntreeRepertoire"}
+      ]
+    },
+    {
+      "from_list": "liste_hypothese_ndab_mekat",
+      "class": "Ndab",
+      "facts": [
+        {"predicate": "estDeType", "value": "NdabDeMekat", "object_class": "TypeDeNdab"},
+        {"predicate": "provientDuLignage", "field": "lignage_maternel_hypothese", "object_class": "GroupeLignager"},
+        {"predicate": "aPourSource", "field": "id", "object_class": "EntreeRepertoire"}
+      ]
+    },
+    {
+      "from_list": "lignage_paternel_labels",
+      "class": "GroupeLignager",
+      "facts": []
+    }
+  ],
+  "scope": {
+    "chefferie": {"field": "chefferie"},
+    "site": {"field": "site_origine_ndab"},
+    "bloc": {"field": "id"},
+    "statut": {"value": "classement du répertoire, hypothèse à valider"}
+  },
+  "confidence": 0.6,
+  "detect_variants": true
+}

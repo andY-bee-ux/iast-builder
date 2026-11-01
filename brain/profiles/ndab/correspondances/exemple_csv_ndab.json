@@ -1,0 +1,19 @@
+{
+  "description": "Exemple de correspondance CSV : colonnes nom, type (NdabNgonLa ou NdabDeMekat), lignage, chefferie, commentaire (texte libre).",
+  "connector": "csv",
+  "delimiter": ",",
+  "subjects": [
+    {
+      "column": "nom",
+      "class": "Ndab",
+      "facts": [
+        {"predicate": "estDeType", "column": "type", "object_class": "TypeDeNdab"},
+        {"predicate": "provientDuLignage", "column": "lignage", "object_class": "GroupeLignager"}
+      ]
+    }
+  ],
+  "scope": {"chefferie": {"column": "chefferie"}},
+  "confidence": 0.8,
+  "text_fields": ["commentaire"],
+  "detect_variants": true
+}

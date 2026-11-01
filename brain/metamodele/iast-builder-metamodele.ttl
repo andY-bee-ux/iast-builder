@@ -1,0 +1,182 @@
+# IAST-Builder : métamodèle du cadre neuro-symbolique collaboratif pour les savoirs traditionnels
+#
+# Ce fichier définit les concepts génériques du cadre, indépendamment de tout domaine.
+# Il comporte deux niveaux :
+#   - le niveau du profil : ce qu'il faut déclarer pour instancier le cadre dans un
+#     domaine (ontologie, dimensions de portée, règles contrôlées, niveaux d'accès,
+#     contraintes de sûreté, autorité de validation, relation de variante) ;
+#   - le niveau de l'exécution : les objets que le moteur manipule quel que soit le
+#     domaine (assertion candidate, portée, provenance, verdict, signal, question
+#     d'investigation, décision, opération d'évolution, version, événement du journal,
+#     composants neuronaux et symboliques).
+# Les invariants qui portent sur ces concepts sont exprimés en SHACL dans
+# iast-builder-invariants.ttl.
+
+@prefix iab:  <http://iast.uqam.ca/iast-builder#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix dct:  <http://purl.org/dc/terms/> .
+
+<http://iast.uqam.ca/iast-builder> a owl:Ontology ;
+    rdfs:label "Métamodèle IAST-Builder (cadre neuro-symbolique collaboratif)"@fr ;
+    dct:description "Concepts génériques d'un cadre neuro-symbolique et collaboratif pour la sauvegarde de savoirs traditionnels situés."@fr ;
+    owl:versionInfo "1.0" ;
+    owl:imports <http://www.w3.org/ns/prov-o> .
+
+########################################################################
+# 1. Niveau du profil
+########################################################################
+
+iab:ProfilDeDomaine a owl:Class ;
+    rdfs:label "Profil de domaine"@fr ;
+    rdfs:comment "Instanciation du cadre pour un savoir particulier : seul élément propre au domaine, tout le reste étant fourni par le moteur."@fr .
+
+iab:OntologieDeDomaine a owl:Class ;
+    rdfs:label "Ontologie de domaine"@fr ;
+    rdfs:comment "Modèle conceptuel issu d'un corpus de référence (collecte de terrain, sources documentaires ou les deux), qui gouverne la couche neuronale et évolue sous décision experte."@fr .
+
+iab:OrigineDuCorpus a owl:Class ;
+    rdfs:label "Origine du corpus de référence"@fr .
+iab:origineTerrain a iab:OrigineDuCorpus, owl:NamedIndividual ; rdfs:label "collecte de terrain"@fr .
+iab:origineDocumentaire a iab:OrigineDuCorpus, owl:NamedIndividual ; rdfs:label "sources documentaires de référence"@fr .
+iab:origineMixte a iab:OrigineDuCorpus, owl:NamedIndividual ; rdfs:label "terrain et sources documentaires"@fr .
+
+iab:DimensionDePortee a owl:Class ;
+    rdfs:label "Dimension de portée"@fr ;
+    rdfs:comment "Axe de contextualisation d'une assertion (chefferie, lignage, région, praticien, population...). Point de variation principal du cadre."@fr .
+
+iab:RegleControlee a owl:Class ;
+    rdfs:label "Règle contrôlée"@fr ;
+    rdfs:comment "Règle du domaine traduite en condition vérifiable sur une assertion ; sa violation place l'assertion en tension."@fr .
+
+iab:NiveauDAcces a owl:Class ;
+    rdfs:label "Niveau d'accès"@fr ;
+    rdfs:comment "Degré de diffusion d'une connaissance validée (public, spécialiste, restreint...)."@fr .
+
+iab:RegleDAcces a owl:Class ;
+    rdfs:label "Règle d'accès"@fr ;
+    rdfs:comment "Condition qui attribue d'office un niveau d'accès à une assertion."@fr .
+
+iab:ContrainteDeSurete a owl:Class ;
+    rdfs:label "Contrainte de sûreté"@fr ;
+    rdfs:comment "Interdit de restitution propre au domaine (par exemple toute posologie), vérifié symboliquement sur chaque réponse."@fr .
+
+iab:AutoriteDeValidation a owl:Class ;
+    rdfs:subClassOf prov:Agent ;
+    rdfs:label "Autorité de validation"@fr ;
+    rdfs:comment "Instance communautaire habilitée à décider de ce qui constitue le savoir."@fr .
+
+iab:RelationDeVariante a owl:Class ;
+    rdfs:label "Relation de variante"@fr ;
+    rdfs:comment "Désignation, dans l'ontologie de domaine, de la classe dont les formes varient et de la relation qui relie deux variantes."@fr .
+
+iab:TypeDeSource a owl:Class ;
+    rdfs:label "Type de source"@fr ;
+    rdfs:comment "Catégorie de source admise par le profil (conversation, document, données structurées, témoignage d'expert...)."@fr .
+
+iab:NiveauDeRisque a owl:Class ;
+    rdfs:label "Niveau de risque"@fr .
+iab:risqueFaible a iab:NiveauDeRisque, owl:NamedIndividual ; rdfs:label "faible"@fr .
+iab:risqueEleve  a iab:NiveauDeRisque, owl:NamedIndividual ; rdfs:label "élevé"@fr ;
+    rdfs:comment "Une erreur de restitution peut causer un préjudice à une personne."@fr .
+
+iab:recueilTemoignagesParDefaut a owl:DatatypeProperty, owl:FunctionalProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range xsd:boolean ;
+    rdfs:comment "Le recueil des témoignages en conversation est-il actif par défaut ?"@fr .
+iab:formulaireParDefaut a owl:DatatypeProperty, owl:FunctionalProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range xsd:boolean ;
+    rdfs:comment "Le formulaire de contribution est-il ouvert par défaut ?"@fr .
+iab:signalementLacunesParDefaut a owl:DatatypeProperty, owl:FunctionalProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range xsd:boolean ;
+    rdfs:comment "Le signalement des lacunes et ambiguïtés aux experts est-il actif par défaut ?"@fr .
+
+iab:utiliseOntologie a owl:ObjectProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:OntologieDeDomaine .
+iab:declareDimension a owl:ObjectProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:DimensionDePortee .
+iab:declareRegle     a owl:ObjectProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:RegleControlee .
+iab:declareNiveau    a owl:ObjectProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:NiveauDAcces .
+iab:declareRegleDAcces a owl:ObjectProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:RegleDAcces .
+iab:declareContrainte a owl:ObjectProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:ContrainteDeSurete .
+iab:declareVariante  a owl:ObjectProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:RelationDeVariante .
+iab:admetSource      a owl:ObjectProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:TypeDeSource .
+iab:sousAutorite     a owl:ObjectProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:AutoriteDeValidation .
+iab:niveauDeRisque   a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:NiveauDeRisque .
+iab:niveauDiffusionAgent a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain iab:ProfilDeDomaine ; rdfs:range iab:NiveauDAcces ;
+    rdfs:comment "Niveau le plus élevé qu'un agent déployé peut restituer."@fr .
+iab:attribueNiveau   a owl:ObjectProperty ; rdfs:domain iab:RegleDAcces ; rdfs:range iab:NiveauDAcces .
+iab:rang a owl:DatatypeProperty ; rdfs:domain iab:NiveauDAcces ; rdfs:range xsd:integer ;
+    rdfs:comment "Ordre des niveaux : un rang plus élevé est plus restrictif."@fr .
+iab:identifiant a owl:DatatypeProperty ; rdfs:range xsd:string .
+iab:description a owl:DatatypeProperty ; rdfs:range xsd:string .
+iab:predicatVise a owl:DatatypeProperty ; rdfs:domain iab:RegleControlee ; rdfs:range xsd:string .
+iab:motif a owl:DatatypeProperty ; rdfs:domain iab:ContrainteDeSurete ; rdfs:range xsd:string ;
+    rdfs:comment "Expression régulière qui détecte une restitution interdite."@fr .
+iab:classeVariable a owl:DatatypeProperty ; rdfs:domain iab:RelationDeVariante ; rdfs:range xsd:string .
+iab:predicatDeVariante a owl:DatatypeProperty ; rdfs:domain iab:RelationDeVariante ; rdfs:range xsd:string .
+iab:origine a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain iab:OntologieDeDomaine ; rdfs:range iab:OrigineDuCorpus .
+iab:corpusDeReference a owl:DatatypeProperty ; rdfs:domain iab:OntologieDeDomaine ; rdfs:range xsd:string ;
+    rdfs:comment "Référence d'une source du corpus dont procède l'ontologie initiale (enquête, pharmacopée, dictionnaire, répertoire)."@fr .
+
+########################################################################
+# 2. Niveau de l'exécution
+########################################################################
+
+iab:AssertionCandidate a owl:Class ;
+    rdfs:subClassOf prov:Entity ;
+    rdfs:label "Assertion candidate"@fr ;
+    rdfs:comment "Unité pivot : toute connaissance nouvelle, quelle que soit sa source, avant et après décision."@fr .
+
+iab:Portee a owl:Class ; rdfs:label "Portée"@fr ;
+    rdfs:comment "Ensemble de valeurs prises sur les dimensions de portée du profil ; une portée vide vaut pour tout contexte."@fr .
+iab:Verdict a owl:Class ; rdfs:label "Verdict formel"@fr .
+iab:conforme a iab:Verdict, owl:NamedIndividual .
+iab:enTension a iab:Verdict, owl:NamedIndividual .
+iab:horsOntologie a iab:Verdict, owl:NamedIndividual .
+iab:Statut a owl:Class ; rdfs:label "Statut"@fr .
+iab:enAttente a iab:Statut, owl:NamedIndividual .
+iab:enDeliberation a iab:Statut, owl:NamedIndividual .
+iab:validee a iab:Statut, owl:NamedIndividual .
+iab:rejetee a iab:Statut, owl:NamedIndividual .
+iab:retiree a iab:Statut, owl:NamedIndividual .
+
+iab:Signal a owl:Class ; rdfs:label "Signal"@fr ;
+    rdfs:comment "Qualification épistémique d'un échange par la couche neuronale."@fr .
+iab:lacune a iab:Signal, owl:NamedIndividual .
+iab:contradiction a iab:Signal, owl:NamedIndividual .
+iab:faitNouveau a iab:Signal, owl:NamedIndividual .
+iab:ambiguite a iab:Signal, owl:NamedIndividual .
+
+iab:QuestionDInvestigation a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Question d'investigation"@fr .
+iab:Decision a owl:Class ; rdfs:subClassOf prov:Activity ; rdfs:label "Décision experte"@fr .
+iab:Expert a owl:Class ; rdfs:subClassOf prov:Agent ; rdfs:label "Expert"@fr .
+iab:Contributeur a owl:Class ; rdfs:subClassOf prov:Agent ; rdfs:label "Contributeur"@fr .
+iab:OperationDEvolution a owl:Class ; rdfs:label "Opération d'évolution"@fr ;
+    rdfs:comment "Élément d'un catalogue fermé ; chaque opération possède une traduction formelle unique et une paraphrase par gabarit."@fr .
+iab:VersionDOntologie a owl:Class ; rdfs:subClassOf prov:Entity ; rdfs:label "Version d'ontologie"@fr .
+iab:EvenementDeJournal a owl:Class ; rdfs:subClassOf prov:Activity ; rdfs:label "Événement du journal"@fr .
+
+iab:Composant a owl:Class ; rdfs:label "Composant"@fr .
+iab:ComposantSymbolique a owl:Class ; rdfs:subClassOf iab:Composant ; rdfs:label "Composant symbolique"@fr .
+iab:ComposantNeuronal a owl:Class ; rdfs:subClassOf iab:Composant ; rdfs:label "Composant neuronal"@fr ;
+    rdfs:comment "Modèle pré-entraîné utilisé comme opérateur, sans ajustement de paramètres."@fr .
+iab:ComposantSymbolique owl:disjointWith iab:ComposantNeuronal .
+
+iab:aPourPortee a owl:ObjectProperty ; rdfs:domain iab:AssertionCandidate ; rdfs:range iab:Portee .
+iab:aPourVerdict a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain iab:AssertionCandidate ; rdfs:range iab:Verdict .
+iab:aPourStatut a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain iab:AssertionCandidate ; rdfs:range iab:Statut .
+iab:aPourNiveauDAcces a owl:ObjectProperty, owl:FunctionalProperty ; rdfs:domain iab:AssertionCandidate ; rdfs:range iab:NiveauDAcces .
+iab:issueDeSignal a owl:ObjectProperty ; rdfs:domain iab:QuestionDInvestigation ; rdfs:range iab:Signal .
+iab:decisionSur a owl:ObjectProperty ; rdfs:domain iab:Decision .
+iab:decidePar a owl:ObjectProperty ; rdfs:subPropertyOf prov:wasAssociatedWith ; rdfs:domain iab:Decision ; rdfs:range iab:Expert .
+iab:valideePar a owl:ObjectProperty ; rdfs:domain iab:AssertionCandidate ; rdfs:range iab:Decision .
+iab:appliqueOperation a owl:ObjectProperty ; rdfs:domain iab:VersionDOntologie ; rdfs:range iab:OperationDEvolution .
+iab:versionPrecedente a owl:ObjectProperty ; rdfs:subPropertyOf prov:wasRevisionOf ; rdfs:domain iab:VersionDOntologie ; rdfs:range iab:VersionDOntologie .
+iab:sousVersion a owl:ObjectProperty ; rdfs:domain iab:EvenementDeJournal ; rdfs:range iab:VersionDOntologie .
+iab:gouverne a owl:ObjectProperty ; rdfs:domain iab:OntologieDeDomaine ; rdfs:range iab:ComposantNeuronal .
+iab:sansEtat a owl:DatatypeProperty ; rdfs:domain iab:ComposantNeuronal ; rdfs:range xsd:boolean ;
+    rdfs:comment "Vrai si le composant ne conserve rien de ce qu'il traite (aucun ajustement de paramètres)."@fr .
+iab:numero a owl:DatatypeProperty ; rdfs:domain iab:VersionDOntologie ; rdfs:range xsd:integer .
+iab:motifDeVersion a owl:DatatypeProperty ; rdfs:domain iab:VersionDOntologie ; rdfs:range xsd:string .
+iab:acteur a owl:DatatypeProperty ; rdfs:domain iab:EvenementDeJournal ; rdfs:range xsd:string .
+iab:typeDEvenement a owl:DatatypeProperty ; rdfs:domain iab:EvenementDeJournal ; rdfs:range xsd:string .
+iab:reference a owl:DatatypeProperty ; rdfs:domain iab:AssertionCandidate ; rdfs:range xsd:string ;
+    rdfs:comment "Référence précise de la source (document, lot et enregistrement, question, expert)."@fr .

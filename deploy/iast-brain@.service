@@ -1,0 +1,20 @@
+# Service brain d'une instance IAST-Builder. %i = identifiant du profil (ndab, afripharm...).
+# Installation : sudo cp deploy/iast-*@.service /etc/systemd/system/ && sudo systemctl daemon-reload
+# Puis :          sudo systemctl enable --now iast-brain@ndab iast-gateway@ndab
+# Ports : fixés dans /etc/iast-builder/%i.env (voir deploy/instance.env.exemple).
+[Unit]
+Description=IAST-Builder, brain (profil %i)
+After=network.target
+
+[Service]
+Type=simple
+User=iast
+WorkingDirectory=/opt/iast-builder/brain
+EnvironmentFile=/etc/iast-builder/%i.env
+Environment=YOBAKOKO_PROFILE=%i
+ExecStart=/opt/iast-builder/brain/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port ${BRAIN_PORT}
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

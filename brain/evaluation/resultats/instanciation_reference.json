@@ -1,0 +1,177 @@
+{
+  "profil": {
+    "profil": "toponymie",
+    "existe": true,
+    "lignes_profil": 160,
+    "classes": 5,
+    "relations": 5,
+    "attributs": 1,
+    "dimensions": 4,
+    "regles": 1,
+    "regles_acces": 1,
+    "niveaux": 2,
+    "lignes_ontologie": 134,
+    "correspondances": 1,
+    "lignes_correspondances": 23
+  },
+  "moteur": {
+    "sha256": "cbce54ff9109f12d473084551942a893c572f18cfa75a109a8bb9f91485f7675",
+    "fichiers": 45,
+    "lignes": 6504
+  },
+  "commit": null,
+  "import": {
+    "enregistrements": 20,
+    "connaissances": 114,
+    "variantes_proposees": 25,
+    "variantes": [
+      [
+        "Bendou",
+        "Bé Ndou"
+      ],
+      [
+        "Fo Ntem",
+        "Fo-Ntèm"
+      ],
+      [
+        "Fo Ntem",
+        "Fontem"
+      ],
+      [
+        "Fo-Ntèm",
+        "Fontem"
+      ],
+      [
+        "Lam Tou",
+        "Lam-Tou"
+      ],
+      [
+        "Lam Tou",
+        "Lamtou"
+      ],
+      [
+        "Lam-Tou",
+        "Lamtou"
+      ],
+      [
+        "Mbo Ka",
+        "Mboka"
+      ],
+      [
+        "Mbo Ndi",
+        "Mbo'o Ndi"
+      ],
+      [
+        "Mbo Ndi",
+        "Mboondi"
+      ],
+      [
+        "Mbo'o Ndi",
+        "Mboondi"
+      ],
+      [
+        "Ndekou",
+        "Ndé Kou"
+      ],
+      [
+        "Ngou Ta",
+        "Ngouta"
+      ],
+      [
+        "Nkoum Fé",
+        "Nkoum-Fè"
+      ],
+      [
+        "Nkoum Fé",
+        "Nkoumfé"
+      ],
+      [
+        "Nkoum-Fè",
+        "Nkoumfé"
+      ],
+      [
+        "Nseba",
+        "Nsé Ba"
+      ],
+      [
+        "Nto Lé",
+        "Nto-Le"
+      ],
+      [
+        "Nto Lé",
+        "Ntolé"
+      ],
+      [
+        "Nto-Le",
+        "Ntolé"
+      ],
+      [
+        "Pa' Si",
+        "Passi"
+      ],
+      [
+        "Tchou Mfe",
+        "Tchou-Mfé"
+      ],
+      [
+        "Tchou Mfe",
+        "Tchoumfe"
+      ],
+      [
+        "Tchou-Mfé",
+        "Tchoumfe"
+      ],
+      [
+        "Tsenga",
+        "Tsé Nga"
+      ]
+    ],
+    "polysemies": [
+      {
+        "forme": "Nkoum Fé",
+        "entites": [
+          "Nkoum Fé (cours d'eau)",
+          "Nkoum Fé (quartier)"
+        ]
+      },
+      {
+        "forme": "Ndé Kou",
+        "entites": [
+          "Ndé Kou (cours d'eau)",
+          "Ndé Kou (quartier)"
+        ]
+      }
+    ],
+    "homonymes": [],
+    "verdicts": {
+      "conforme": 127,
+      "en_tension": 12
+    },
+    "niveaux_acces": {
+      "public": 127,
+      "restreint": 12
+    },
+    "connaissances_lieux_sacres": 12,
+    "validees_groupees": 127
+  },
+  "controles": {
+    "lieux_sacres_absents_du_dossier": true,
+    "nkoum_fe_present_dans_le_dossier": true,
+    "audit_conforme": true
+  },
+  "verifications": {
+    "passages": 2,
+    "avant_conformite": 2,
+    "problemes": [
+      "Identifiant de individu invalide : « cours d'eau ». Un identifiant ne contient ni espace, ni apostrophe, ni accent (par exemple CoursDEau) ; le texte lisible va dans le libellé.",
+      "Identifiant de individu invalide : « marché ». Un identifiant ne contient ni espace, ni apostrophe, ni accent (par exemple CoursDEau) ; le texte lisible va dans le libellé.",
+      "Identifiant de individu invalide : « bois sacré ». Un identifiant ne contient ni espace, ni apostrophe, ni accent (par exemple CoursDEau) ; le texte lisible va dans le libellé."
+    ]
+  },
+  "moteur_fin": {
+    "sha256": "cbce54ff9109f12d473084551942a893c572f18cfa75a109a8bb9f91485f7675",
+    "fichiers": 45,
+    "lignes": 6504
+  },
+  "moteur_inchange": true
+}

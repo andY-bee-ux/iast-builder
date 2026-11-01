@@ -1,0 +1,36 @@
+version: "3.9"
+
+# Démarrage local en une commande : docker compose up --build
+# Les deux services partagent le même réseau interne Docker ; la gateway
+# joint le brain via son nom de service ("brain"), pas via localhost.
+
+services:
+  brain:
+    build: ./brain
+    env_file: ./brain/.env
+    environment:
+      - PORT=8000
+    volumes:
+      - ./brain/data:/app/data
+      - ./brain/uploads:/app/uploads
+      # Cache du modèle d'embeddings entre redémarrages, pour ne le télécharger
+      # qu'une seule fois même si le conteneur est recréé.
+      - fastembed-cache:/root/.cache/fastembed
+    ports:
+      - "8000:8000" # exposé pour le débogage direct ; retirez cette ligne en production
+    restart: unless-stopped
+
+  gateway:
+    build: ./gateway
+    env_file: ./gateway/.env
+    environment:
+      - PORT=3000
+      - BRAIN_URL=http://brain:8000
+    depends_on:
+      - brain
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+
+volumes:
+  fastembed-cache:

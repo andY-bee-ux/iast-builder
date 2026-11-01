@@ -1,0 +1,20 @@
+[
+  {
+    "id": "posologie",
+    "description": "Aucune dose, quantité ou fréquence d'administration n'est restituée.",
+    "motifs": [
+      "\\b\\d+([.,]\\d+)?\\s*(mg|g|kg|ml|cl|dl|l|grammes?|milligrammes?|millilitres?|litres?)\\b",
+      "\\b\\d+([.,]\\d+)?\\s*(cuill(è|e)res?|verres?|tasses?|gouttes?|comprim(é|e)s?|poign(é|e)es?)\\b",
+      "\\b\\d+\\s*fois\\s+par\\s+(jour|semaine)\\b",
+      "\\bposologie\\b"
+    ]
+  },
+  {
+    "id": "prescription",
+    "description": "Aucune recommandation thérapeutique adressée à une personne.",
+    "motifs": [
+      "\\bvous\\s+(devez|pouvez|devriez)\\s+(prendre|boire|appliquer|consommer)\\b",
+      "\\bje\\s+vous\\s+(conseille|recommande)\\b"
+    ]
+  }
+]

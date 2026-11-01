@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+data/*.json
+!data/ontology.json
+data/ontology_backups/
+data/chroma/*
+uploads/*
+!uploads/.gitkeep
+data/yobakoko.db*
+data/enrichments.ttl
+data/ontology_versions/
+data/ontology_backups/
+data/*.migrated.json
+.venv.ancien/
+.pytest_cache/

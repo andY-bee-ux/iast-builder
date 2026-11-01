@@ -1,0 +1,135 @@
+profil,famille,operateur,cible,attendu,detecte,messages
+ndab,V,profil_valide,-,aucun,False,
+ndab,S,autorite_absente,-,IP2,True,IP2 : un profil désigne une autorité de validation.
+ndab,S,portee_vide,-,IP3,True,IP3 : un profil déclare au moins une dimension de portée. | Règle R2 : dimension de portée « sexe » non déclarée par le profil. | Règle R3 : dimension de portée « ligne » non déclarée par le profil. | Règle R3 : dimension de portée « ligne » non déclarée par le profil. | Correspondance exemple_csv_ndab.json : dimension de portée « chefferie » non déclarée. | Correspondance repertoire_bangangte.json : dimension de portée « chefferie » non déclarée. | Correspondance repertoire_bangangte.json : dimension de portée « site » non déclarée. | Correspondance repertoire_bangangte.json : dimension de portée « bloc » non déclarée. | Correspondance repertoire_bangangte.json : dimension de portée « statut » non déclarée.
+ndab,S,niveaux_absents,-,IP4,True,IP4 : le niveau de diffusion de l'agent doit être l'un des niveaux déclarés. | IP4 : un profil déclare au moins un niveau d'accès. | Niveau par défaut « public » non déclaré.
+ndab,S,diffusion_non_declaree,-,IP4,True,IP4 : le niveau de diffusion de l'agent doit être l'un des niveaux déclarés.
+ndab,S,corpus_absent,-,IP1,True,IP1 : l'ontologie de domaine cite au moins une source de son corpus de référence.
+ndab,S,origine_invalide,-,IP1,True,"IP1 : l'ontologie de domaine déclare l'origine de son corpus (terrain, documentaire ou mixte)."
+ndab,S,fichier_ontologie_absent,-,coherence,True,Fichier d'ontologie introuvable : absent.json
+ndab,S,collecte_non_declaree,temoignages,IP8,True,IP8 : le profil déclare si le recueil des témoignages est actif par défaut.
+ndab,S,collecte_non_declaree,formulaire,IP8,True,IP8 : le profil déclare si le formulaire de contribution est ouvert par défaut.
+ndab,S,collecte_non_declaree,lacunes,IP8,True,IP8 : le profil déclare si le signalement des lacunes est actif par défaut.
+ndab,S,risque_eleve_sans_contrainte,-,IP5,True,IP5 : un profil à risque élevé déclare au moins une contrainte de sûreté.
+ndab,S,risque_eleve_un_seul_niveau,-,IP5,True,IP5 : un profil à risque élevé déclare au moins deux niveaux d'accès.
+ndab,S,regle_sans_description,R2#0,IP6,True,IP6 : description manquante.
+ndab,S,regle_sans_identifiant,R2#0,IP6,True,IP6 : identifiant manquant.
+ndab,S,regle_predicat_inconnu,R2#0,coherence,True,Règle R2 : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,regle_dimension_non_declaree,R2#0,coherence,True,Règle R2 : dimension de portée « dimensionInexistante » non déclarée par le profil.
+ndab,S,regle_classe_inconnue,R2#0,coherence,True,Règle R2 : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,regle_sans_description,R3#1,IP6,True,IP6 : description manquante.
+ndab,S,regle_sans_identifiant,R3#1,IP6,True,IP6 : identifiant manquant.
+ndab,S,regle_predicat_inconnu,R3#1,coherence,True,Règle R3 : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,regle_dimension_non_declaree,R3#1,coherence,True,Règle R3 : dimension de portée « dimensionInexistante » non déclarée par le profil.
+ndab,S,regle_classe_inconnue,R3#1,coherence,True,Règle R3 : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,regle_sans_description,R3#2,IP6,True,IP6 : description manquante.
+ndab,S,regle_sans_identifiant,R3#2,IP6,True,IP6 : identifiant manquant.
+ndab,S,regle_predicat_inconnu,R3#2,coherence,True,Règle R3 : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,regle_dimension_non_declaree,R3#2,coherence,True,Règle R3 : dimension de portée « dimensionInexistante » non déclarée par le profil.
+ndab,S,regle_classe_inconnue,R3#2,coherence,True,Règle R3 : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,defaut_non_declare,-,coherence,True,Niveau par défaut « inexistant » non déclaré.
+ndab,S,variante_classe_inconnue,-,coherence,True,Variantes : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,variante_relation_inconnue,-,coherence,True,Variantes : relation « relationInexistante » absente de l'ontologie.
+ndab,S,correspondance_predicat_inconnu,exemple_csv_ndab:0.0,coherence,True,Correspondance exemple_csv_ndab.json : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,correspondance_classe_inconnue,exemple_csv_ndab:0.0,coherence,True,Correspondance exemple_csv_ndab.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_predicat_inconnu,exemple_csv_ndab:0.1,coherence,True,Correspondance exemple_csv_ndab.json : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,correspondance_classe_inconnue,exemple_csv_ndab:0.1,coherence,True,Correspondance exemple_csv_ndab.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_sujet_inconnu,exemple_csv_ndab:0,coherence,True,Correspondance exemple_csv_ndab.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_dimension_non_declaree,exemple_csv_ndab:chefferie,coherence,True,Correspondance exemple_csv_ndab.json : dimension de portée « x_chefferie » non déclarée.
+ndab,S,correspondance_predicat_inconnu,repertoire_bangangte:0.0,coherence,True,Correspondance repertoire_bangangte.json : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,correspondance_classe_inconnue,repertoire_bangangte:0.0,coherence,True,Correspondance repertoire_bangangte.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_predicat_inconnu,repertoire_bangangte:0.1,coherence,True,Correspondance repertoire_bangangte.json : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,correspondance_classe_inconnue,repertoire_bangangte:0.1,coherence,True,Correspondance repertoire_bangangte.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_predicat_inconnu,repertoire_bangangte:0.2,coherence,True,Correspondance repertoire_bangangte.json : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,correspondance_classe_inconnue,repertoire_bangangte:0.2,coherence,True,Correspondance repertoire_bangangte.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_sujet_inconnu,repertoire_bangangte:0,coherence,True,Correspondance repertoire_bangangte.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_predicat_inconnu,repertoire_bangangte:1.0,coherence,True,Correspondance repertoire_bangangte.json : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,correspondance_classe_inconnue,repertoire_bangangte:1.0,coherence,True,Correspondance repertoire_bangangte.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_predicat_inconnu,repertoire_bangangte:1.1,coherence,True,Correspondance repertoire_bangangte.json : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,correspondance_classe_inconnue,repertoire_bangangte:1.1,coherence,True,Correspondance repertoire_bangangte.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_predicat_inconnu,repertoire_bangangte:1.2,coherence,True,Correspondance repertoire_bangangte.json : prédicat « predicatInexistant » absent de l'ontologie.
+ndab,S,correspondance_classe_inconnue,repertoire_bangangte:1.2,coherence,True,Correspondance repertoire_bangangte.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_sujet_inconnu,repertoire_bangangte:1,coherence,True,Correspondance repertoire_bangangte.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_sujet_inconnu,repertoire_bangangte:2,coherence,True,Correspondance repertoire_bangangte.json : classe « ClasseInexistante » absente de l'ontologie.
+ndab,S,correspondance_dimension_non_declaree,repertoire_bangangte:chefferie,coherence,True,Correspondance repertoire_bangangte.json : dimension de portée « x_chefferie » non déclarée.
+ndab,S,correspondance_dimension_non_declaree,repertoire_bangangte:site,coherence,True,Correspondance repertoire_bangangte.json : dimension de portée « x_site » non déclarée.
+ndab,S,correspondance_dimension_non_declaree,repertoire_bangangte:bloc,coherence,True,Correspondance repertoire_bangangte.json : dimension de portée « x_bloc » non déclarée.
+ndab,S,correspondance_dimension_non_declaree,repertoire_bangangte:statut,coherence,True,Correspondance repertoire_bangangte.json : dimension de portée « x_statut » non déclarée.
+ndab,P,regle_valeur_mal_orthographiee,R2#0,aucun,False,
+ndab,P,regle_objet_permute,R2#0,aucun,False,
+ndab,P,regle_valeur_mal_orthographiee,R3#1,aucun,False,
+ndab,P,regle_objet_permute,R3#1,aucun,False,
+ndab,P,regle_valeur_mal_orthographiee,R3#2,aucun,False,
+ndab,P,regle_objet_permute,R3#2,aucun,False,
+ndab,P,defaut_abaisse,-,aucun,False,
+afripharm,V,profil_valide,-,aucun,False,
+afripharm,S,autorite_absente,-,IP2,True,IP2 : un profil désigne une autorité de validation.
+afripharm,S,portee_vide,-,IP3,True,IP3 : un profil déclare au moins une dimension de portée. | Règle PH1 : dimension de portée « population » non déclarée par le profil. | Règle d'accès PH3b : dimension de portée « transmission » non déclarée par le profil. | Correspondance pharmacopee_ouest_africaine.json : dimension de portée « pays » non déclarée. | Correspondance pharmacopee_ouest_africaine.json : dimension de portée « langue » non déclarée. | Correspondance pharmacopee_ouest_africaine.json : dimension de portée « region » non déclarée. | Correspondance pharmacopee_ouest_africaine.json : dimension de portée « population » non déclarée. | Correspondance pharmacopee_ouest_africaine.json : dimension de portée « preuve » non déclarée. | Correspondance pharmacopee_ouest_africaine.json : dimension de portée « transmission » non déclarée. | Correspondance pharmacopee_ouest_africaine.json : dimension de portée « source » non déclarée.
+afripharm,S,niveaux_absents,-,IP4,True,IP4 : le niveau de diffusion de l'agent doit être l'un des niveaux déclarés. | IP4 : un profil déclare au moins un niveau d'accès. | Règle d'accès PH2 : niveau « restreint » non déclaré. | Règle d'accès PH3a : niveau « restreint » non déclaré. | Règle d'accès PH3b : niveau « restreint » non déclaré. | Niveau par défaut « specialiste » non déclaré.
+afripharm,S,diffusion_non_declaree,-,IP4,True,IP4 : le niveau de diffusion de l'agent doit être l'un des niveaux déclarés.
+afripharm,S,corpus_absent,-,IP1,True,IP1 : l'ontologie de domaine cite au moins une source de son corpus de référence.
+afripharm,S,origine_invalide,-,IP1,True,"IP1 : l'ontologie de domaine déclare l'origine de son corpus (terrain, documentaire ou mixte)."
+afripharm,S,fichier_ontologie_absent,-,coherence,True,Fichier d'ontologie introuvable : absent.json
+afripharm,S,collecte_non_declaree,temoignages,IP8,True,IP8 : le profil déclare si le recueil des témoignages est actif par défaut.
+afripharm,S,collecte_non_declaree,formulaire,IP8,True,IP8 : le profil déclare si le formulaire de contribution est ouvert par défaut.
+afripharm,S,collecte_non_declaree,lacunes,IP8,True,IP8 : le profil déclare si le signalement des lacunes est actif par défaut.
+afripharm,S,risque_eleve_sans_contrainte,-,IP5,True,IP5 : un profil à risque élevé déclare au moins une contrainte de sûreté.
+afripharm,S,risque_eleve_un_seul_niveau,-,IP5,True,IP5 : un profil à risque élevé déclare au moins deux niveaux d'accès.
+afripharm,S,contrainte_sans_motif,posologie,IP6,True,"IP6 : une contrainte de sûreté est vérifiable, elle porte au moins un motif."
+afripharm,S,contrainte_sans_description,posologie,IP6,True,IP6 : description manquante.
+afripharm,S,contrainte_sans_motif,prescription,IP6,True,"IP6 : une contrainte de sûreté est vérifiable, elle porte au moins un motif."
+afripharm,S,contrainte_sans_description,prescription,IP6,True,IP6 : description manquante.
+afripharm,S,regle_sans_description,PH1#0,IP6,True,IP6 : description manquante.
+afripharm,S,regle_sans_identifiant,PH1#0,IP6,True,IP6 : identifiant manquant.
+afripharm,S,regle_predicat_inconnu,PH1#0,coherence,True,Règle PH1 : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,regle_dimension_non_declaree,PH1#0,coherence,True,Règle PH1 : dimension de portée « dimensionInexistante » non déclarée par le profil.
+afripharm,S,regle_classe_inconnue,PH1#0,coherence,True,Règle PH1 : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,regle_acces_niveau_inconnu,PH2,coherence,True,Règle d'accès PH2 : niveau « inexistant » non déclaré.
+afripharm,S,regle_acces_sans_description,PH2,IP6,True,IP6 : description manquante.
+afripharm,S,regle_acces_niveau_inconnu,PH3a,coherence,True,Règle d'accès PH3a : niveau « inexistant » non déclaré.
+afripharm,S,regle_acces_sans_description,PH3a,IP6,True,IP6 : description manquante.
+afripharm,S,regle_acces_niveau_inconnu,PH3b,coherence,True,Règle d'accès PH3b : niveau « inexistant » non déclaré.
+afripharm,S,regle_acces_sans_description,PH3b,IP6,True,IP6 : description manquante.
+afripharm,S,defaut_non_declare,-,coherence,True,Niveau par défaut « inexistant » non déclaré.
+afripharm,S,variante_classe_inconnue,-,coherence,True,Variantes : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,variante_relation_inconnue,-,coherence,True,Variantes : relation « relationInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:0.0,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:0.1,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:0.2,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:0.2,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_sujet_inconnu,pharmacopee_ouest_africaine:0,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:1.0,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:1.0,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_sujet_inconnu,pharmacopee_ouest_africaine:1,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:2.0,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:2.0,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:2.1,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:2.1,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:2.2,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:2.2,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:2.3,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:2.3,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:2.4,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:2.4,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_sujet_inconnu,pharmacopee_ouest_africaine:2,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:3.0,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:3.0,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:3.1,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:3.1,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:3.2,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:3.2,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_predicat_inconnu,pharmacopee_ouest_africaine:3.3,coherence,True,Correspondance pharmacopee_ouest_africaine.json : prédicat « predicatInexistant » absent de l'ontologie.
+afripharm,S,correspondance_classe_inconnue,pharmacopee_ouest_africaine:3.3,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_sujet_inconnu,pharmacopee_ouest_africaine:3,coherence,True,Correspondance pharmacopee_ouest_africaine.json : classe « ClasseInexistante » absente de l'ontologie.
+afripharm,S,correspondance_dimension_non_declaree,pharmacopee_ouest_africaine:pays,coherence,True,Correspondance pharmacopee_ouest_africaine.json : dimension de portée « x_pays » non déclarée.
+afripharm,S,correspondance_dimension_non_declaree,pharmacopee_ouest_africaine:langue,coherence,True,Correspondance pharmacopee_ouest_africaine.json : dimension de portée « x_langue » non déclarée.
+afripharm,S,correspondance_dimension_non_declaree,pharmacopee_ouest_africaine:region,coherence,True,Correspondance pharmacopee_ouest_africaine.json : dimension de portée « x_region » non déclarée.
+afripharm,S,correspondance_dimension_non_declaree,pharmacopee_ouest_africaine:population,coherence,True,Correspondance pharmacopee_ouest_africaine.json : dimension de portée « x_population » non déclarée.
+afripharm,S,correspondance_dimension_non_declaree,pharmacopee_ouest_africaine:preuve,coherence,True,Correspondance pharmacopee_ouest_africaine.json : dimension de portée « x_preuve » non déclarée.
+afripharm,S,correspondance_dimension_non_declaree,pharmacopee_ouest_africaine:transmission,coherence,True,Correspondance pharmacopee_ouest_africaine.json : dimension de portée « x_transmission » non déclarée.
+afripharm,S,correspondance_dimension_non_declaree,pharmacopee_ouest_africaine:source,coherence,True,Correspondance pharmacopee_ouest_africaine.json : dimension de portée « x_source » non déclarée.
+afripharm,P,regle_valeur_mal_orthographiee,PH1#0,aucun,False,
+afripharm,P,motif_de_surete_inoperant,posologie,aucun,False,
+afripharm,P,motif_de_surete_inoperant,prescription,aucun,False,
+afripharm,P,regles_acces_supprimees,-,aucun,False,
+afripharm,P,defaut_abaisse,-,aucun,False,
