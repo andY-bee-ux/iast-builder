@@ -92,10 +92,12 @@ The metamodel, the variation points and the conditions of reuse are described in
 
 ## Licence
 
-See `LICENSE`.
+The code is distributed under the MIT licence (see `LICENSE`). The licence covers the software; the
+demonstration data remain subject to the conditions of their sources, and the field data of YobaKoko are not
+distributed.
 
 ## Acknowledgements
 
 IAST project (Artificial Intelligence and Traditional Knowledge), Université du Québec à Montréal and
 Université de Dschang, with the support of the Fonds de recherche du Québec (FRQ) and the Agence universitaire
-de la Francophonie (AUF).
+de la Francophonie (AUF), project AUF/FRQ 2025-AUFST-360364.
