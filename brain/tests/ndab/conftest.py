@@ -25,7 +25,8 @@ os.environ["ANTHROPIC_API_KEY"] = "test"
 os.environ["INTERNAL_SECRET"] = ""
 os.environ["YOBAKOKO_PROFILE"] = "ndab"
 (_tmp / "data").mkdir(parents=True)
-shutil.copy(BRAIN_DIR / "data" / "ontology.json", _tmp / "data" / "ontology.json")
+# Ontologie initiale fournie avec le profil : les tests ne dépendent d'aucune donnée locale.
+shutil.copy(BRAIN_DIR / "profiles" / "ndab" / "ontologie_initiale.json", _tmp / "data" / "ontology.json")
 sys.path.insert(0, str(BRAIN_DIR))
 
 
