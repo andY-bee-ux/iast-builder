@@ -405,14 +405,14 @@ body.admin a{ color:var(--brass-light); }
 
 /* Écrans larges : l'en-tête devient une barre latérale, la conversation occupe le reste de l'écran. */
 @media (min-width: 1100px) {
-  body{
+  body:not(.admin){
     display:grid;
     grid-template-columns: 320px minmax(0, 1fr);
     grid-template-rows: minmax(0, 1fr) auto;
     height:100vh;
     min-height:0;
   }
-  header{
+  body:not(.admin) header{
     grid-column:1;
     grid-row:1 / span 2;
     border-bottom:none;
@@ -420,10 +420,10 @@ body.admin a{ color:var(--brass-light); }
     padding:28px 24px;
     overflow-y:auto;
   }
-  header .subtitle{ max-width:none; }
-  header .controls{ flex-direction:column; align-items:flex-start; gap:14px; margin-top:22px; }
-  header .persona-row{ margin-left:0; }
-  main{
+  body:not(.admin) header .subtitle{ max-width:none; }
+  body:not(.admin) header .controls{ flex-direction:column; align-items:flex-start; gap:14px; margin-top:22px; }
+  body:not(.admin) header .persona-row{ margin-left:0; }
+  body:not(.admin) main{
     grid-column:2;
     grid-row:1;
     max-width:none;
@@ -431,6 +431,6 @@ body.admin a{ color:var(--brass-light); }
     padding:24px 56px 0;
     min-height:0;
   }
-  #chat, #toolsContainer, .contrib-panel, .suggestions, #form{ max-width:980px; width:100%; }
-  .zigzag{ grid-column:2; grid-row:2; }
+  body:not(.admin) #chat, body:not(.admin) #toolsContainer, .contrib-panel, .suggestions, #form{ max-width:980px; width:100%; }
+  body:not(.admin) .zigzag{ grid-column:2; grid-row:2; }
 }
