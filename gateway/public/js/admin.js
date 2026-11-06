@@ -159,11 +159,11 @@ async function loadStats() {
   const a = s.assertions || {};
   const open = (q.open || 0) + (q.complement || 0) + (q.deliberation || 0);
   document.getElementById("statsBar").innerHTML =
-    `<span>Questions à traiter : <b>${open}</b></span>` +
-    `<span>Connaissances en attente : <b>${(a.pending || 0) + (a.deliberation || 0)}</b></span>` +
-    `<span>Connaissances validées : <b>${a.validated || 0}</b></span>` +
-    `<span>Passages indexés : <b>${s.vectorCount}</b></span>` +
-    `<span>Version de l'ontologie : <b>${s.ontologyVersion ?? "?"}</b></span>`;
+    `<span><b>${open}</b>Questions à traiter</span>` +
+    `<span><b>${(a.pending || 0) + (a.deliberation || 0)}</b>Connaissances en attente</span>` +
+    `<span><b>${a.validated || 0}</b>Connaissances validées</span>` +
+    `<span><b>${s.vectorCount}</b>Passages indexés</span>` +
+    `<span><b>${s.ontologyVersion ?? "?"}</b>Version de l'ontologie</span>`;
 }
 
 // ---------------------------------------------------------------------------

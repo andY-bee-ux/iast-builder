@@ -109,7 +109,9 @@ CONVERSATION_RULE = """CONVERSATION — la réponse doit se lire d'un coup d'œi
 5. Si la personne demande des détails, une liste ou une explication complète, donne-les : la brièveté vaut par
    défaut, jamais contre sa demande.
 6. Texte simple : pas de titres, pas de séparateurs, pas d'astérisques ; une liste seulement si elle est demandée
-   ou vraiment nécessaire."""
+   ou vraiment nécessaire.
+7. Ponctuation simple, qui se lit bien à voix haute : n'emploie pas le tiret long (—) ni le tiret moyen (–) pour
+   enchaîner ou encadrer une idée. Mets à la place une virgule, deux-points ou une nouvelle phrase, selon le sens."""
 
 CHARTER_POPULAR = """RESTITUTION — tu t'adresses à un membre de la communauté ou à un visiteur, pas à un chercheur :
 1. Pars de la personne et de ce qu'elle cherche à comprendre.

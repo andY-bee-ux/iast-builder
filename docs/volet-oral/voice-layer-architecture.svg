@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="fleche" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10" fill="none" stroke="#444" stroke-width="1.4"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="500" fill="#fff"/>
+
+  <!-- Path of a spoken question -->
+  <rect x="20" y="40" width="1060" height="190" rx="26" fill="none" stroke="#9a9a9a" stroke-width="1.2"/>
+  <text x="550" y="64" text-anchor="middle" font-size="14" fill="#333">the user can ask a follow-up question</text>
+  <path d="M970 110 V76 H130 V108" fill="none" stroke="#444" stroke-width="1.4" marker-end="url(#fleche)"/>
+
+  <!-- 1. Recording (interface) -->
+  <rect x="40" y="110" width="180" height="96" rx="14" fill="#fff" stroke="#444" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="130" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Recording</text>
+  <text x="130" y="166" text-anchor="middle" font-size="13" fill="#333">browser microphone</text>
+  <text x="130" y="185" text-anchor="middle" font-size="13" fill="#333">webm/opus audio</text>
+
+  <!-- 2. Transcription (neural) -->
+  <rect x="250" y="110" width="180" height="96" rx="14" fill="#d6d6d6" stroke="#444" stroke-width="1.4"/>
+  <text x="340" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Transcription</text>
+  <text x="340" y="166" text-anchor="middle" font-size="13" fill="#333">local Whisper</text>
+  <text x="340" y="185" text-anchor="middle" font-size="13" fill="#333">(faster-whisper)</text>
+
+  <!-- 3. Review (human) -->
+  <rect x="460" y="110" width="180" height="96" rx="14" fill="#9e9e9e" stroke="#444" stroke-width="1.4"/>
+  <text x="550" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">Review</text>
+  <text x="550" y="166" text-anchor="middle" font-size="13" fill="#fff">the user can correct</text>
+  <text x="550" y="185" text-anchor="middle" font-size="13" fill="#fff">before sending</text>
+
+  <!-- 4. Answer (symbolic) -->
+  <rect x="670" y="110" width="180" height="96" rx="14" fill="#fff" stroke="#444" stroke-width="1.4"/>
+  <text x="760" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Answer</text>
+  <text x="760" y="166" text-anchor="middle" font-size="13" fill="#333">unchanged /api/chat pipeline</text>
+  <text x="760" y="185" text-anchor="middle" font-size="13" fill="#333">dossier + controlled LLM</text>
+
+  <!-- 5. Voice output (neural) -->
+  <rect x="880" y="110" width="180" height="96" rx="14" fill="#d6d6d6" stroke="#444" stroke-width="1.4"/>
+  <text x="970" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Voice output</text>
+  <text x="970" y="166" text-anchor="middle" font-size="13" fill="#333">browser speech synthesis</text>
+  <text x="970" y="185" text-anchor="middle" font-size="13" fill="#333">emotion → voice, avatar face</text>
+
+  <!-- Path arrows -->
+  <path d="M222 158 H247" stroke="#444" stroke-width="1.4" marker-end="url(#fleche)"/>
+  <path d="M432 158 H457" stroke="#444" stroke-width="1.4" marker-end="url(#fleche)"/>
+  <path d="M642 158 H667" stroke="#444" stroke-width="1.4" marker-end="url(#fleche)"/>
+  <path d="M852 158 H877" stroke="#444" stroke-width="1.4" marker-end="url(#fleche)"/>
+
+  <!-- Hollow arrows: guarantees apply to transcription and answer -->
+  <path d="M332 318 V226 H324 L340 208 L356 226 H348 V318 Z" fill="#fff" stroke="#444" stroke-width="1.3"/>
+  <text x="367" y="272" font-size="13" fill="#333">in memory, on the machine</text>
+  <path d="M752 318 V226 H744 L760 208 L776 226 H768 V318 Z" fill="#fff" stroke="#444" stroke-width="1.3"/>
+  <text x="787" y="272" font-size="13" fill="#333">same checks as a typed question</text>
+
+  <!-- Preserved guarantees -->
+  <rect x="40" y="318" width="1020" height="104" rx="12" fill="none" stroke="#555" stroke-width="1.4" stroke-dasharray="8 6"/>
+  <text x="550" y="344" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Preserved guarantees</text>
+  <text x="295" y="372" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">Privacy</text>
+  <text x="295" y="395" text-anchor="middle" font-size="13" fill="#333">audio is neither stored nor sent to an external service</text>
+  <line x1="550" y1="360" x2="550" y2="408" stroke="#aaa" stroke-width="1"/>
+  <text x="805" y="372" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">Governance</text>
+  <text x="805" y="395" text-anchor="middle" font-size="13" fill="#333">answer dossier, safety filter, signals to experts</text>
+
+  <!-- Legend -->
+  <text x="150" y="468" font-size="14" fill="#333">Stages:</text>
+  <rect x="215" y="453" width="20" height="20" rx="4" fill="#fff" stroke="#444" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="243" y="468" font-size="14" fill="#333">interface (browser)</text>
+  <rect x="410" y="453" width="20" height="20" rx="4" fill="#d6d6d6" stroke="#444" stroke-width="1.2"/>
+  <text x="438" y="468" font-size="14" fill="#333">neural layer</text>
+  <rect x="580" y="453" width="20" height="20" rx="4" fill="#fff" stroke="#444" stroke-width="1.2"/>
+  <text x="608" y="468" font-size="14" fill="#333">symbolic layer</text>
+  <rect x="760" y="453" width="20" height="20" rx="4" fill="#9e9e9e" stroke="#444" stroke-width="1.2"/>
+  <text x="788" y="468" font-size="14" fill="#333">human decision</text>
+</svg>

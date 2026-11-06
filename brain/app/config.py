@@ -58,6 +58,14 @@ LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.2"))
 # Premier usage : téléchargement unique (~120 Mo) depuis Hugging Face.
 EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 
+# --- Reconnaissance vocale (locale, via faster-whisper) ------------------------
+# Volet oral : la question dictée est transcrite sur la machine, l'audio n'est ni envoyé
+# à un service externe ni conservé. Premier usage : téléchargement unique du modèle
+# (« small » : ~460 Mo ; « base » : ~140 Mo, plus rapide mais moins précis).
+WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small")
+WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cpu")
+WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")
+
 # --- Sécurité interne ----------------------------------------------------------
 # Secret que la gateway présente à chaque appel (voir internal_auth.py).
 INTERNAL_SECRET = os.getenv("INTERNAL_SECRET", "")

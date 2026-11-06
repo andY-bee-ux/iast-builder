@@ -9,3 +9,6 @@ fastembed>=0.5
 python-dotenv>=1.0
 rdflib>=7.0
 pyshacl>=0.26
+faster-whisper>=1.1
+# av 16 et plus casse le décodage audio de faster-whisper 1.2 (argument « metadata_errors »).
+av<16

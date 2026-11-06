@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="500" viewBox="0 0 1100 500" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="fleche" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10" fill="none" stroke="#444" stroke-width="1.4"/>
+    </marker>
+  </defs>
+  <rect width="1100" height="500" fill="#fff"/>
+
+  <!-- Cadre du parcours d'une question orale -->
+  <rect x="20" y="40" width="1060" height="190" rx="26" fill="none" stroke="#9a9a9a" stroke-width="1.2"/>
+  <text x="550" y="64" text-anchor="middle" font-size="14" fill="#333">le visiteur peut enchaîner une nouvelle question</text>
+  <path d="M970 110 V76 H125 V108" fill="none" stroke="#444" stroke-width="1.4" marker-end="url(#fleche)"/>
+
+  <!-- 1. Enregistrement (interface) -->
+  <rect x="40" y="110" width="170" height="96" rx="14" fill="#fff" stroke="#444" stroke-width="1.4" stroke-dasharray="6 4"/>
+  <text x="125" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Enregistrement</text>
+  <text x="125" y="166" text-anchor="middle" font-size="13" fill="#333">micro du navigateur</text>
+  <text x="125" y="185" text-anchor="middle" font-size="13" fill="#333">audio webm/opus</text>
+
+  <!-- 2. Transcription (neuronal) -->
+  <rect x="250" y="110" width="170" height="96" rx="14" fill="#d6d6d6" stroke="#444" stroke-width="1.4"/>
+  <text x="335" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Transcription</text>
+  <text x="335" y="166" text-anchor="middle" font-size="13" fill="#333">Whisper local</text>
+  <text x="335" y="185" text-anchor="middle" font-size="13" fill="#333">(faster-whisper)</text>
+
+  <!-- 3. Relecture (humain) -->
+  <rect x="460" y="110" width="170" height="96" rx="14" fill="#9e9e9e" stroke="#444" stroke-width="1.4"/>
+  <text x="545" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#fff">Relecture</text>
+  <text x="545" y="166" text-anchor="middle" font-size="13" fill="#fff">le visiteur corrige</text>
+  <text x="545" y="185" text-anchor="middle" font-size="13" fill="#fff">puis envoie</text>
+
+  <!-- 4. Réponse gouvernée (symbolique) -->
+  <rect x="670" y="110" width="170" height="96" rx="14" fill="#fff" stroke="#444" stroke-width="1.4"/>
+  <text x="755" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Réponse</text>
+  <text x="755" y="166" text-anchor="middle" font-size="13" fill="#333">/api/chat inchangé</text>
+  <text x="755" y="185" text-anchor="middle" font-size="13" fill="#333">dossier + LLM contrôlé</text>
+
+  <!-- 5. Lecture vocale (neuronal) -->
+  <rect x="880" y="110" width="170" height="96" rx="14" fill="#d6d6d6" stroke="#444" stroke-width="1.4"/>
+  <text x="965" y="142" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Lecture vocale</text>
+  <text x="965" y="166" text-anchor="middle" font-size="13" fill="#333">synthèse du navigateur</text>
+  <text x="965" y="185" text-anchor="middle" font-size="13" fill="#333">émotion → voix, avatar</text>
+
+  <!-- Flèches du parcours -->
+  <path d="M212 158 H247" stroke="#444" stroke-width="1.4" marker-end="url(#fleche)"/>
+  <path d="M422 158 H457" stroke="#444" stroke-width="1.4" marker-end="url(#fleche)"/>
+  <path d="M632 158 H667" stroke="#444" stroke-width="1.4" marker-end="url(#fleche)"/>
+  <path d="M842 158 H877" stroke="#444" stroke-width="1.4" marker-end="url(#fleche)"/>
+
+  <!-- Flèches creuses : les garanties s'appliquent à la transcription et à la réponse -->
+  <path d="M327 318 V226 H319 L335 208 L351 226 H343 V318 Z" fill="#fff" stroke="#444" stroke-width="1.3"/>
+  <text x="362" y="272" font-size="13" fill="#333">en mémoire, sur la machine</text>
+  <path d="M747 318 V226 H739 L755 208 L771 226 H763 V318 Z" fill="#fff" stroke="#444" stroke-width="1.3"/>
+  <text x="782" y="272" font-size="13" fill="#333">mêmes contrôles qu'une question tapée</text>
+
+  <!-- Garanties conservées -->
+  <rect x="40" y="318" width="1010" height="104" rx="12" fill="none" stroke="#555" stroke-width="1.4" stroke-dasharray="8 6"/>
+  <text x="545" y="344" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Garanties conservées</text>
+  <text x="290" y="372" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">Confidentialité</text>
+  <text x="290" y="395" text-anchor="middle" font-size="13" fill="#333">l'audio n'est ni stocké ni envoyé à un service externe</text>
+  <line x1="545" y1="360" x2="545" y2="408" stroke="#aaa" stroke-width="1"/>
+  <text x="800" y="372" text-anchor="middle" font-size="15" font-weight="bold" fill="#222">Gouvernance</text>
+  <text x="800" y="395" text-anchor="middle" font-size="13" fill="#333">dossier de réponse, filtre de sûreté, signaux aux experts</text>
+
+  <!-- Légende -->
+  <text x="150" y="468" font-size="14" fill="#333">Étapes :</text>
+  <rect x="215" y="453" width="20" height="20" rx="4" fill="#fff" stroke="#444" stroke-width="1.2" stroke-dasharray="4 3"/>
+  <text x="243" y="468" font-size="14" fill="#333">interface (navigateur)</text>
+  <rect x="410" y="453" width="20" height="20" rx="4" fill="#d6d6d6" stroke="#444" stroke-width="1.2"/>
+  <text x="438" y="468" font-size="14" fill="#333">couche neuronale</text>
+  <rect x="580" y="453" width="20" height="20" rx="4" fill="#fff" stroke="#444" stroke-width="1.2"/>
+  <text x="608" y="468" font-size="14" fill="#333">couche symbolique</text>
+  <rect x="760" y="453" width="20" height="20" rx="4" fill="#9e9e9e" stroke="#444" stroke-width="1.2"/>
+  <text x="788" y="468" font-size="14" fill="#333">décision humaine</text>
+</svg>

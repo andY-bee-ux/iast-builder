@@ -8,6 +8,7 @@ import contributeRoutes from "./routes/contribute";
 import documentsRoutes from "./routes/documents";
 import adminRoutes from "./routes/admin";
 import profileRoutes from "./routes/profile";
+import sttRoutes from "./routes/stt";
 import { BRAIN_URL } from "./brainClient";
 
 const app = express();
@@ -20,6 +21,7 @@ app.use("/api", chatRoutes);
 app.use("/api", contributeRoutes);
 app.use("/api", documentsRoutes);
 app.use("/api", profileRoutes);
+app.use("/api", sttRoutes);
 app.use("/api", adminRoutes);
 
 app.get("/api/health", async (req, res) => {

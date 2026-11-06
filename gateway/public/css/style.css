@@ -189,6 +189,21 @@
     border-radius:var(--radius);
   }
   button.send:disabled{ opacity:.5; cursor:default; }
+  /* Volet oral : micro et lecture vocale (js/voix.js) */
+  .voice-btn{
+    background:transparent;
+    border:1px solid var(--indigo-700);
+    color:var(--bone-dim);
+    padding:0 12px;
+    font-size:17px;
+    cursor:pointer;
+    border-radius:var(--radius);
+    opacity:.55;
+  }
+  .voice-btn:hover{ border-color:var(--brass); }
+  .voice-btn.active{ opacity:1; }
+  .voice-btn.listening{ opacity:1; border-color:var(--clay); background:var(--clay); animation:voice-pulse 1.2s ease-in-out infinite; }
+  @keyframes voice-pulse{ 50%{ box-shadow:0 0 0 6px rgba(122,59,46,.35); } }
   .suggestions{
     display:flex;
     gap:8px;
@@ -434,3 +449,545 @@ body.admin a{ color:var(--brass-light); }
   body:not(.admin) #chat, body:not(.admin) #toolsContainer, .contrib-panel, .suggestions, #form{ max-width:980px; width:100%; }
   body:not(.admin) .zigzag{ grid-column:2; grid-row:2; }
 }
+
+/* =====================================================================
+   Thème clair et chaleureux de la page de conversation.
+   Les variables historiques sont redéfinies pour cette page seulement :
+   le panneau d'administration (body.admin) garde son thème sombre.
+   Les tailles sont fluides : elles grandissent avec la largeur de l'écran
+   (borne de musée, grand moniteur) au lieu de rester fixes.
+   ===================================================================== */
+body:not(.admin){
+  --indigo-950:#FBF6EE;   /* fond de page (crème) */
+  --indigo-900:#FFFFFF;   /* cartes, en-tête */
+  --indigo-700:#EADFCF;   /* bordures douces */
+  --bone:#2E2620;         /* texte principal */
+  --bone-dim:#6B5E54;     /* texte secondaire */
+  --brass:#C8643B;        /* accent terracotta */
+  --brass-light:#A9512D;  /* accent pour le texte (contraste suffisant sur fond clair) */
+  --clay:#D9534F;         /* enregistrement en cours */
+  --vert:#3F7D5E;
+  --vert-clair:#E2EFE6;
+  --terracotta-clair:#F8E4D8;
+  --radius:16px;
+  --ombre:0 2px 12px rgba(74,52,34,.08);
+  --ombre-forte:0 10px 30px rgba(74,52,34,.12);
+  /* Échelle typographique fluide */
+  --t-xs:clamp(12px, .35vw + 7px, 16px);
+  --t-s:clamp(14px, .4vw + 8.5px, 19px);
+  --t-m:clamp(16px, .5vw + 9.5px, 22px);
+  --t-l:clamp(19px, .7vw + 10px, 28px);
+  --t-xl:clamp(28px, 1.6vw + 12px, 56px);
+  --champ:clamp(48px, 2.2vw + 22px, 70px);
+  font-family: "Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  background:var(--indigo-950);
+}
+body:not(.admin) .zigzag{ height:10px; opacity:.4; background-color:var(--indigo-950); }
+
+/* ---- Barre latérale : identité de l'agent ---- */
+body:not(.admin) header{ background:var(--indigo-900); box-shadow:var(--ombre); border-bottom:none; }
+body:not(.admin) .header-identity{ display:flex; align-items:center; gap:16px; }
+body:not(.admin) h1{ font-family: Georgia, "Iowan Old Style", serif; font-size:var(--t-l); color:var(--bone); }
+body:not(.admin) .eyebrow{ letter-spacing:.08em; color:var(--vert); font-weight:600; font-size:var(--t-s); line-height:1.4; overflow-wrap:anywhere; position:relative; z-index:1; }
+body:not(.admin) .subtitle{ font-size:var(--t-m); line-height:1.55; color:var(--bone-dim); }
+.avatar-principal{
+  width:88px; height:88px; flex:none; border-radius:50%; overflow:hidden;
+  box-shadow:0 0 0 5px #fff, 0 0 0 9px var(--vert-clair, #E2EFE6), var(--ombre-forte, none);
+  animation:avatar-flotte 5s ease-in-out infinite;
+}
+@keyframes avatar-flotte{ 50%{ transform:translateY(-6px); } }
+.avatar-principal svg, .msg.agent .avatar svg{ display:block; width:100%; height:100%; }
+
+/* Comment ça marche */
+.etapes{ list-style:none; counter-reset:etape; margin:22px 0 4px; padding:18px 18px 8px; background:var(--indigo-950, #FBF6EE); border-radius:var(--radius, 16px); }
+.etapes:empty{ display:none; }
+.etapes li{ counter-increment:etape; position:relative; padding-left:2.6em; margin-bottom:.9em; font-size:var(--t-m); line-height:1.45; color:var(--bone); }
+.etapes li::before{
+  content:counter(etape); position:absolute; left:0; top:-2px;
+  width:30px; height:30px; border-radius:50%; background:var(--vert); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.9em;
+}
+.etapes .etapes-titre{ counter-increment:none; padding-left:0; font-weight:700; color:var(--vert); text-transform:uppercase; letter-spacing:.07em; font-size:var(--t-xs); }
+.etapes .etapes-titre::before{ content:none; }
+
+body:not(.admin) .lang-btn{ border-radius:999px; padding:.45em 1.1em; background:#fff; font-size:var(--t-m); }
+body:not(.admin) .lang-btn.active{ background:var(--vert); border-color:var(--vert); color:#fff; }
+body:not(.admin) .persona-row label{ font-size:var(--t-m); }
+body:not(.admin) .persona-row select{ border-radius:999px; padding:.45em 1em; background:#fff; font-size:var(--t-m); }
+
+/* ---- Zone principale : fond décoratif doux ----
+   De haut en bas : deux halos chauds, un voile crème qui efface le motif au centre
+   (le motif encadre le contenu sans passer derrière les textes), puis le motif. */
+body:not(.admin) main{
+  background:
+    radial-gradient(circle at 92% 8%, rgba(242,193,78,.18) 0, transparent 28%),
+    radial-gradient(circle at 6% 94%, rgba(200,100,59,.08) 0, transparent 30%),
+    radial-gradient(ellipse 70% 65% at 50% 50%, var(--indigo-950) 45%, transparent 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64'%3E%3Cpath d='M0 32 L16 16 L32 32 L48 16 L64 32' fill='none' stroke='%23C8643B' stroke-opacity='.07' stroke-width='2'/%3E%3C/svg%3E");
+}
+body:not(.admin) #chat, body:not(.admin) #toolsContainer, body:not(.admin) .contrib-panel,
+body:not(.admin) .suggestions, body:not(.admin) #form, body:not(.admin) .typing, body:not(.admin) .hero{
+  margin-left:auto; margin-right:auto; width:100%; max-width:min(max(1200px, 62vw), 1500px, 100%);
+}
+
+/* ---- Accueil (conversation pas encore commencée) ---- */
+.hero{ display:none; }
+body.conversation-vide main{ justify-content:center; }
+body.conversation-vide #chat{ display:none; }
+body.conversation-vide .hero{ display:block; padding:0 0 clamp(20px, 2vw, 40px); }
+.hero-titre{
+  font-family: Georgia, "Iowan Old Style", serif; font-weight:400; margin:0 0 .35em;
+  font-size:var(--t-xl); color:var(--bone); line-height:1.15;
+}
+.hero-titre::after{ content:""; display:block; width:72px; height:5px; border-radius:3px; background:var(--brass); margin-top:.35em; }
+.hero-texte{ margin:0; font-size:var(--t-l); line-height:1.5; color:var(--bone-dim); max-width:46em; }
+
+/* Suggestions : grandes cartes sur l'accueil, pastilles ensuite */
+body:not(.admin) .chip{
+  background:#fff; border:1px solid var(--indigo-700); border-radius:999px;
+  padding:.6em 1.1em; font-size:var(--t-s); color:var(--bone); box-shadow:var(--ombre);
+  transition:transform .12s, border-color .12s, box-shadow .12s;
+}
+body:not(.admin) .chip:hover{ border-color:var(--vert); color:var(--vert); }
+body.conversation-vide .suggestions{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap:clamp(12px, 1.2vw, 24px); padding-bottom:clamp(20px, 2vw, 40px);
+}
+body.conversation-vide .chip{
+  border-radius:var(--radius); text-align:left; padding:1.1em 1.2em 1.2em;
+  font-size:var(--t-m); line-height:1.4; min-height:7.2em;
+  display:flex; flex-direction:column; gap:.6em; border-color:transparent;
+}
+body.conversation-vide .chip::before{
+  width:2.2em; height:2.2em; border-radius:12px; display:flex; align-items:center; justify-content:center; font-size:1.1em;
+}
+body.conversation-vide .chip:nth-child(3n+1)::before{ content:"💬"; background:var(--vert-clair); }
+body.conversation-vide .chip:nth-child(3n+2)::before{ content:"📖"; background:var(--terracotta-clair); }
+body.conversation-vide .chip:nth-child(3n)::before{ content:"🔎"; background:#FBF0D3; }
+body.conversation-vide .chip:hover{ transform:translateY(-3px); box-shadow:var(--ombre-forte); border-color:var(--vert); color:var(--bone); }
+
+/* ---- Messages : bulles arrondies ---- */
+body:not(.admin) .msg{ font-size:var(--t-m); line-height:1.6; }
+body:not(.admin) .msg.user{
+  background:var(--terracotta-clair); color:var(--bone);
+  border-radius:20px 20px 4px 20px; padding:.7em 1.1em;
+}
+body:not(.admin) .msg.agent .avatar{ width:clamp(42px, 2.6vw, 64px); height:clamp(42px, 2.6vw, 64px); overflow:hidden; box-shadow:var(--ombre); }
+body:not(.admin) .msg.agent .content{
+  background:#fff; border-left:none; border-radius:4px 20px 20px 20px;
+  padding:.8em 1.1em; box-shadow:var(--ombre);
+}
+body:not(.admin) .msg.agent .label, body:not(.admin) .msg.user .label{ letter-spacing:.06em; font-weight:600; font-size:var(--t-xs); }
+body:not(.admin) .msg.agent .label{ color:var(--vert); }
+body:not(.admin) .msg-sources{ font-size:var(--t-s); }
+body:not(.admin) .msg-signal{ border-left:none; background:var(--vert-clair); color:#2F5C45; padding:.5em .8em; border-radius:10px; font-size:var(--t-s); }
+body:not(.admin) .typing{ font-style:italic; font-size:var(--t-s); }
+
+/* ---- Avatar : clignement des yeux, lèvres pendant la lecture vocale ---- */
+.avatar-yeux{ transform-box:fill-box; transform-origin:center; animation:avatar-cligne 5s infinite; }
+@keyframes avatar-cligne{ 0%,95%,100%{ transform:scaleY(1); } 97%{ transform:scaleY(.1); } }
+.avatar-bouche-parle{ transform-box:fill-box; transform-origin:center; }
+.parle .avatar-bouche{ display:none; }
+.parle .avatar-bouche-parle{ display:inline; animation:avatar-parle .22s ease-in-out infinite alternate; }
+@keyframes avatar-parle{ from{ transform:scaleY(.25); } to{ transform:scaleY(1); } }
+
+/* ---- Zone de saisie : grand champ et boutons ronds ---- */
+body:not(.admin) form{ border-top:none; align-items:center; gap:clamp(8px, .8vw, 14px); }
+body:not(.admin) textarea{
+  background:#fff; border:2px solid var(--indigo-700); border-radius:calc(var(--champ) / 2);
+  padding:0 1.3em; height:var(--champ); line-height:calc(var(--champ) - 4px);
+  font-size:var(--t-m); box-shadow:var(--ombre-forte); min-width:0;
+}
+body:not(.admin) textarea:focus{ outline:none; border-color:var(--brass); box-shadow:0 0 0 4px var(--terracotta-clair); }
+body:not(.admin) button.send{
+  background:var(--brass); color:#fff; border-radius:999px; height:var(--champ); padding:0 1.6em;
+  font-size:var(--t-m); box-shadow:var(--ombre-forte); flex:none; transition:transform .1s, background .15s;
+}
+body:not(.admin) button.send:hover:not(:disabled){ background:var(--brass-light); }
+body:not(.admin) button.send:active:not(:disabled){ transform:scale(.97); }
+body:not(.admin) .voice-btn{
+  width:var(--champ); height:var(--champ); padding:0; border-radius:50%; flex:none;
+  background:#fff; border:2px solid var(--indigo-700); box-shadow:var(--ombre); opacity:.6;
+  font-size:calc(var(--champ) * .38);
+}
+body:not(.admin) .voice-btn.active{ opacity:1; }
+body:not(.admin) .voice-btn.listening{ background:var(--clay); border-color:var(--clay); }
+body:not(.admin) .voice-btn:disabled{ cursor:wait; opacity:.5; }
+
+/* ---- Panneaux (outils, contribution) : cartes arrondies ---- */
+body:not(.admin) .infer-panel, body:not(.admin) .contrib-panel{ border-radius:var(--radius); overflow:hidden; background:#fff; box-shadow:var(--ombre); border:none; }
+body:not(.admin) .infer-toggle, body:not(.admin) .contrib-toggle{ background:#fff; color:var(--vert); font-size:var(--t-s); padding:.9em 1.2em; }
+body:not(.admin) .contrib-tab{ background:#fff; border-radius:999px; font-size:var(--t-s); }
+body:not(.admin) .contrib-tab.active{ background:var(--vert); border-color:var(--vert); color:#fff; }
+body:not(.admin) .contrib-field, body:not(.admin) .infer-field{ font-size:var(--t-s); }
+body:not(.admin) .contrib-field textarea, body:not(.admin) .contrib-field input, body:not(.admin) .contrib-field select,
+body:not(.admin) .infer-field input, body:not(.admin) .infer-field select{
+  background:var(--indigo-950); border-radius:10px; height:auto; line-height:1.4; padding:.6em .8em; box-shadow:none; border-width:1px;
+}
+body:not(.admin) .contrib-submit, body:not(.admin) .infer-submit{ background:var(--vert); color:#fff; border-radius:999px; font-size:var(--t-s); }
+
+/* ---- Disposition ---- */
+@media (min-width: 1100px){
+  body:not(.admin){ grid-template-columns: clamp(380px, 28vw, 640px) minmax(0, 1fr); }
+  body:not(.admin) header{ border-right:none; box-shadow:2px 0 14px rgba(74,52,34,.06); padding:clamp(28px, 2.4vw, 52px) clamp(24px, 2vw, 44px); }
+  body:not(.admin) header .controls{ margin-top:18px; }
+  body:not(.admin) .header-identity{ flex-direction:column; align-items:center; text-align:center; gap:16px; margin-top:clamp(28px, 2.2vw, 48px); }
+  body:not(.admin) .avatar-principal{ width:clamp(180px, 13vw, 300px); height:clamp(180px, 13vw, 300px); }
+  body:not(.admin) h1{ font-size:var(--t-xl); }
+  body:not(.admin) main{ padding:clamp(28px, 3vw, 64px) clamp(32px, 4vw, 96px) 0; }
+}
+@media (max-width: 600px){
+  body:not(.admin) header{ padding:16px; }
+  body:not(.admin) .avatar-principal{ width:64px; height:64px; }
+  body:not(.admin) main{ padding:12px 12px 0; }
+  body:not(.admin) button.send{ padding:0 1em; }
+  body:not(.admin) .persona-row{ margin-left:0; }
+  .etapes{ display:none; }
+}
+
+/* Réglages de la barre latérale : boutons de langue espacés, libellé aligné sur son menu. */
+body:not(.admin) #langButtons{ display:inline-flex; flex-wrap:wrap; gap:10px; }
+body:not(.admin) .persona-row{ gap:12px; }
+body:not(.admin) .persona-row label{ color:var(--bone); }
+
+/* Bulles de conversation plus généreuses : texte plus grand, plus d'air, avatar plus visible. */
+body:not(.admin) #chat{ gap:clamp(16px, 1.4vw, 28px); }
+body:not(.admin) .msg{ font-size:clamp(17px, .6vw + 9.5px, 24px); line-height:1.6; }
+body:not(.admin) .msg.user{ padding:.85em 1.3em; border-radius:24px 24px 6px 24px; max-width:75%; }
+body:not(.admin) .msg.agent{ gap:clamp(10px, .9vw, 18px); max-width:85%; }
+body:not(.admin) .msg.agent .content{ padding:1em 1.4em; border-radius:6px 24px 24px 24px; }
+body:not(.admin) .msg.agent .avatar{ width:clamp(48px, 3.2vw, 76px); height:clamp(48px, 3.2vw, 76px); }
+
+/* Zone de saisie extensible : une ligne au départ, elle s'agrandit avec le texte (js/app.js, ajusterHauteur). */
+body:not(.admin) textarea#input{
+  height:var(--champ); min-height:var(--champ); max-height:40vh;
+  line-height:1.45; overflow-y:auto;
+  padding:calc((var(--champ) - 1.45em - 4px) / 2) 1.3em;
+  border-radius:min(calc(var(--champ) / 2), 28px);
+}
+body:not(.admin) form{ align-items:flex-end; }
+
+/* =====================================================================
+   Thème clair et chaleureux du panneau d'administration.
+   Mêmes principes que la page de conversation : fond crème, cartes blanches
+   arrondies, accents terracotta et vert, tailles fluides. Les badges et les
+   pastilles de statut passent en teintes pastel lisibles sur fond clair.
+   ===================================================================== */
+body.admin{
+  --indigo-950:#FBF6EE;
+  --indigo-900:#FFFFFF;
+  --indigo-700:#EADFCF;
+  --bone:#2E2620;
+  --bone-dim:#6B5E54;
+  --brass:#C8643B;
+  --brass-light:#A9512D;
+  --clay:#C0392B;
+  --vert:#3F7D5E;
+  --vert-clair:#E2EFE6;
+  --terracotta-clair:#F8E4D8;
+  --radius:14px;
+  --ombre:0 2px 12px rgba(74,52,34,.08);
+  --ombre-forte:0 10px 30px rgba(74,52,34,.12);
+  --t-xs:clamp(12px, .3vw + 7.5px, 15px);
+  --t-s:clamp(13.5px, .35vw + 8.5px, 17px);
+  --t-m:clamp(15px, .45vw + 9px, 20px);
+  --t-l:clamp(18px, .6vw + 10px, 26px);
+  --t-xl:clamp(26px, 1.2vw + 12px, 44px);
+  max-width:min(1400px, 100%);
+  padding:clamp(20px, 2.5vw, 48px) clamp(16px, 3vw, 56px) 80px;
+  font-family:"Segoe UI", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  font-size:var(--t-s);
+  background:
+    radial-gradient(circle at 96% 0%, rgba(242,193,78,.16) 0, transparent 26%),
+    var(--indigo-950);
+}
+body.admin h1{ font-family:Georgia, "Iowan Old Style", serif; color:var(--bone); }
+body.admin input, body.admin select, body.admin textarea, body.admin button{ font-family:inherit; }
+body.admin a{ color:var(--brass-light); }
+
+/* ---- Connexion ---- */
+body.admin .admin-login{
+  max-width:440px; margin:12vh auto; padding:clamp(28px, 3vw, 48px);
+  background:#fff; border-radius:24px; box-shadow:var(--ombre-forte); text-align:center;
+}
+body.admin .admin-login h1{ font-size:var(--t-xl); margin:0; }
+body.admin .admin-login h1::after{ content:""; display:block; width:56px; height:4px; border-radius:2px; background:var(--brass); margin:14px auto 0; }
+body.admin .admin-login p{ font-size:var(--t-s) !important; line-height:1.5; }
+body.admin .admin-login input{
+  background:var(--indigo-950); border:2px solid var(--indigo-700); border-radius:999px;
+  padding:.8em 1.2em; font-size:var(--t-m); margin:18px 0 8px;
+}
+body.admin .admin-login input:focus{ outline:none; border-color:var(--brass); box-shadow:0 0 0 4px var(--terracotta-clair); }
+body.admin .admin-login button{ width:100%; padding:.85em; font-size:var(--t-m); }
+body.admin .admin-login .err{ color:var(--clay); font-size:var(--t-s); }
+
+/* ---- En-tête : titre, expert connecté ---- */
+body.admin .admin-header{
+  background:#fff; border-radius:20px; box-shadow:var(--ombre);
+  padding:clamp(16px, 1.6vw, 28px) clamp(18px, 2vw, 34px); margin-bottom:clamp(16px, 1.6vw, 28px);
+  flex-wrap:wrap; gap:16px;
+}
+body.admin .admin-header h1{ font-size:var(--t-xl); margin:0; }
+body.admin .expert-box{ flex-wrap:wrap; gap:12px; }
+body.admin .expert-box label{ font-size:var(--t-s); color:var(--bone-dim); }
+body.admin .expert-box input{
+  background:var(--indigo-950); border:2px solid var(--indigo-700); border-radius:999px;
+  padding:.6em 1.1em; font-size:var(--t-s); min-width:min(300px, 100%);
+}
+body.admin .expert-box input:focus{ outline:none; border-color:var(--vert); box-shadow:0 0 0 4px var(--vert-clair); }
+
+/* ---- Statistiques : tuiles ---- */
+body.admin .stats-bar{
+  display:grid; grid-template-columns:repeat(auto-fit, minmax(min(190px, 100%), 1fr));
+  gap:clamp(10px, 1vw, 18px); margin:0 0 clamp(18px, 1.8vw, 30px);
+}
+body.admin .stats-bar span{
+  background:#fff; border-radius:var(--radius); box-shadow:var(--ombre);
+  padding:clamp(14px, 1.2vw, 22px) clamp(16px, 1.4vw, 24px);
+  font-size:var(--t-s); color:var(--bone-dim); border-top:4px solid var(--indigo-700);
+}
+body.admin .stats-bar span:nth-child(1){ border-top-color:var(--brass); }
+body.admin .stats-bar span:nth-child(2){ border-top-color:#E0A23B; }
+body.admin .stats-bar span:nth-child(3){ border-top-color:var(--vert); }
+body.admin .stats-bar span:nth-child(4){ border-top-color:#5B7FA6; }
+body.admin .stats-bar span:nth-child(5){ border-top-color:#8A6FA8; }
+body.admin .stats-bar b{ display:block; font-size:var(--t-xl); line-height:1.1; color:var(--bone); font-weight:700; margin-bottom:4px; }
+
+/* ---- Onglets : pastilles ---- */
+body.admin .admin-tabs{
+  border-bottom:none; flex-wrap:wrap; gap:8px; padding:6px; margin-bottom:clamp(16px, 1.6vw, 28px);
+  background:#fff; border-radius:999px; box-shadow:var(--ombre); width:fit-content; max-width:100%;
+}
+body.admin .admin-tab{
+  border:none; border-radius:999px; padding:.6em 1.2em; font-size:var(--t-s); color:var(--bone-dim);
+  transition:background .15s, color .15s;
+}
+body.admin .admin-tab:hover{ background:var(--indigo-950); color:var(--bone); }
+body.admin .admin-tab.active{ background:var(--brass); color:#fff; }
+
+/* ---- Textes d'introduction et titres de section ---- */
+body.admin .panel-intro{ font-size:var(--t-s); line-height:1.55; color:var(--bone-dim); max-width:60em; margin-bottom:16px; }
+body.admin .section-title{ font-family:Georgia, "Iowan Old Style", serif; font-weight:400; font-size:var(--t-l); color:var(--bone); margin:clamp(24px, 2.4vw, 40px) 0 12px; }
+body.admin .section-title::after{ content:""; display:block; width:44px; height:3px; border-radius:2px; background:var(--brass); margin-top:8px; }
+
+/* ---- Cartes ---- */
+body.admin .admin-card{
+  background:#fff; border:none; border-radius:18px; box-shadow:var(--ombre);
+  padding:clamp(16px, 1.5vw, 26px); margin-bottom:clamp(12px, 1.1vw, 18px);
+  transition:box-shadow .15s;
+}
+body.admin .admin-card:hover{ box-shadow:var(--ombre-forte); }
+body.admin .admin-card .meta{ font-size:var(--t-xs); color:var(--bone-dim); font-family:inherit; }
+body.admin .admin-card .body-text{ font-size:var(--t-m); line-height:1.55; color:var(--bone); }
+body.admin .admin-card .actions{ gap:10px; margin-top:12px; }
+body.admin .admin-card .actions input, body.admin .admin-card select{
+  background:var(--indigo-950); border:2px solid var(--indigo-700); border-radius:999px;
+  padding:.5em 1em; font-size:var(--t-s); color:var(--bone);
+}
+body.admin .domain-q{
+  border-left:4px solid var(--brass); background:var(--terracotta-clair); border-radius:0 12px 12px 0;
+  padding:.7em 1em; font-size:var(--t-m); color:var(--bone);
+}
+body.admin .excerpt{ font-size:var(--t-s); }
+body.admin .dossier{ border-top:1px dashed var(--indigo-700); }
+body.admin .dossier h4{ font-size:var(--t-s); color:var(--vert); }
+body.admin .proposal{ font-size:var(--t-s); }
+body.admin .paraphrase{ background:var(--vert-clair); border:none; border-radius:12px; padding:.8em 1em; font-size:var(--t-s); color:#24452F; }
+body.admin .problems{ color:var(--clay); font-size:var(--t-s); }
+body.admin .empty-state{
+  font-size:var(--t-m); padding:clamp(30px, 4vw, 60px) 20px; background:#fff; border-radius:18px;
+  border:2px dashed var(--indigo-700);
+}
+
+/* ---- Boutons : pastilles arrondies ---- */
+body.admin .btn-admin, body.admin .admin-login button{
+  background:var(--brass); color:#fff; border:none; border-radius:999px;
+  padding:.6em 1.3em; font-size:var(--t-s); font-weight:600; box-shadow:0 2px 8px rgba(200,100,59,.25);
+  transition:transform .1s, background .15s; text-decoration:none; display:inline-block;
+}
+body.admin .btn-admin:hover, body.admin .admin-login button:hover{ background:var(--brass-light); }
+body.admin .btn-admin:active, body.admin .admin-login button:active{ transform:scale(.97); }
+body.admin .btn-admin.ghost{ background:#fff; color:var(--bone); border:2px solid var(--indigo-700); box-shadow:none; }
+body.admin .btn-admin.ghost:hover{ border-color:var(--vert); color:var(--vert); background:#fff; }
+body.admin .btn-admin.danger{ background:#fff; color:var(--clay); border:2px solid #F2C9C4; box-shadow:none; }
+body.admin .btn-admin.danger:hover{ background:#FBEAE8; }
+
+/* ---- Filtres, formulaires, éditeurs ---- */
+body.admin .filter-row select, body.admin .connector-form select{
+  background:#fff; border:2px solid var(--indigo-700); border-radius:999px; padding:.5em 1em;
+  font-size:var(--t-s); color:var(--bone); box-shadow:var(--ombre);
+}
+body.admin .wide-text, body.admin .ontology-editor textarea{
+  background:#fff; border:2px solid var(--indigo-700); border-radius:14px; padding:.9em 1.1em;
+  font-size:var(--t-s); color:var(--bone); box-shadow:var(--ombre);
+}
+body.admin .wide-text:focus, body.admin .ontology-editor textarea:focus{ outline:none; border-color:var(--brass); box-shadow:0 0 0 4px var(--terracotta-clair); }
+body.admin .mono, body.admin .ontology-editor textarea{ font-family:ui-monospace, Consolas, monospace; font-size:var(--t-xs); }
+body.admin .connector-form{ background:#fff; border-radius:18px; box-shadow:var(--ombre); padding:clamp(16px, 1.5vw, 26px); max-width:none; }
+body.admin .connector-form label{ font-size:var(--t-s); color:var(--bone); }
+body.admin .ontology-status{ font-size:var(--t-s); color:var(--vert); }
+body.admin .raw-editor summary{ font-size:var(--t-s); color:var(--bone-dim); }
+
+/* ---- Badges et statuts : teintes pastel ---- */
+body.admin .badge, body.admin .status-pill{
+  font-family:inherit; font-size:var(--t-xs); font-weight:600; letter-spacing:.03em;
+  padding:.3em .8em; border-radius:999px; background:#EFE8DD; color:var(--bone);
+}
+body.admin .badge.contradiction, body.admin .badge.en_tension{ background:#FBE3DA; color:#9A3B1F; }
+body.admin .badge.lacune{ background:#E1EAF5; color:#2E5785; }
+body.admin .badge.nouveaute, body.admin .badge.conforme{ background:var(--vert-clair); color:#2B5E43; }
+body.admin .badge.ambiguite, body.admin .badge.hors_ontologie{ background:#FBF0D3; color:#8A6514; }
+body.admin .status-pending{ background:#FBF0D3; color:#8A6514; }
+body.admin .status-approved, body.admin .status-validated, body.admin .status-applied, body.admin .status-done{ background:var(--vert-clair); color:#2B5E43; }
+body.admin .status-rejected, body.admin .status-retired, body.admin .status-reverted, body.admin .status-failed{ background:#FBE3DA; color:#9A3B1F; }
+body.admin .status-deliberation, body.admin .status-open, body.admin .status-complement, body.admin .status-proposed{ background:#E1EAF5; color:#2E5785; }
+
+/* ---- Journal ---- */
+body.admin #journalList{ background:#fff; border-radius:18px; box-shadow:var(--ombre); padding:6px clamp(14px, 1.4vw, 24px); }
+body.admin .journal-row{ font-size:var(--t-xs); padding:.7em 0; border-bottom:1px solid var(--indigo-700); }
+body.admin .journal-row:last-child{ border-bottom:none; }
+body.admin .collecte-row{ border-top-color:var(--indigo-700); }
+
+@media (max-width: 700px){
+  body.admin .admin-tabs{ border-radius:18px; width:100%; }
+  body.admin .admin-header{ flex-direction:column; align-items:flex-start; }
+}
+
+/* Grand écran : le nom de l'expert et le bouton de déconnexion restent sur une ligne. */
+@media (min-width: 900px){ body.admin .expert-box{ flex-wrap:nowrap; } }
+
+/* =====================================================================
+   Palettes vives (essai) : ?theme=lagune | savane | foret dans l'adresse.
+   La conversation garde un fond clair ; la couleur porte sur la barre latérale.
+   ===================================================================== */
+body[data-theme]:not(.admin){
+  --barre-texte:#FFFFFF;
+  --barre-texte-doux:rgba(255,255,255,.86);
+}
+body[data-theme="lagune"]:not(.admin){
+  --indigo-950:#EAF6F4; --indigo-700:#CDE6E1;
+  --vert:#0E7468; --vert-clair:#D3EEE9;
+  --brass:#EE6A4C; --brass-light:#D4502F; --terracotta-clair:#FDE3DC;
+  --barre:linear-gradient(165deg, #0B6B60 0%, #12907F 100%);
+  --halo1:rgba(238,106,76,.16); --halo2:rgba(18,144,127,.14);
+}
+body[data-theme="savane"]:not(.admin){
+  --indigo-950:#FFF5E3; --indigo-700:#F4DDB8;
+  --vert:#2E8B57; --vert-clair:#DCF0E3;
+  --brass:#2E8B57; --brass-light:#23704A; --terracotta-clair:#FDE7CF;
+  --barre:linear-gradient(165deg, #C4501A 0%, #EE8A2E 100%);
+  --halo1:rgba(238,138,46,.20); --halo2:rgba(46,139,87,.10);
+}
+body[data-theme="foret"]:not(.admin){
+  --indigo-950:#EEF7F0; --indigo-700:#D2E8D8;
+  --vert:#2F7D4F; --vert-clair:#DCEFE2;
+  --brass:#E8823A; --brass-light:#C96A25; --terracotta-clair:#FCE6D4;
+  --barre:linear-gradient(165deg, #245F3E 0%, #3C9461 100%);
+  --halo1:rgba(232,130,58,.16); --halo2:rgba(60,148,97,.14);
+}
+
+/* Barre latérale colorée */
+body[data-theme]:not(.admin) header{ background:var(--barre); box-shadow:none; }
+body[data-theme]:not(.admin) h1{ color:var(--barre-texte); }
+body[data-theme]:not(.admin) .eyebrow{ color:var(--barre-texte-doux); }
+body[data-theme]:not(.admin) .subtitle{ color:var(--barre-texte-doux); }
+body[data-theme]:not(.admin) .avatar-principal{ box-shadow:0 0 0 5px rgba(255,255,255,.9), 0 0 0 10px rgba(255,255,255,.25), 0 12px 30px rgba(0,0,0,.18); }
+body[data-theme]:not(.admin) .etapes{ background:rgba(255,255,255,.12); }
+body[data-theme]:not(.admin) .etapes li{ color:var(--barre-texte); }
+body[data-theme]:not(.admin) .etapes .etapes-titre{ color:var(--barre-texte-doux); }
+body[data-theme]:not(.admin) .etapes li::before{ background:#fff; color:var(--vert); }
+body[data-theme]:not(.admin) .lang-btn{ background:transparent; border-color:rgba(255,255,255,.6); color:var(--barre-texte); }
+body[data-theme]:not(.admin) .lang-btn:hover{ border-color:#fff; color:#fff; }
+body[data-theme]:not(.admin) .lang-btn.active{ background:#fff; border-color:#fff; color:var(--vert); }
+body[data-theme]:not(.admin) .persona-row label{ color:var(--barre-texte); }
+body[data-theme]:not(.admin) .persona-row select{ border-color:transparent; }
+
+/* Zone principale : halos et motif aux couleurs de la palette */
+body[data-theme]:not(.admin) main{
+  background:
+    radial-gradient(circle at 92% 8%, var(--halo1) 0, transparent 30%),
+    radial-gradient(circle at 6% 94%, var(--halo2) 0, transparent 32%),
+    radial-gradient(ellipse 70% 65% at 50% 50%, var(--indigo-950) 45%, transparent 100%),
+    var(--indigo-950);
+}
+body[data-theme]:not(.admin) .hero-titre::after{ background:var(--brass); }
+body[data-theme]:not(.admin) .msg.user{ background:var(--terracotta-clair); }
+
+/* Forêt : l'orange est la couleur d'accent (règle 60-30-10) ; il revient sur la tunique de l'avatar,
+   le trait sous le titre et le bouton Envoyer, c'est-à-dire sur l'agent et l'action principale. */
+body[data-theme="foret"]:not(.admin) button.send{ box-shadow:0 8px 22px rgba(232,130,58,.30); }
+
+/* =====================================================================
+   Thème par défaut « sable » : le beige d'origine, plus soutenu.
+   Fond sable, barre latérale sable doré, cartes et saisie blanches qui ressortent.
+   (Les palettes ?theme=... gardent leurs propres réglages.)
+   ===================================================================== */
+body:not(.admin):not([data-theme]){
+  --indigo-950:#F3E7D3;   /* fond de page (sable) */
+  --indigo-700:#E2D0B3;   /* bordures */
+  --bone:#2B231D;
+  --bone-dim:#5F5248;
+  --brass:#C2582F;        /* bouton Envoyer (terracotta) */
+  --brass-light:#A3461F;
+  --vert:#3B7656;
+  --vert-clair:#DCEADF;
+  --terracotta-clair:#F6DCCB;
+}
+body:not(.admin):not([data-theme]) header{ background:linear-gradient(170deg, #F7ECDA 0%, #ECDAB9 100%); }
+body:not(.admin):not([data-theme]) .etapes{ background:rgba(255,255,255,.55); }
+body:not(.admin):not([data-theme]) .lang-btn{ background:rgba(255,255,255,.75); }
+body:not(.admin):not([data-theme]) .avatar-principal{ box-shadow:0 0 0 5px #fff, 0 0 0 10px rgba(59,118,86,.18), 0 12px 28px rgba(74,52,34,.16); }
+body:not(.admin):not([data-theme]) .chip, body:not(.admin):not([data-theme]) textarea#input{ box-shadow:0 4px 16px rgba(74,52,34,.10); }
+
+/* Sable : barre latérale nettement délimitée de la zone de conversation. */
+body:not(.admin):not([data-theme]) header{
+  background:linear-gradient(170deg, #EBD7B4 0%, #DEC497 100%);
+  border-right:2px solid #CDB084;
+  box-shadow:6px 0 22px rgba(74,52,34,.14);
+  position:relative; z-index:1;
+}
+body:not(.admin):not([data-theme]) .etapes{ background:rgba(255,253,248,.82); box-shadow:0 2px 10px rgba(74,52,34,.08); }
+body:not(.admin):not([data-theme]) .lang-btn{ background:rgba(255,253,248,.85); border-color:#CDB084; }
+body:not(.admin):not([data-theme]) .lang-btn.active{ background:var(--vert); border-color:var(--vert); color:#fff; }
+body:not(.admin):not([data-theme]) .persona-row select{ border-color:#CDB084; }
+@media (max-width: 1099px){
+  body:not(.admin):not([data-theme]) header{ border-right:none; border-bottom:2px solid #CDB084; box-shadow:0 6px 18px rgba(74,52,34,.12); }
+}
+
+/* Forêt : le guide « Comment ça marche » en carte blanche, lisible sur la barre verte. */
+body[data-theme="foret"]:not(.admin) .etapes{ background:#fff; box-shadow:0 6px 20px rgba(0,0,0,.14); }
+body[data-theme="foret"]:not(.admin) .etapes li{ color:var(--bone); }
+body[data-theme="foret"]:not(.admin) .etapes .etapes-titre{ color:var(--vert); }
+body[data-theme="foret"]:not(.admin) .etapes li::before{ background:var(--vert); color:#fff; }
+
+/* Lèvres synchronisées sur la voix (js/voix.js, articuler) : l'ouverture suit chaque syllabe ;
+   l'animation régulière ne sert plus que de repli quand la voix ne signale pas les mots. */
+.parle.synchro .avatar-bouche-parle{
+  animation:none;
+  transform:scaleY(var(--ouverture, .15));
+  transition:transform 70ms ease-out;
+}
+
+/* ---- Espacements resserrés (sans excès) : accueil plus compact, tailles inchangées ---- */
+body.conversation-vide .hero{ padding-bottom:clamp(22px, 1.9vw, 36px); }
+body.conversation-vide .suggestions{ gap:clamp(14px, 1.3vw, 24px); padding-bottom:clamp(22px, 1.9vw, 36px); }
+body.conversation-vide .chip{ min-height:6.4em; }
+.etapes{ margin-top:clamp(20px, 1.6vw, 30px); }
+.etapes li{ margin-bottom:.85em; }
+body:not(.admin) header .controls{ margin-top:clamp(18px, 1.5vw, 28px); gap:12px; }
+
+/* ---- Panneaux masqués : l'inférence passe par la conversation ; la contribution s'ouvre depuis
+   le lien « Partagez-le » de la barre latérale ---- */
+body:not(.admin) #toolsContainer{ display:none; }
+body:not(.admin) .contrib-panel:not(.visible){ display:none; }
+.etapes .lien-contrib{ color:inherit; font-weight:700; text-decoration:underline; text-underline-offset:2px; }
+
+/* Medumba (glossaire limité, profil ndab) masqué dans l'interface : seuls le français et l'anglais sont proposés.
+   La langue reste déclarée dans le profil ; retirer cette règle la fait réapparaître. */
+body:not(.admin) #langButtons .lang-btn[data-lang="mb"]{ display:none; }
+
+/* Accueil : la zone de saisie un peu plus bas, détachée des cartes de suggestion. */
+body.conversation-vide #form{ margin-top:clamp(20px, 4vh, 56px); }
+
+/* Barre latérale : plus d'espace vertical entre les boutons de langue et le style de réponse. */
+body:not(.admin) header .controls{ row-gap:clamp(18px, 1.4vw, 26px); }

@@ -1,0 +1,114 @@
+<mxfile host="65bd71144e">
+    <diagram id="volet-oral" name="Architecture of the voice layer">
+        <mxGraphModel dx="611" dy="258" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="cadre" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=none;strokeColor=#9A9A9A;" value="" vertex="1">
+                    <mxGeometry height="190" width="1060" x="20" y="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="retour-texte" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" value="the user can ask a follow-up question" vertex="1">
+                    <mxGeometry height="20" width="400" x="350" y="52" as="geometry"/>
+                </mxCell>
+                <mxCell id="enregistrement" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFFFF;strokeColor=#444444;dashed=1;dashPattern=6 4;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:16px&quot;&gt;Recording&lt;/b&gt;&lt;br&gt;&lt;br&gt;browser microphone&lt;br&gt;webm/opus audio" vertex="1">
+                    <mxGeometry height="96" width="170" x="40" y="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="transcription" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#D6D6D6;strokeColor=#444444;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:16px&quot;&gt;Transcription&lt;/b&gt;&lt;br&gt;&lt;br&gt;local Whisper&lt;br&gt;(faster-whisper)" vertex="1">
+                    <mxGeometry height="96" width="170" x="250" y="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="relecture" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#9E9E9E;strokeColor=#444444;fontSize=13;fontColor=#FFFFFF;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:16px&quot;&gt;Review&lt;/b&gt;&lt;br&gt;&lt;br&gt;the user can correct&lt;br&gt;before sending" vertex="1">
+                    <mxGeometry height="96" width="170" x="460" y="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="reponse" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFFFF;strokeColor=#444444;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:16px&quot;&gt;Answer&lt;/b&gt;&lt;br&gt;&lt;br&gt;unchanged pipeline : /api/chat&lt;br&gt;dossier + controlled LLM" vertex="1">
+                    <mxGeometry height="96" width="170" x="660" y="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="lecture" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#D6D6D6;strokeColor=#444444;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:16px&quot;&gt;Voice output&lt;/b&gt;&lt;br&gt;&lt;br&gt;browser speech synthesis&lt;br&gt;emotion → voice, avatar face" vertex="1">
+                    <mxGeometry height="96" width="170" x="880" y="110" as="geometry"/>
+                </mxCell>
+                <mxCell id="f1" edge="1" parent="1" source="enregistrement" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endSize=9;strokeColor=#444444;" target="transcription">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f2" edge="1" parent="1" source="transcription" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endSize=9;strokeColor=#444444;" target="relecture">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f3" edge="1" parent="1" source="relecture" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endSize=9;strokeColor=#444444;" target="reponse">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f4" edge="1" parent="1" source="reponse" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endSize=9;strokeColor=#444444;" target="lecture">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="f-retour" edge="1" parent="1" source="lecture" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endSize=9;strokeColor=#444444;exitX=0.5;exitY=0;entryX=0.5;entryY=0;" target="enregistrement">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="965" y="76"/>
+                            <mxPoint x="125" y="76"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="garanties" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=none;strokeColor=#555555;dashed=1;dashPattern=8 6;" value="" vertex="1">
+                    <mxGeometry height="104" width="1010" x="40" y="318" as="geometry"/>
+                </mxCell>
+                <mxCell id="garanties-titre" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontColor=#222222;fontFamily=Helvetica;" value="&lt;b&gt;Preserved guarantees&lt;/b&gt;" vertex="1">
+                    <mxGeometry height="24" width="300" x="395" y="332" as="geometry"/>
+                </mxCell>
+                <mxCell id="confidentialite" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:15px&quot;&gt;Privacy&lt;/b&gt;&lt;br&gt;audio is neither stored nor sent to an external service" vertex="1">
+                    <mxGeometry height="44" width="460" x="60" y="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="separateur" edge="1" parent="1" style="endArrow=none;html=1;strokeColor=#AAAAAA;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="545" y="360" as="sourcePoint"/>
+                        <mxPoint x="545" y="408" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="gouvernance" parent="1" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:15px&quot;&gt;Governance&lt;/b&gt;&lt;br&gt;answer dossier, safety filter, signals to experts" vertex="1">
+                    <mxGeometry height="44" width="460" x="570" y="360" as="geometry"/>
+                </mxCell>
+                <mxCell id="g1" edge="1" parent="1" style="shape=flexArrow;html=1;endArrow=block;endWidth=16;width=8;endSize=6;fillColor=#FFFFFF;strokeColor=#444444;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="335" y="318" as="sourcePoint"/>
+                        <mxPoint x="335" y="207" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="g1-texte" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="in memory, on the machine" vertex="1">
+                    <mxGeometry height="24" width="220" x="360" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="g2" edge="1" parent="1" style="shape=flexArrow;html=1;endArrow=block;endWidth=16;width=8;endSize=6;fillColor=#FFFFFF;strokeColor=#444444;" value="">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="755" y="318" as="sourcePoint"/>
+                        <mxPoint x="755" y="207" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="g2-texte" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="same checks as a typed question" vertex="1">
+                    <mxGeometry height="24" width="280" x="780" y="258" as="geometry"/>
+                </mxCell>
+                <mxCell id="legende" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" value="Stages:" vertex="1">
+                    <mxGeometry height="22" width="60" x="150" y="452" as="geometry"/>
+                </mxCell>
+                <mxCell id="l-interface" parent="1" style="rounded=1;html=1;arcSize=20;fillColor=#FFFFFF;strokeColor=#444444;dashed=1;dashPattern=4 3;" value="" vertex="1">
+                    <mxGeometry height="20" width="20" x="215" y="453" as="geometry"/>
+                </mxCell>
+                <mxCell id="l-interface-t" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" value="interface (browser)" vertex="1">
+                    <mxGeometry height="22" width="160" x="242" y="452" as="geometry"/>
+                </mxCell>
+                <mxCell id="l-neuronal" parent="1" style="rounded=1;html=1;arcSize=20;fillColor=#D6D6D6;strokeColor=#444444;" value="" vertex="1">
+                    <mxGeometry height="20" width="20" x="410" y="453" as="geometry"/>
+                </mxCell>
+                <mxCell id="l-neuronal-t" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" value="neural layer" vertex="1">
+                    <mxGeometry height="22" width="140" x="437" y="452" as="geometry"/>
+                </mxCell>
+                <mxCell id="l-symbolique" parent="1" style="rounded=1;html=1;arcSize=20;fillColor=#FFFFFF;strokeColor=#444444;" value="" vertex="1">
+                    <mxGeometry height="20" width="20" x="580" y="453" as="geometry"/>
+                </mxCell>
+                <mxCell id="l-symbolique-t" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" value="symbolic layer" vertex="1">
+                    <mxGeometry height="22" width="150" x="607" y="452" as="geometry"/>
+                </mxCell>
+                <mxCell id="l-humain" parent="1" style="rounded=1;html=1;arcSize=20;fillColor=#9E9E9E;strokeColor=#444444;" value="" vertex="1">
+                    <mxGeometry height="20" width="20" x="760" y="453" as="geometry"/>
+                </mxCell>
+                <mxCell id="l-humain-t" parent="1" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" value="human decision" vertex="1">
+                    <mxGeometry height="22" width="140" x="787" y="452" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

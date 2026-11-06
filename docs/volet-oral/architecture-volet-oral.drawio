@@ -1,0 +1,126 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="volet-oral" name="Architecture du volet oral">
+    <mxGraphModel dx="1100" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500" math="0" shadow="0">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Cadre du parcours -->
+        <mxCell id="cadre" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=none;strokeColor=#9A9A9A;" vertex="1" parent="1">
+          <mxGeometry x="20" y="40" width="1060" height="190" as="geometry"/>
+        </mxCell>
+        <mxCell id="retour-texte" value="le visiteur peut enchaîner une nouvelle question" style="text;html=1;align=center;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="350" y="52" width="400" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- Étapes -->
+        <mxCell id="enregistrement" value="&lt;b style=&quot;font-size:16px&quot;&gt;Enregistrement&lt;/b&gt;&lt;br&gt;&lt;br&gt;micro du navigateur&lt;br&gt;audio webm/opus" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFFFF;strokeColor=#444444;dashed=1;dashPattern=6 4;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="40" y="110" width="170" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="transcription" value="&lt;b style=&quot;font-size:16px&quot;&gt;Transcription&lt;/b&gt;&lt;br&gt;&lt;br&gt;Whisper local&lt;br&gt;(faster-whisper)" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#D6D6D6;strokeColor=#444444;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="250" y="110" width="170" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="relecture" value="&lt;b style=&quot;font-size:16px&quot;&gt;Relecture&lt;/b&gt;&lt;br&gt;&lt;br&gt;le visiteur corrige&lt;br&gt;puis envoie" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#9E9E9E;strokeColor=#444444;fontSize=13;fontColor=#FFFFFF;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="460" y="110" width="170" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="reponse" value="&lt;b style=&quot;font-size:16px&quot;&gt;Réponse&lt;/b&gt;&lt;br&gt;&lt;br&gt;/api/chat inchangé&lt;br&gt;dossier + LLM contrôlé" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFFFF;strokeColor=#444444;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="670" y="110" width="170" height="96" as="geometry"/>
+        </mxCell>
+        <mxCell id="lecture" value="&lt;b style=&quot;font-size:16px&quot;&gt;Lecture vocale&lt;/b&gt;&lt;br&gt;&lt;br&gt;synthèse du navigateur&lt;br&gt;émotion → voix, avatar" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#D6D6D6;strokeColor=#444444;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="880" y="110" width="170" height="96" as="geometry"/>
+        </mxCell>
+
+        <!-- Flèches du parcours -->
+        <mxCell id="f1" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endSize=9;strokeColor=#444444;" edge="1" parent="1" source="enregistrement" target="transcription">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="f2" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endSize=9;strokeColor=#444444;" edge="1" parent="1" source="transcription" target="relecture">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="f3" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endSize=9;strokeColor=#444444;" edge="1" parent="1" source="relecture" target="reponse">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="f4" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endSize=9;strokeColor=#444444;" edge="1" parent="1" source="reponse" target="lecture">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="f-retour" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=open;endSize=9;strokeColor=#444444;exitX=0.5;exitY=0;entryX=0.5;entryY=0;" edge="1" parent="1" source="lecture" target="enregistrement">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="965" y="76"/>
+              <mxPoint x="125" y="76"/>
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- Garanties conservées -->
+        <mxCell id="garanties" value="" style="rounded=1;whiteSpace=wrap;html=1;arcSize=10;fillColor=none;strokeColor=#555555;dashed=1;dashPattern=8 6;" vertex="1" parent="1">
+          <mxGeometry x="40" y="318" width="1010" height="104" as="geometry"/>
+        </mxCell>
+        <mxCell id="garanties-titre" value="&lt;b&gt;Garanties conservées&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;fontSize=16;fontColor=#222222;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="395" y="332" width="300" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="confidentialite" value="&lt;b style=&quot;font-size:15px&quot;&gt;Confidentialité&lt;/b&gt;&lt;br&gt;l'audio n'est ni stocké ni envoyé à un service externe" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="60" y="360" width="460" height="44" as="geometry"/>
+        </mxCell>
+        <mxCell id="separateur" value="" style="endArrow=none;html=1;strokeColor=#AAAAAA;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="545" y="360" as="sourcePoint"/>
+            <mxPoint x="545" y="408" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="gouvernance" value="&lt;b style=&quot;font-size:15px&quot;&gt;Gouvernance&lt;/b&gt;&lt;br&gt;dossier de réponse, filtre de sûreté, signaux aux experts" style="text;html=1;align=center;verticalAlign=middle;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="570" y="360" width="460" height="44" as="geometry"/>
+        </mxCell>
+
+        <!-- Flèches creuses vers la transcription et la réponse -->
+        <mxCell id="g1" value="" style="shape=flexArrow;html=1;endArrow=block;endWidth=16;width=8;endSize=6;fillColor=#FFFFFF;strokeColor=#444444;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="335" y="318" as="sourcePoint"/>
+            <mxPoint x="335" y="207" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="g1-texte" value="en mémoire, sur la machine" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="360" y="258" width="220" height="24" as="geometry"/>
+        </mxCell>
+        <mxCell id="g2" value="" style="shape=flexArrow;html=1;endArrow=block;endWidth=16;width=8;endSize=6;fillColor=#FFFFFF;strokeColor=#444444;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="755" y="318" as="sourcePoint"/>
+            <mxPoint x="755" y="207" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="g2-texte" value="mêmes contrôles qu'une question tapée" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="780" y="258" width="280" height="24" as="geometry"/>
+        </mxCell>
+
+        <!-- Légende -->
+        <mxCell id="legende" value="Étapes :" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="150" y="452" width="60" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="l-interface" value="" style="rounded=1;html=1;arcSize=20;fillColor=#FFFFFF;strokeColor=#444444;dashed=1;dashPattern=4 3;" vertex="1" parent="1">
+          <mxGeometry x="215" y="453" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="l-interface-t" value="interface (navigateur)" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="242" y="452" width="160" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="l-neuronal" value="" style="rounded=1;html=1;arcSize=20;fillColor=#D6D6D6;strokeColor=#444444;" vertex="1" parent="1">
+          <mxGeometry x="410" y="453" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="l-neuronal-t" value="couche neuronale" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="437" y="452" width="140" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="l-symbolique" value="" style="rounded=1;html=1;arcSize=20;fillColor=#FFFFFF;strokeColor=#444444;" vertex="1" parent="1">
+          <mxGeometry x="580" y="453" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="l-symbolique-t" value="couche symbolique" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="607" y="452" width="150" height="22" as="geometry"/>
+        </mxCell>
+        <mxCell id="l-humain" value="" style="rounded=1;html=1;arcSize=20;fillColor=#9E9E9E;strokeColor=#444444;" vertex="1" parent="1">
+          <mxGeometry x="760" y="453" width="20" height="20" as="geometry"/>
+        </mxCell>
+        <mxCell id="l-humain-t" value="décision humaine" style="text;html=1;align=left;verticalAlign=middle;fontSize=14;fontColor=#333333;fontFamily=Helvetica;" vertex="1" parent="1">
+          <mxGeometry x="787" y="452" width="140" height="22" as="geometry"/>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

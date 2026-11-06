@@ -22,7 +22,7 @@ import shutil
 from . import db, enrichments, instance, journal, ontology_evolution, ontology_loader, profile_check
 from .config import DATA_DIR
 from .profile import active as active_profile
-from .routers import admin, chat, contribute, documents, knowledge, profile as profile_router, questions
+from .routers import admin, chat, contribute, documents, knowledge, profile as profile_router, questions, stt
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s : %(message)s")
 log = logging.getLogger("yobakoko")
@@ -65,7 +65,7 @@ app = FastAPI(title="IAST-Builder Brain", version="4.0.0", lifespan=lifespan)
 # CORS permissif acceptable : le service n'est joint que par la gateway.
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-for r in (chat, contribute, documents, admin, questions, knowledge, profile_router):
+for r in (chat, contribute, documents, admin, questions, knowledge, profile_router, stt):
     app.include_router(r.router, prefix="/api")
 
 
