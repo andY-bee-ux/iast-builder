@@ -991,3 +991,79 @@ body.conversation-vide #form{ margin-top:clamp(20px, 4vh, 56px); }
 
 /* Barre latérale : plus d'espace vertical entre les boutons de langue et le style de réponse. */
 body:not(.admin) header .controls{ row-gap:clamp(18px, 1.4vw, 26px); }
+
+/* ---- Volet oral : barre de lecture sous chaque réponse et réglages de la voix ---- */
+.audio-barre{ display:flex; gap:6px; margin-top:.6em; }
+.audio-btn{
+  width:30px; height:30px; padding:0; border-radius:50%; display:inline-grid; place-items:center;
+  background:transparent; border:1.5px solid rgba(0,0,0,.14); color:var(--indigo-700, #2F5C45); cursor:pointer;
+  transition:background .15s, border-color .15s, opacity .15s;
+}
+.audio-btn svg{ width:15px; height:15px; fill:currentColor; }
+.audio-btn:hover:not(:disabled){ border-color:var(--brass); background:rgba(0,0,0,.04); }
+.audio-btn:disabled{ opacity:.35; cursor:default; }
+.audio-barre[data-etat="lecture"] .audio-lire,
+.audio-barre[data-etat="pause"] .audio-lire{ background:var(--brass); border-color:var(--brass); color:#fff; }
+
+body:not(.admin) #form{ position:relative; }
+.voice-btn.ouvert{ opacity:1; border-color:var(--brass); }
+.voix-reglages{
+  position:absolute; right:0; bottom:calc(100% + 10px); z-index:20; width:min(340px, calc(100vw - 32px));
+  background:#fff; color:#2B2B2B; border-radius:16px; padding:16px 18px; box-shadow:0 10px 30px rgba(0,0,0,.18);
+  display:grid; gap:12px; font-size:var(--t-s, 15px);
+}
+.voix-reglages[hidden]{ display:none; }
+.voix-titre{ margin:0; font-weight:700; }
+.voix-auto{ display:flex; align-items:center; gap:8px; cursor:pointer; }
+.voix-champ{ display:grid; gap:4px; }
+.voix-etiquette{ font-size:.85em; color:#666; }
+.voix-reglages select{ width:100%; padding:7px 9px; border-radius:10px; border:1.5px solid rgba(0,0,0,.15); background:#fff; font:inherit; }
+.voix-essai{
+  justify-self:start; padding:7px 14px; border-radius:999px; border:none; cursor:pointer;
+  background:var(--brass); color:#fff; font:inherit; font-weight:600;
+}
+
+/* ---- Échelle réduite (environ 12 %) : à 100 % de zoom, l'interface paraissait trop grande ---- */
+body:not(.admin){
+  --t-xs:clamp(11px, .3vw + 6.5px, 14px);
+  --t-s:clamp(13px, .35vw + 7.5px, 16px);
+  --t-m:clamp(14px, .42vw + 8.5px, 19px);
+  --t-l:clamp(17px, .6vw + 9px, 24px);
+  --t-xl:clamp(24px, 1.3vw + 10px, 46px);
+  --champ:clamp(42px, 1.9vw + 20px, 60px);
+}
+body:not(.admin) .msg{ font-size:clamp(15px, .5vw + 8.5px, 21px); }
+body:not(.admin) .msg.agent .avatar{ width:clamp(42px, 2.8vw, 66px); height:clamp(42px, 2.8vw, 66px); }
+@media (min-width: 1100px){
+  body:not(.admin){ grid-template-columns: clamp(340px, 24vw, 560px) minmax(0, 1fr); }
+  body:not(.admin) .avatar-principal{ width:clamp(150px, 11vw, 250px); height:clamp(150px, 11vw, 250px); }
+  body:not(.admin) main{ padding:clamp(24px, 2.6vw, 56px) clamp(28px, 3.4vw, 80px) 0; }
+}
+
+/* ---- Deuxième réduction : colonne de gauche contenue dans l'écran, sans barre de défilement ---- */
+body:not(.admin){
+  --t-xs:clamp(10px, .2vw + 6px, 11px);
+  --t-s:clamp(11.5px, .23vw + 6.5px, 13px);
+  --t-m:clamp(12.5px, .3vw + 6.5px, 15px);
+  --t-l:clamp(14px, .4vw + 7px, 18px);
+  --t-xl:clamp(19px, .85vw + 8.5px, 32px);
+  --champ:clamp(36px, 1.25vw + 14px, 44px);
+}
+body:not(.admin) .msg{ font-size:clamp(13px, .36vw + 6.8px, 16px); }
+body.conversation-vide .suggestions{ grid-template-columns:repeat(auto-fit, minmax(min(190px, 100%), 1fr)); }
+.etapes{ margin-top:clamp(14px, 1.1vw, 22px); padding:14px 16px 6px; }
+.etapes li{ margin-bottom:.6em; line-height:1.4; }
+/* Si l'écran est vraiment bas, la colonne défile encore, mais sans afficher de barre. */
+body:not(.admin) header{ scrollbar-width:none; }
+body:not(.admin) header::-webkit-scrollbar{ display:none; }
+@media (min-width: 1100px){
+  body:not(.admin){ grid-template-columns: clamp(280px, 20vw, 440px) minmax(0, 1fr); }
+  body:not(.admin) header{ padding:clamp(16px, 1.25vw, 28px) clamp(16px, 1.25vw, 28px); }
+  body:not(.admin) .header-identity{ gap:8px; margin-top:clamp(12px, 1vw, 24px); }
+  body:not(.admin) .avatar-principal{ width:clamp(100px, 6.8vw, 160px); height:clamp(100px, 6.8vw, 160px); }
+  body:not(.admin) .msg.agent .avatar{ width:clamp(34px, 2.15vw, 52px); height:clamp(34px, 2.15vw, 52px); }
+}
+
+/* Volet oral : moteur de transcription utilisé (prototype, voir AFFICHER_MOTEUR dans voix.js) */
+.stt-info{ max-width:980px; width:100%; margin:6px auto 0; padding:0 4px; font-size:var(--t-xs, 12px); color:var(--bone-dim, #6B5E54); }
+.stt-info[hidden]{ display:none; }

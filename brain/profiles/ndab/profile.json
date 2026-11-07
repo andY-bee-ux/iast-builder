@@ -321,6 +321,9 @@
       ]
     }
   },
+  "voix": {
+    "vocabulaire": ["Ndab ngon là'", "Ndab de Mekat", "chefferie", "Medumba"]
+  },
   "collecte": {
     "temoignages": true,
     "formulaire": true,

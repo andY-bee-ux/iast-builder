@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="volet-oral" name="Architecture of the voice layer">
-        <mxGraphModel dx="611" dy="258" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500" math="0" shadow="0">
+        <mxGraphModel dx="900" dy="342" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="500" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -13,7 +13,7 @@
                 <mxCell id="enregistrement" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#FFFFFF;strokeColor=#444444;dashed=1;dashPattern=6 4;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:16px&quot;&gt;Recording&lt;/b&gt;&lt;br&gt;&lt;br&gt;browser microphone&lt;br&gt;webm/opus audio" vertex="1">
                     <mxGeometry height="96" width="170" x="40" y="110" as="geometry"/>
                 </mxCell>
-                <mxCell id="transcription" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#D6D6D6;strokeColor=#444444;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:16px&quot;&gt;Transcription&lt;/b&gt;&lt;br&gt;&lt;br&gt;local Whisper&lt;br&gt;(faster-whisper)" vertex="1">
+                <mxCell id="transcription" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#D6D6D6;strokeColor=#444444;fontSize=13;fontColor=#333333;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:16px&quot;&gt;Transcription&lt;/b&gt;&lt;br&gt;&lt;br&gt;ElevenLabs Scribe v2" vertex="1">
                     <mxGeometry height="96" width="170" x="250" y="110" as="geometry"/>
                 </mxCell>
                 <mxCell id="relecture" parent="1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=14;fillColor=#9E9E9E;strokeColor=#444444;fontSize=13;fontColor=#FFFFFF;fontFamily=Helvetica;" value="&lt;b style=&quot;font-size:16px&quot;&gt;Review&lt;/b&gt;&lt;br&gt;&lt;br&gt;the user can correct&lt;br&gt;before sending" vertex="1">

@@ -181,6 +181,11 @@ function addMessage(role, text, emotion, extra) {
   const body = document.createElement("span");
   body.textContent = text;
   content.appendChild(body);
+  // Barre de lecture (écouter, pause, recommencer, arrêter), fournie par voix.js.
+  if (role === "agent" && window.Voix) {
+    const barre = Voix.barre(text, emotion);
+    if (barre) content.appendChild(barre);
+  }
   // Sources du dossier de réponse (lissage : le texte les tait, l'usager peut les consulter).
   if (role === "agent" && extra && extra.sources && extra.sources.length) {
     const det = document.createElement("details");

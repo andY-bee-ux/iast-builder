@@ -65,6 +65,14 @@ EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "sentence-transformers/paraphrase
 WHISPER_MODEL = os.getenv("WHISPER_MODEL", "small")
 WHISPER_DEVICE = os.getenv("WHISPER_DEVICE", "cpu")
 WHISPER_COMPUTE_TYPE = os.getenv("WHISPER_COMPUTE_TYPE", "int8")
+# Moteur de transcription : « whisper » (local, par défaut) ou « elevenlabs » (service en ligne
+# Scribe, plus précis et plus rapide sur un portable, mais l'audio de l'usager quitte la machine).
+# En cas d'échec d'ElevenLabs (réseau, clé, quota), la transcription se rabat sur Whisper.
+STT_MOTEUR = os.getenv("STT_MOTEUR", "whisper").strip().lower()
+ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "")
+ELEVENLABS_STT_MODEL = os.getenv("ELEVENLABS_STT_MODEL", "scribe_v2")
+# Serveur européen possible : https://api.eu.residency.elevenlabs.io
+ELEVENLABS_URL = os.getenv("ELEVENLABS_URL", "https://api.elevenlabs.io").rstrip("/")
 
 # --- Sécurité interne ----------------------------------------------------------
 # Secret que la gateway présente à chaque appel (voir internal_auth.py).

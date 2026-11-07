@@ -84,7 +84,18 @@ def plain_text(text: str) -> str:
     # Espace manquante entre deux phrases (« Rubiaceae.Ce nom »), souvent laissée par le retrait des renvois.
     out = re.sub(r"([a-zàâäéèêëîïôöùûüç\)»])([.!?…])([A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ«])", r"\1\2 \3", out)
     out = re.sub(r"([?!…])([A-ZÀÂÄÉÈÊËÎÏÔÖÙÛÜÇ«])", r"\1 \2", out)
+    out = sans_tirets(out)
     return first_person(out.strip())
+
+
+def sans_tirets(text: str) -> str:
+    """Filet de sécurité de la règle 7 : le modèle emploie parfois quand même le tiret long (—) ou
+    moyen (–) pour enchaîner ou encadrer une idée. On le remplace par une virgule, qui se lit bien à
+    voix haute. Les intervalles numériques (« 1990–2000 ») sont laissés tels quels."""
+    text = re.sub(r"^[ \t]*[—–][ \t]*", "• ", text, flags=re.M)               # tiret en début de ligne : puce
+    text = re.sub(r"(?<!\d)[ \t]*[—–][ \t]*(?!\d)", ", ", text)               # tiret d'incise ou d'enchaînement
+    text = re.sub(r",[ \t]*([,.;:!?…)»])", r"\1", text)                        # « , . » ou « , , » laissés en fin d'incise
+    return re.sub(r"[ \t]{2,}", " ", text)
 
 
 def normalize_citations(text: str) -> str:
